@@ -48,10 +48,7 @@ void setupPins(int argc, char* argv[]) {
   // clear display (optional here)
   lcdCommand(0x01);
 
-  // cusor off
-  lcdCommand(0x0c);
-
-  // lcdCommand(0x80);
+  lcdCommand(0x80);
   // lcdString("Using HD44780");
   // lcdCommand(0xC0);
   // lcdString("LCD directly! :)");
