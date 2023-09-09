@@ -1,20 +1,22 @@
-#define PIN_RS 7
-#define PIN_E 8
-#define PIN_D4 9
-#define PIN_D5 10
-#define PIN_D6 11
-#define PIN_D7 12
+
 
 #include "lcd.h"
 #include "wiringPi.h"
 
-void setupPins() {
-  pinMode(PIN_RS, OUTPUT);
-  pinMode(PIN_E, OUTPUT);
-  pinMode(PIN_D4, OUTPUT);
-  pinMode(PIN_D5, OUTPUT);
-  pinMode(PIN_D6, OUTPUT);
-  pinMode(PIN_D7, OUTPUT);
+void setupPins(int argc, char* argv[]) {
+  uint pinRs = (uint)argv[PIN_RS];
+  uint pinE = (uint)argv[PIN_E];
+  uint pinD4 = (uint)argv[PIN_D4];
+  uint pinD5 = (uint)argv[PIN_D5];
+  uint pinD6 = (uint)argv[PIN_D6];
+  uint pinD7 = (uint)argv[PIN_D7];
+
+  setupPinGIOP(PIN_RS, pinRs, OUTPUT);
+  setupPinGIOP(PIN_E, pinE, OUTPUT);
+  setupPinGIOP(PIN_D4, pinD4, OUTPUT);
+  setupPinGIOP(PIN_D5, pinD5, OUTPUT);
+  setupPinGIOP(PIN_D6, pinD6, OUTPUT);
+  setupPinGIOP(PIN_D7, pinD7, OUTPUT);
 
   // 4-bit mode, 2 lines, 5x7 format
   lcdCommand(0b00110000);
@@ -31,7 +33,7 @@ void setupPins() {
   lcdString("LCD directly! :)");
 }
 
-int main() {
-  setupPins();
+int main(int argc, char* argv[]) {
+  setupPins(argc, argv);
   return 0;
 }
