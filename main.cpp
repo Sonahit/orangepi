@@ -47,7 +47,7 @@ void setupPins(int argc, char* argv[]) {
 }
 
 int main(int argc, char* argv[]) {
-  println("Got args " + argc);
+  std::cout << "Got args " << argc << std::endl;
 
   if (wiringPiSetup() != 0) {
     return 1;
