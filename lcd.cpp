@@ -3,9 +3,9 @@
 #include "iostream"
 #include "wiringPi.h"
 
-// RS, RW, E,  D4, D5, D6, D7
-// 0   1  2   3   4   5   6
-uint pinSetup[7] = {};
+// RS, RW, E,  D4, D5, D6, D7, D1, D2, D3
+// 0   1  2   3   4   5   6, 7, 8, 9, 10
+uint pinSetup[11] = {};
 
 uint pin(uint index) { return pinSetup[index]; }
 void setupPinGPIO(uint index, uint pin, int mode, std::string type) {
@@ -31,7 +31,7 @@ void readLcd() {
   digitalWrite(pin(PIN_E), LOW);
 }
 
-void writeDataPins(uint data) {
+void writeDataPins4Pin(uint data) {
   digitalWrite(pin(PIN_D7), (data >> 7) & 1);
   digitalWrite(pin(PIN_D6), (data >> 6) & 1);
   digitalWrite(pin(PIN_D5), (data >> 5) & 1);
@@ -49,16 +49,30 @@ void writeDataPins(uint data) {
   readLcd();
 }
 
+void writeDataPins8Pin(uint data) {
+  digitalWrite(pin(PIN_D7), (data >> 7) & 1);
+  digitalWrite(pin(PIN_D6), (data >> 6) & 1);
+  digitalWrite(pin(PIN_D5), (data >> 5) & 1);
+  digitalWrite(pin(PIN_D4), (data >> 4) & 1);
+
+  digitalWrite(pin(PIN_D3), (data >> 3) & 1);
+  digitalWrite(pin(PIN_D2), (data >> 2) & 1);
+  digitalWrite(pin(PIN_D1), (data >> 1) & 1);
+  digitalWrite(pin(PIN_D0), (data >> 0) & 1);
+
+  readLcd();
+}
+
 void lcdCommand(uint command) {
   switchToCommand();
-  writeDataPins(command);
+  writeDataPins4Pin(command);
 }
 
 void readModeLcd() { digitalWrite(pin(PIN_RW), HIGH); }
 
 void writeModeLcd() { digitalWrite(pin(PIN_RW), LOW); }
 
-void lcdChar(const char chr) { writeDataPins((uint)chr); }
+void lcdChar(const char chr) { writeDataPins4Pin((uint)chr); }
 
 void lcdString(std::string str) {
   switchToChar();

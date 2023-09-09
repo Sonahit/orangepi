@@ -9,6 +9,10 @@
 #define PIN_D5 4
 #define PIN_D6 5
 #define PIN_D7 6
+#define PIN_D0 7
+#define PIN_D1 8
+#define PIN_D2 9
+#define PIN_D3 10
 
 const int LCD_DELAY_MS = 5;
 
@@ -17,7 +21,7 @@ typedef unsigned int uint;
 void switchToCommand();
 void switchToChar();
 void readLcd();
-void writeDataPins(uint data);
+void writeDataPins4Pin(uint data);
 void lcdCommand(uint command);
 void lcdString(std::string str);
 void readModeLcd();

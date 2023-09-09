@@ -15,6 +15,10 @@ void setupPins(int argc, char* argv[]) {
   uint pinD5 = atoi(argv[PIN_D5 + 1]);
   uint pinD6 = atoi(argv[PIN_D6 + 1]);
   uint pinD7 = atoi(argv[PIN_D7 + 1]);
+  uint pinD4 = atoi(argv[PIN_D0 + 1]);
+  uint pinD5 = atoi(argv[PIN_D1 + 1]);
+  uint pinD6 = atoi(argv[PIN_D2 + 1]);
+  uint pinD7 = atoi(argv[PIN_D3 + 1]);
 
   println("Setup pins");
 
@@ -25,6 +29,10 @@ void setupPins(int argc, char* argv[]) {
   setupPinGPIO(PIN_D5, pinD5, OUTPUT, "D5");
   setupPinGPIO(PIN_D6, pinD6, OUTPUT, "D6");
   setupPinGPIO(PIN_D7, pinD7, OUTPUT, "D7");
+  setupPinGPIO(PIN_D0, pinD4, OUTPUT, "D0");
+  setupPinGPIO(PIN_D1, pinD5, OUTPUT, "D1");
+  setupPinGPIO(PIN_D2, pinD6, OUTPUT, "D2");
+  setupPinGPIO(PIN_D3, pinD7, OUTPUT, "D3");
 
   writeModeLcd();
 
