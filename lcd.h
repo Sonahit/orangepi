@@ -19,7 +19,6 @@ void switchToChar();
 void readLcd();
 void writeDataPins(uint data);
 void lcdCommand(uint command);
-void lcdChar(const char chr);
 void lcdString(std::string str);
 void readModeLcd();
 void writeModeLcd();

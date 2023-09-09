@@ -54,16 +54,17 @@ void lcdCommand(uint command) {
   writeDataPins(command);
 }
 
-void lcdChar(const char chr) {
-  switchToChar();
-  writeDataPins((uint)chr);
-}
-
 void readModeLcd() { digitalWrite(pin(PIN_RW), HIGH); }
 
 void writeModeLcd() { digitalWrite(pin(PIN_RW), LOW); }
 
+void lcdChar(const char chr) {
+  std::cout << "writing " << chr << " with code " << (uint)chr << std::endl;
+  writeDataPins((uint)chr);
+}
+
 void lcdString(std::string str) {
+  switchToChar();
   for (std::string::iterator it = str.begin(); it != str.end(); ++it) {
     lcdChar(*it);
   }
