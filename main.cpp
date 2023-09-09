@@ -37,7 +37,9 @@ void setupPins(int argc, char* argv[]) {
   writeModeLcd();
 
   println("Setup pins done");
+}
 
+void logic() {
   // 4-bit mode, 2 lines, 5x7 format
   // lcdCommand(0x38);
 
@@ -45,7 +47,7 @@ void setupPins(int argc, char* argv[]) {
   lcdCommand(0x0e);
 
   // RETURN HOME
-  // lcdCommand(0x02);
+  lcdCommand(0x02);
 
   // clear display (optional here)
   lcdCommand(0x01);
@@ -65,6 +67,8 @@ int main(int argc, char* argv[]) {
   }
 
   setupPins(argc, argv);
+
+  logic();
 
   return 0;
 }
