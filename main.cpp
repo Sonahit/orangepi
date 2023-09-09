@@ -33,19 +33,14 @@ void setupPins(int argc, char* argv[]) {
   // 4-bit mode, 2 lines, 5x7 format
   lcdCommand(0x38);
 
-  // LCD ON
-  lcdCommand(0x0f);
+  // lcd on cursor blink
+  lcdCommand(0x0e);
 
   // RETURN HOME
   // lcdCommand(0x02);
 
   // clear display (optional here)
   lcdCommand(0x01);
-
-  delay(1000);
-
-  // cursor blink
-  lcdCommand(0x0e);
 
   // move to first line
   lcdCommand(0x80);
