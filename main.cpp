@@ -1,5 +1,7 @@
 
 
+#include <iostream>
+
 #include "lcd.h"
 #include "wiringPi.h"
 
@@ -11,12 +13,16 @@ void setupPins(int argc, char* argv[]) {
   uint pinD6 = (uint)argv[PIN_D6];
   uint pinD7 = (uint)argv[PIN_D7];
 
+  std::cout << "Setup pins" << std::endl;
+
   setupPinGIOP(PIN_RS, pinRs, OUTPUT);
   setupPinGIOP(PIN_E, pinE, OUTPUT);
   setupPinGIOP(PIN_D4, pinD4, OUTPUT);
   setupPinGIOP(PIN_D5, pinD5, OUTPUT);
   setupPinGIOP(PIN_D6, pinD6, OUTPUT);
   setupPinGIOP(PIN_D7, pinD7, OUTPUT);
+
+  std::cout << "Setup pins done" << std::endl;
 
   // 4-bit mode, 2 lines, 5x7 format
   lcdCommand(0b00110000);
@@ -37,6 +43,7 @@ int main(int argc, char* argv[]) {
   if (wiringPiSetup() != 0) {
     return 1;
   }
+
   setupPins(argc, argv);
 
   for (;;) {
