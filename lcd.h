@@ -15,7 +15,7 @@
 #define PIN_D3 10
 #define PIN_MODE 11
 
-const int LCD_DELAY_MS = 50;
+const int LCD_DELAY_MS = 100;
 
 typedef unsigned int uint;
 
