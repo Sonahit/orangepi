@@ -58,10 +58,7 @@ void readModeLcd() { digitalWrite(pin(PIN_RW), HIGH); }
 
 void writeModeLcd() { digitalWrite(pin(PIN_RW), LOW); }
 
-void lcdChar(const char chr) {
-  std::cout << "writing " << chr << " with code " << (uint)chr << std::endl;
-  writeDataPins((uint)chr);
-}
+void lcdChar(const char chr) { writeDataPins((uint)chr); }
 
 void lcdString(std::string str) {
   switchToChar();
