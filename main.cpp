@@ -35,6 +35,7 @@ void setupPins(int argc, char* argv[]) {
   setupPinGPIO(PIN_D2, pinD2, OUTPUT, "D2");
   setupPinGPIO(PIN_D3, pinD3, OUTPUT, "D3");
 
+  digitalWrite(PIN_E, LOW);
   writeModeLcd();
 
   println("Setup pins done");
