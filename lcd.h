@@ -24,4 +24,4 @@ void lcdString(std::string str);
 void readModeLcd();
 void writeModeLcd();
 
-void setupPinGPIO(uint index, uint pin, int mode);
+void setupPinGPIO(uint index, uint pin, int mode, std::string type);

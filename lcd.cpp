@@ -8,9 +8,10 @@
 uint pinSetup[7] = {};
 
 uint pin(uint index) { return pinSetup[index]; }
-void setupPinGPIO(uint index, uint pin, int mode) {
+void setupPinGPIO(uint index, uint pin, int mode, std::string type) {
   pinSetup[index] = pin;
-  std::cout << "Setup pin " << pin << " with mode " << mode << std::endl;
+  std::cout << "Setup " << type << " pin " << pin << " with mode " << mode
+            << std::endl;
   pinMode(pin, mode);
 }
 

@@ -18,13 +18,13 @@ void setupPins(int argc, char* argv[]) {
 
   println("Setup pins");
 
-  setupPinGPIO(PIN_RS, pinRs, OUTPUT);
-  setupPinGPIO(PIN_RW, pinRW, OUTPUT);
-  setupPinGPIO(PIN_E, pinE, OUTPUT);
-  setupPinGPIO(PIN_D4, pinD4, OUTPUT);
-  setupPinGPIO(PIN_D5, pinD5, OUTPUT);
-  setupPinGPIO(PIN_D6, pinD6, OUTPUT);
-  setupPinGPIO(PIN_D7, pinD7, OUTPUT);
+  setupPinGPIO(PIN_RS, pinRs, OUTPUT, "RS");
+  setupPinGPIO(PIN_RW, pinRW, OUTPUT, "RW");
+  setupPinGPIO(PIN_E, pinE, OUTPUT, "E");
+  setupPinGPIO(PIN_D4, pinD4, OUTPUT, "D4");
+  setupPinGPIO(PIN_D5, pinD5, OUTPUT, "D5");
+  setupPinGPIO(PIN_D6, pinD6, OUTPUT, "D6");
+  setupPinGPIO(PIN_D7, pinD7, OUTPUT, "D7");
 
   writeModeLcd();
 
