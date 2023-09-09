@@ -39,22 +39,26 @@ void setupPins(int argc, char* argv[]) {
   writeModeLcd();
 
   println("Setup pins done");
-}
 
-void logic() {
+  println("Setup display");
   if (is4bitMode()) {
     // 4-bit mode, 2 lines, 5x7 format
-    lcdCommand(0x28);
+    lcdCommand(0x38);
   }
 
   // lcd on cursor blink
-  lcdCommand(0x0f);
+  lcdCommand(0x0e);
+  // clear display (optional here)
+  lcdCommand(0x01);
+  println("Setup display done");
+}
 
+void logic() {
   // clear display (optional here)
   lcdCommand(0x01);
 
   // move to first line
-  lcdCommand(0x80);
+  lcdCommand(0x83);
   lcdString("plz hlep");
 
   // move to second line
