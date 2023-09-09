@@ -3,12 +3,12 @@
 #include "iostream"
 #include "wiringPi.h"
 
-// RS, E, D4, D5, D6, D7
-// 0   1  2   3   4   5
-uint pinSetup[6] = {};
+// RS, RW, E,  D4, D5, D6, D7
+// 0   1  2   3   4   5   6
+uint pinSetup[7] = {};
 
 uint pin(uint index) { return pinSetup[index]; }
-void setupPinGIOP(uint index, uint pin, int mode) {
+void setupPinGPIO(uint index, uint pin, int mode) {
   pinSetup[index] = pin;
   std::cout << "Setup pin " << pin << " with mode " << mode << std::endl;
   pinMode(pin, mode);
@@ -25,9 +25,9 @@ void switchToChar() {
 }
 
 void readLcd() {
-  digitalWrite(pin(PIN_E), HIGH);
+  digitalWrite(pin(PIN_RW), HIGH);
   delay(LCD_DELAY_MS);
-  digitalWrite(pin(PIN_E), LOW);
+  digitalWrite(pin(PIN_RW), LOW);
 }
 
 void writeDataPins(uint data) {

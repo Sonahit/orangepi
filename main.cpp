@@ -7,6 +7,7 @@
 
 void setupPins(int argc, char* argv[]) {
   uint pinRs = (uint)atoi(argv[PIN_RS + 1]);
+  uint pinRW = (uint)atoi(argv[PIN_RW + 1]);
   uint pinE = (uint)atoi(argv[PIN_E + 1]);
   uint pinD4 = (uint)atoi(argv[PIN_D4 + 1]);
   uint pinD5 = (uint)atoi(argv[PIN_D5 + 1]);
@@ -15,12 +16,16 @@ void setupPins(int argc, char* argv[]) {
 
   std::cout << "Setup pins" << std::endl;
 
-  setupPinGIOP(PIN_RS, pinRs, OUTPUT);
-  setupPinGIOP(PIN_E, pinE, OUTPUT);
-  setupPinGIOP(PIN_D4, pinD4, OUTPUT);
-  setupPinGIOP(PIN_D5, pinD5, OUTPUT);
-  setupPinGIOP(PIN_D6, pinD6, OUTPUT);
-  setupPinGIOP(PIN_D7, pinD7, OUTPUT);
+  setupPinGPIO(PIN_RS, pinRs, OUTPUT);
+  setupPinGPIO(PIN_RW, pinRW, OUTPUT);
+
+  setupPinGPIO(PIN_E, pinE, OUTPUT);
+  digitalWrite(pinE, HIGH);
+
+  setupPinGPIO(PIN_D4, pinD4, OUTPUT);
+  setupPinGPIO(PIN_D5, pinD5, OUTPUT);
+  setupPinGPIO(PIN_D6, pinD6, OUTPUT);
+  setupPinGPIO(PIN_D7, pinD7, OUTPUT);
 
   std::cout << "Setup pins done" << std::endl;
 
