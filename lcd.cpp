@@ -74,7 +74,11 @@ void lcdCommand(uint command) {
   writeDataPins(command);
 }
 
-void setupPinMode(uint mode) { is4PinMode = mode == 0 ? true : false; }
+void setupPinMode(uint mode) {
+  is4PinMode = mode == 0 ? true : false;
+  std::string text = is4PinMode ? "4 pin" : "8 pin";
+  std::cout << text << " mode";
+}
 
 void readModeLcd() { digitalWrite(pin(PIN_RW), HIGH); }
 
