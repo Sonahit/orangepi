@@ -35,5 +35,8 @@ void setupPins(int argc, char* argv[]) {
 
 int main(int argc, char* argv[]) {
   setupPins(argc, argv);
+
+  for (;;) {
+  }
   return 0;
 }
