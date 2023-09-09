@@ -25,9 +25,9 @@ void switchToChar() {
 }
 
 void readLcd() {
-  digitalWrite(pin(PIN_RW), HIGH);
+  digitalWrite(pin(PIN_E), HIGH);
   delay(LCD_DELAY_MS);
-  digitalWrite(pin(PIN_RW), LOW);
+  digitalWrite(pin(PIN_E), LOW);
 }
 
 void writeDataPins(uint data) {
@@ -57,6 +57,10 @@ void lcdChar(const char chr) {
   switchToChar();
   writeDataPins((uint)chr);
 }
+
+void readModeLcd() { digitalWrite(pin(PIN_RW), HIGH); }
+
+void writeModeLcd() { digitalWrite(pin(PIN_RW), LOW); }
 
 void lcdString(std::string str) {
   for (std::string::iterator it = str.begin(); it != str.end(); ++it) {

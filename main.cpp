@@ -20,14 +20,13 @@ void setupPins(int argc, char* argv[]) {
 
   setupPinGPIO(PIN_RS, pinRs, OUTPUT);
   setupPinGPIO(PIN_RW, pinRW, OUTPUT);
-
   setupPinGPIO(PIN_E, pinE, OUTPUT);
-  digitalWrite(pinE, HIGH);
-
   setupPinGPIO(PIN_D4, pinD4, OUTPUT);
   setupPinGPIO(PIN_D5, pinD5, OUTPUT);
   setupPinGPIO(PIN_D6, pinD6, OUTPUT);
   setupPinGPIO(PIN_D7, pinD7, OUTPUT);
+
+  writeModeLcd();
 
   println("Setup pins done");
 
