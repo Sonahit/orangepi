@@ -5,16 +5,18 @@
 #include "lcd.h"
 #include "wiringPi.h"
 
-void setupPins(int argc, char* argv[]) {
-  uint pinRs = (uint)atoi(argv[PIN_RS + 1]);
-  uint pinRW = (uint)atoi(argv[PIN_RW + 1]);
-  uint pinE = (uint)atoi(argv[PIN_E + 1]);
-  uint pinD4 = (uint)atoi(argv[PIN_D4 + 1]);
-  uint pinD5 = (uint)atoi(argv[PIN_D5 + 1]);
-  uint pinD6 = (uint)atoi(argv[PIN_D6 + 1]);
-  uint pinD7 = (uint)atoi(argv[PIN_D7 + 1]);
+void println(std::string text) { std::cout << text << std::endl; }
 
-  std::cout << "Setup pins" << std::endl;
+void setupPins(int argc, char* argv[]) {
+  uint pinRs = atoi(argv[PIN_RS + 1]);
+  uint pinRW = atoi(argv[PIN_RW + 1]);
+  uint pinE = atoi(argv[PIN_E + 1]);
+  uint pinD4 = atoi(argv[PIN_D4 + 1]);
+  uint pinD5 = atoi(argv[PIN_D5 + 1]);
+  uint pinD6 = atoi(argv[PIN_D6 + 1]);
+  uint pinD7 = atoi(argv[PIN_D7 + 1]);
+
+  println("Setup pins");
 
   setupPinGPIO(PIN_RS, pinRs, OUTPUT);
   setupPinGPIO(PIN_RW, pinRW, OUTPUT);
@@ -27,7 +29,7 @@ void setupPins(int argc, char* argv[]) {
   setupPinGPIO(PIN_D6, pinD6, OUTPUT);
   setupPinGPIO(PIN_D7, pinD7, OUTPUT);
 
-  std::cout << "Setup pins done" << std::endl;
+  println("Setup pins done");
 
   // 4-bit mode, 2 lines, 5x7 format
   lcdCommand(0b00110000);
@@ -45,6 +47,8 @@ void setupPins(int argc, char* argv[]) {
 }
 
 int main(int argc, char* argv[]) {
+  println("Got args " + argc);
+
   if (wiringPiSetup() != 0) {
     return 1;
   }
