@@ -65,14 +65,14 @@ void writeDataPins8Pin(uint data) {
 
 void lcdCommand(uint command) {
   switchToCommand();
-  writeDataPins4Pin(command);
+  writeDataPins8Pin(command);
 }
 
 void readModeLcd() { digitalWrite(pin(PIN_RW), HIGH); }
 
 void writeModeLcd() { digitalWrite(pin(PIN_RW), LOW); }
 
-void lcdChar(const char chr) { writeDataPins4Pin((uint)chr); }
+void lcdChar(const char chr) { writeDataPins8Pin((uint)chr); }
 
 void lcdString(std::string str) {
   switchToChar();
