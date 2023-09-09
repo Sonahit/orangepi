@@ -26,7 +26,7 @@ void setupPins(int argc, char* argv[]) {
   uint pinD7 = atoi(argv[PIN_D7 + 1]);
 
   int fd =
-      lcdInit(2, 16, 4, pinRs, pinE, pinD4, pinD5, pinD6, pinD7, 0, 0, 0, 0);
+      lcdInit(2, 16, 4, pinRs, pinE, 0, 0, 0, 0, pinD4, pinD5, pinD6, pinD7);
 
   println("Setup pins done");
   lcdCursor(fd, 1);
