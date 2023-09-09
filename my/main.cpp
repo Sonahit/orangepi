@@ -48,7 +48,6 @@ void setupPins(int argc, char* argv[]) {
 
   // move to second line
   lcdCommand(0xC0);
-
   lcdString("LCD directly! :)");
 }
 
