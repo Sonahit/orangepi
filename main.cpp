@@ -49,7 +49,7 @@ void setupPins(int argc, char* argv[]) {
   lcdCommand(0x01);
 
   lcdCommand(0x80);
-  // lcdString("Using HD44780");
+  lcdString("Using HD44780");
   // lcdCommand(0xC0);
   // lcdString("LCD directly! :)");
 }
