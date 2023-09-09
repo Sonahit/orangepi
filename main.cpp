@@ -1,5 +1,3 @@
-#include "wiringPi.h"
-
 #define PIN_RS 7
 #define PIN_E 8
 #define PIN_D4 9
@@ -8,6 +6,7 @@
 #define PIN_D7 12
 
 #include "lcd.h"
+#include "wiringPi.h"
 
 void setupPins() {
   pinMode(PIN_RS, OUTPUT);
