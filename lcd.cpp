@@ -7,6 +7,8 @@
 // 0   1  2   3   4   5   6, 7, 8, 9, 10
 uint pinSetup[11] = {};
 
+static bool is4PinMode = false;
+
 uint pin(uint index) { return pinSetup[index]; }
 void setupPinGPIO(uint index, uint pin, int mode, std::string type) {
   pinSetup[index] = pin;
@@ -63,16 +65,22 @@ void writeDataPins8Pin(uint data) {
   readLcd();
 }
 
+void writeDataPins(uint data) {
+  is4PinMode ? writeDataPins4Pin(data) : writeDataPins8Pin(data);
+}
+
 void lcdCommand(uint command) {
   switchToCommand();
-  writeDataPins8Pin(command);
+  writeDataPins(command);
 }
+
+void setupPinMode(uint mode) { is4PinMode = mode == 0 ? true : false; }
 
 void readModeLcd() { digitalWrite(pin(PIN_RW), HIGH); }
 
 void writeModeLcd() { digitalWrite(pin(PIN_RW), LOW); }
 
-void lcdChar(const char chr) { writeDataPins8Pin((uint)chr); }
+void lcdChar(const char chr) { writeDataPins((uint)chr); }
 
 void lcdString(std::string str) {
   switchToChar();

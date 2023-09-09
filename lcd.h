@@ -13,6 +13,7 @@
 #define PIN_D1 8
 #define PIN_D2 9
 #define PIN_D3 10
+#define PIN_MODE 11
 
 const int LCD_DELAY_MS = 5;
 
@@ -26,5 +27,7 @@ void lcdCommand(uint command);
 void lcdString(std::string str);
 void readModeLcd();
 void writeModeLcd();
+// 0 == 4pin, anything else is 8
+void setupPinMode(uint mode);
 
 void setupPinGPIO(uint index, uint pin, int mode, std::string type);

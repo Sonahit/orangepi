@@ -19,6 +19,7 @@ void setupPins(int argc, char* argv[]) {
   uint pinD1 = atoi(argv[PIN_D1 + 1]);
   uint pinD2 = atoi(argv[PIN_D2 + 1]);
   uint pinD3 = atoi(argv[PIN_D3 + 1]);
+  setupPinMode(atoi(argv[PIN_MODE + 1]));
 
   println("Setup pins");
 
