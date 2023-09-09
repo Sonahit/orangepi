@@ -39,7 +39,7 @@ void setupPins(int argc, char* argv[]) {
   println("Setup pins done");
 
   // 4-bit mode, 2 lines, 5x7 format
-  lcdCommand(0x38);
+  // lcdCommand(0x38);
 
   // lcd on cursor blink
   lcdCommand(0x0e);
