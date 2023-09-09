@@ -54,11 +54,11 @@ void logic() {
 
   // move to first line
   lcdCommand(0x80);
-  lcdString("Using HD44780");
+  lcdString("plz hlep");
 
   // move to second line
-  lcdCommand(0xC0);
-  lcdString("LCD directly! :)");
+  // lcdCommand(0xC0);
+  // lcdString("LCD directly! :)");
 }
 
 int main(int argc, char* argv[]) {
