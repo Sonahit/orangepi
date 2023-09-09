@@ -47,10 +47,7 @@ void logic() {
   }
 
   // lcd on cursor blink
-  lcdCommand(0x0e);
-
-  // RETURN HOME
-  lcdCommand(0x02);
+  lcdCommand(0x0f);
 
   // clear display (optional here)
   lcdCommand(0x01);
