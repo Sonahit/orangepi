@@ -13,6 +13,11 @@
 #define PIN_D6 5
 #define PIN_D7 6
 
+#define PIN_D0 7
+#define PIN_D1 8
+#define PIN_D2 9
+#define PIN_D3 10
+
 void println(std::string text) { std::cout << text << std::endl; }
 
 void setupPins(int argc, char* argv[]) {
@@ -24,9 +29,13 @@ void setupPins(int argc, char* argv[]) {
   uint pinD5 = atoi(argv[PIN_D5 + 1]);
   uint pinD6 = atoi(argv[PIN_D6 + 1]);
   uint pinD7 = atoi(argv[PIN_D7 + 1]);
+  uint pinD0 = atoi(argv[PIN_D0 + 1]);
+  uint pinD1 = atoi(argv[PIN_D1 + 1]);
+  uint pinD2 = atoi(argv[PIN_D2 + 1]);
+  uint pinD3 = atoi(argv[PIN_D3 + 1]);
 
-  int fd =
-      lcdInit(2, 16, 4, pinRs, pinE, 0, 0, 0, 0, pinD4, pinD5, pinD6, pinD7);
+  int fd = lcdInit(2, 16, 4, pinRs, pinE, pinD0, pinD1, pinD2, pinD3, pinD4,
+                   pinD5, pinD6, pinD7);
 
   println("Setup pins done");
   lcdCursor(fd, 1);
