@@ -31,23 +31,24 @@ void setupPins(int argc, char* argv[]) {
   println("Setup pins done");
 
   // 4-bit mode, 2 lines, 5x7 format
-  lcdCommand(0b00110000);
-  // display & cursor home (keep this!)
-  lcdCommand(0b00000010);
-  // display on, right shift, underline off, blink off
-  lcdCommand(0b00001100);
-  // clear display (optional here)
-  lcdCommand(0b00000001);
+  // lcdCommand(0b00110000);
+  // // display & cursor home (keep this!)
+  // lcdCommand(0b00000010);
+  // // display on, right shift, underline off, blink off
+  // lcdCommand(0b00001100);
+  // // clear display (optional here)
+  // lcdCommand(0b00000001);
+  lcdCommand(0x0f);
+  lcdCommand(0x02);
+  lcdCommand(0x38);
 
-  lcdCommand(0b10000000);  // set address to 0x00
+  lcdCommand(0x80);
   lcdString("Using HD44780");
-  lcdCommand(0b11000000);  // set address to 0x40
+  lcdCommand(0xC0);
   lcdString("LCD directly! :)");
 }
 
 int main(int argc, char* argv[]) {
-  std::cout << "Got args " << argc << std::endl;
-
   if (wiringPiSetup() != 0) {
     return 1;
   }
