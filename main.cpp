@@ -42,6 +42,11 @@ void setupPins(int argc, char* argv[]) {
   // clear display (optional here)
   lcdCommand(0x01);
 
+  delay(1000);
+
+  // cursor blink
+  lcdCommand(0x0e);
+
   // move to first line
   lcdCommand(0x80);
   lcdString("Using HD44780");
