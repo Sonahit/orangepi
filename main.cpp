@@ -6,12 +6,12 @@
 #include "wiringPi.h"
 
 void setupPins(int argc, char* argv[]) {
-  uint pinRs = (uint)argv[PIN_RS];
-  uint pinE = (uint)argv[PIN_E];
-  uint pinD4 = (uint)argv[PIN_D4];
-  uint pinD5 = (uint)argv[PIN_D5];
-  uint pinD6 = (uint)argv[PIN_D6];
-  uint pinD7 = (uint)argv[PIN_D7];
+  uint pinRs = (uint)atoi(argv[PIN_RS]);
+  uint pinE = (uint)atoi(argv[PIN_E]);
+  uint pinD4 = (uint)atoi(argv[PIN_D4]);
+  uint pinD5 = (uint)atoi(argv[PIN_D5]);
+  uint pinD6 = (uint)atoi(argv[PIN_D6]);
+  uint pinD7 = (uint)atoi(argv[PIN_D7]);
 
   std::cout << "Setup pins" << std::endl;
 
