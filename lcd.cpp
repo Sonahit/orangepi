@@ -1,5 +1,6 @@
 #include "lcd.h"
 
+#include "iostream"
 #include "wiringPi.h"
 
 // RS, E, D4, D5, D6, D7
@@ -9,6 +10,7 @@ uint pinSetup[6] = {};
 uint pin(uint index) { return pinSetup[index]; }
 void setupPinGIOP(uint index, uint pin, int mode) {
   pinSetup[index] = pin;
+  std::cout << "Setup pin " << pin << " with mode " << mode << std::endl;
   pinMode(pin, mode);
 }
 
