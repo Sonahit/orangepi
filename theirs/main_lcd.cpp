@@ -5,37 +5,25 @@
 #include "lcd.h"
 #include "wiringPi.h"
 
-#define PIN_RS 0
-#define PIN_RW 1
-#define PIN_E 2
-#define PIN_D4 3
-#define PIN_D5 4
-#define PIN_D6 5
-#define PIN_D7 6
-
-#define PIN_D0 7
-#define PIN_D1 8
-#define PIN_D2 9
-#define PIN_D3 10
+#define PIN_RS 23
+#define PIN_RW 23
+#define PIN_E 22
+#define PIN_D4 5
+#define PIN_D5 2
+#define PIN_D6 1
+#define PIN_D7 0
+#define PIN_D0 20
+#define PIN_D1 19
+#define PIN_D2 17
+#define PIN_D3 3
 
 void println(std::string text) { std::cout << text << std::endl; }
 
 void setupPins(int argc, char* argv[]) {
   println("Setup pins");
-  uint pinRs = atoi(argv[PIN_RS + 1]);
-  uint pinRW = atoi(argv[PIN_RW + 1]);
-  uint pinE = atoi(argv[PIN_E + 1]);
-  uint pinD4 = atoi(argv[PIN_D4 + 1]);
-  uint pinD5 = atoi(argv[PIN_D5 + 1]);
-  uint pinD6 = atoi(argv[PIN_D6 + 1]);
-  uint pinD7 = atoi(argv[PIN_D7 + 1]);
-  uint pinD0 = atoi(argv[PIN_D0 + 1]);
-  uint pinD1 = atoi(argv[PIN_D1 + 1]);
-  uint pinD2 = atoi(argv[PIN_D2 + 1]);
-  uint pinD3 = atoi(argv[PIN_D3 + 1]);
 
-  int fd = lcdInit(2, 16, 4, pinRs, pinE, pinD0, pinD1, pinD2, pinD3, pinD4,
-                   pinD5, pinD6, pinD7);
+  int fd = lcdInit(2, 16, 8, PIN_RS, PIN_E, PIN_D0, PIN_D1, PIN_D2, PIN_D3,
+                   PIN_D4, PIN_D5, PIN_D6, PIN_D7);
 
   println("Setup pins done");
   lcdCursor(fd, 1);
