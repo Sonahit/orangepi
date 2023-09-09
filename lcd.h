@@ -29,5 +29,6 @@ void readModeLcd();
 void writeModeLcd();
 // 0 == 4pin, anything else is 8
 void setupPinMode(uint mode);
+bool is4bitMode();
 
 void setupPinGPIO(uint index, uint pin, int mode, std::string type);

@@ -69,6 +69,8 @@ void writeDataPins(uint data) {
   is4PinMode ? writeDataPins4Pin(data) : writeDataPins8Pin(data);
 }
 
+bool is4bitMode() { return is4PinMode; }
+
 void lcdCommand(uint command) {
   switchToCommand();
   writeDataPins(command);

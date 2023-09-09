@@ -41,8 +41,10 @@ void setupPins(int argc, char* argv[]) {
 }
 
 void logic() {
-  // 4-bit mode, 2 lines, 5x7 format
-  // lcdCommand(0x38);
+  if (is4bitMode()) {
+    // 4-bit mode, 2 lines, 5x7 format
+    lcdCommand(0x28);
+  }
 
   // lcd on cursor blink
   lcdCommand(0x0e);
