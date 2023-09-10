@@ -29,17 +29,17 @@ uint initLcd(Pins intPins) {
 
 void switchToCommand() {
   digitalWrite(PINS.RS.index, LOW);
-  delay(LCD_DELAY_MS);
+  delay(PINS.LCD_DELAY_MS);
 }
 
 void switchToChar() {
   digitalWrite(PINS.RS.index, HIGH);
-  delay(LCD_DELAY_MS);
+  delay(PINS.LCD_DELAY_MS);
 }
 
 void readLcd() {
   digitalWrite(PINS.E.index, HIGH);
-  delay(LCD_DELAY_MS);
+  delay(PINS.LCD_DELAY_MS);
   digitalWrite(PINS.E.index, LOW);
 }
 

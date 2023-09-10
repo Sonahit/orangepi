@@ -22,9 +22,8 @@ struct Pins {
   Pin D5;
   Pin D6;
   Pin D7;
+  uint LCD_DELAY_MS = 50;
 };
-
-const int LCD_DELAY_MS = 50;
 
 void switchToCommand();
 void switchToChar();

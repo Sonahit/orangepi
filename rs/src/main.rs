@@ -49,6 +49,7 @@ const PINS: wp::Pins = wp::Pins {
         index: 25,
     },
     is4PinMode: false,
+    LCD_DISPLAY_MS: 1000,
 };
 
 fn setup() {
