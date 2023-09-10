@@ -55,10 +55,11 @@ fn setup() {
     wp::digital_write(PINS.E.index, wp::PinValue::LOW.repr);
     wp::write_mode_lcd();
     // 4-bit mode, 2 lines, 5x7 format
-    // wp::lcd_command(0x38);
+    wp::lcd_command(0b00111000);
 
-    // lcd on cursor blink
-    wp::lcd_command(0x0f);
+    // display on
+    wp::lcd_command(0b00001110);
+
     // clear display (optional here)
     wp::lcd_command(0x01);
     println!("Setup done");
@@ -68,14 +69,16 @@ fn logic() {
     // clear display (optional here)
     wp::lcd_command(0x01);
 
-    // move to first line
-    wp::lcd_command(0x83);
+    // first line
+    // entrymode
+    wp::lcd_command(0b00000110);
+    wp::lcd_string("Hitachi");
+    //nextline
+    wp::lcd_command(0b11000000);
+    wp::lcd_string("MICROCOM");
 
-    wp::lcd_string("plz hlep");
-
-    // move to second line
-    wp::lcd_command(0xC0);
-    wp::lcd_string("LCD directly! :)");
+    // HOME
+    wp::lcd_command(0b10);
 }
 
 fn main() {
