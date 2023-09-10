@@ -77,3 +77,9 @@ pub fn lcd_string(str: &str) {
 
     ffi::lcd_string(&txt)
 }
+
+pub fn lcd_commands(commands: &[u32]) {
+    for cmd in commands {
+        lcd_command(*cmd);
+    }
+}

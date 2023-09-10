@@ -58,10 +58,16 @@ fn setup() {
 }
 
 fn logic() {
-    wp::lcd_command(0b00100000);
-    wp::lcd_command(0b00100000);
-    wp::lcd_command(0b00001110);
-    wp::lcd_command(0b00000110);
+    // https://www.sparkfun.com/datasheets/LCD/HD44780.pdf Table 12
+    #[rustfmt::skip]
+    wp::lcd_commands(
+        &[
+            0b00100000, 
+            0b00100000, 
+            0b00001110, 
+            0b00000110
+        ]
+    );
 
     wp::lcd_string("h");
 
