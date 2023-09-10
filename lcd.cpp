@@ -90,7 +90,7 @@ void lcdChar(const char chr) { writeDataPins((uint)chr); }
 
 void lcdString(std::string str) {
   switchToChar();
-  for (std::string::iterator it = str.begin(); it != str.end(); ++it) {
+  for (auto it = str.begin(); it != str.end(); ++it) {
     lcdChar(*it);
   }
 }
