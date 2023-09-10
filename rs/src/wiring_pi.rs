@@ -1,6 +1,6 @@
 #[cxx::bridge]
 #[allow(dead_code)]
-pub mod ffi {
+mod ffi {
     #[repr(u32)]
     enum LCDMode {
         OUTPUT = 1,
@@ -65,4 +65,15 @@ pub mod ffi {
         #[rust_name = "digital_write"]
         fn lcdDigitalWrite(pin: u32, value: u32);
     }
+}
+
+pub use self::ffi::{
+    digital_write, init_lcd, is_4bit_mode, lcd_command, read_lcd, read_mode_lcd, switch_to_char,
+    switch_to_command, write_mode_lcd, LCDMode, Pin, PinValue, Pins,
+};
+
+pub fn lcd_string(str: &str) {
+    cxx::let_cxx_string!(txt = str);
+
+    ffi::lcd_string(&txt)
 }

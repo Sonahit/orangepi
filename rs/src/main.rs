@@ -1,5 +1,7 @@
 mod wiring_pi;
-use wiring_pi::ffi as wp;
+
+use wiring_pi as wp;
+
 const PINS: wp::Pins = wp::Pins {
     D0: wp::Pin {
         mode: wp::LCDMode::OUTPUT,
@@ -69,14 +71,11 @@ fn logic() {
     // move to first line
     wp::lcd_command(0x83);
 
-    cxx::let_cxx_string!(txt = "plz hlep");
-
-    wp::lcd_string(&txt);
+    wp::lcd_string("plz hlep");
 
     // move to second line
     wp::lcd_command(0xC0);
-    cxx::let_cxx_string!(txt = "LCD directly! :)");
-    wp::lcd_string(&txt);
+    wp::lcd_string("LCD directly! :)");
 }
 
 fn main() {
