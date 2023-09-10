@@ -31,7 +31,6 @@ mod ffi {
         pub D5: Pin,
         pub D6: Pin,
         pub D7: Pin,
-        pub LCD_DELAY_MS: u32,
     }
 
     unsafe extern "C++" {

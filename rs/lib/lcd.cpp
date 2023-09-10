@@ -5,6 +5,8 @@
 
 static Pins PINS;
 
+const uint LCD_DISPLAY_MS = 100;
+
 uint initLcd(Pins intPins) {
   if (wiringPiSetup() != 0) {
     return 1;
@@ -29,17 +31,17 @@ uint initLcd(Pins intPins) {
 
 void switchToCommand() {
   digitalWrite(PINS.RS.index, LOW);
-  delay(PINS.LCD_DELAY_MS);
+  delay(LCD_DISPLAY_MS);
 }
 
 void switchToChar() {
   digitalWrite(PINS.RS.index, HIGH);
-  delay(PINS.LCD_DELAY_MS);
+  delay(LCD_DISPLAY_MS);
 }
 
 void readLcd() {
   digitalWrite(PINS.E.index, HIGH);
-  delay(PINS.LCD_DELAY_MS);
+  delay(LCD_DISPLAY_MS);
   digitalWrite(PINS.E.index, LOW);
 }
 

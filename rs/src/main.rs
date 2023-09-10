@@ -49,12 +49,11 @@ const PINS: wp::Pins = wp::Pins {
         index: 25,
     },
     is4PinMode: false,
-    LCD_DELAY_MS: 100,
 };
 
-fn setup(e_pin: u32) {
+fn setup() {
     println!("Setup");
-    wp::digital_write(e_pin, wp::PinValue::LOW.repr);
+    wp::digital_write(PINS.E.index, wp::PinValue::LOW.repr);
     wp::write_mode_lcd();
     println!("Setup done");
 }
@@ -109,6 +108,6 @@ fn main() {
 
     println!("Hello, world! {}", status);
 
-    setup(PINS.E.index);
+    setup();
     logic();
 }
