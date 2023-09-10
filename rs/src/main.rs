@@ -98,10 +98,7 @@ fn main() {
             index: 25,
         },
         is4PinMode: false,
-        LCD_DELAY_MS: std::option_env!("DELAY")
-            .unwrap_or("100")
-            .parse::<u32>()
-            .unwrap(),
+        LCD_DELAY_MS: 100,
     };
 
     let e_pin = pins.E.index;
