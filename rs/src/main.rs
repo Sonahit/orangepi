@@ -47,7 +47,7 @@ const PINS: wp::Pins = wp::Pins {
         mode: wp::LCDMode::OUTPUT,
         index: 23,
     },
-    is4PinMode: false,
+    is4PinMode: true,
 };
 
 fn setup() {
@@ -58,27 +58,35 @@ fn setup() {
 }
 
 fn logic() {
-    // 4-bit mode, 2 lines, 5x7 format
+    wp::switch_to_command();
+    wp::lcd_command(0b00100000);
+    wp::lcd_command(0b00100000);
+    wp::lcd_command(0b00001110);
+    wp::lcd_command(0b00000110);
+
+    wp::switch_to_char();
+    wp::lcd_command('h' as u32);
+
+    // 2 lines, 5x7 format
     // wp::lcd_command(0b00111000);
 
     // display on
-    wp::lcd_command(0b00001110);
+    // wp::lcd_command(0b00001110);
 
     // clear display (optional here)
-    wp::lcd_command(0x01);
+    // wp::lcd_command(0x01);
 
     // first line
     // entrymode
-    wp::lcd_command(0b00000110);
-    // wp::lcd_command('h' as u32);
+    // wp::lcd_command(0b00000110);
 
     // wp::lcd_string("Hitachi");
     //nextline
-    wp::lcd_command(0b11000000);
-    wp::lcd_string("MICROCOM");
+    // wp::lcd_command(0b11000000);
+    // wp::lcd_string("MICROCOM");
 
     // HOME
-    wp::lcd_command(0b10);
+    // wp::lcd_command(0b10);
 }
 
 fn main() {
