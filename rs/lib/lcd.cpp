@@ -12,6 +12,18 @@ uint initLcd(Pins intPins) {
 
   PINS = intPins;
 
+  pinMode(PINS.D0.index, PINS.D0.mode);
+  pinMode(PINS.D1.index, PINS.D1.mode);
+  pinMode(PINS.D2.index, PINS.D2.mode);
+  pinMode(PINS.D3.index, PINS.D3.mode);
+  pinMode(PINS.D4.index, PINS.D4.mode);
+  pinMode(PINS.D5.index, PINS.D5.mode);
+  pinMode(PINS.D6.index, PINS.D6.mode);
+  pinMode(PINS.D7.index, PINS.D7.mode);
+  pinMode(PINS.E.index, PINS.E.mode);
+  pinMode(PINS.RS.index, PINS.RS.mode);
+  pinMode(PINS.RW.index, PINS.RW.mode);
+
   return 0;
 }
 

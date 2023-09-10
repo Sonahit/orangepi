@@ -1,12 +1,19 @@
 #[cxx::bridge]
 #[allow(dead_code)]
 pub mod ffi {
-    #[repr(i32)]
+    #[repr(u32)]
     enum LCDMode {
         OUTPUT = 1,
     }
+
+    #[repr(u32)]
+    enum PinValue {
+        LOW = 0,
+        HIGH = 1,
+    }
+
     struct Pin {
-        pub index: i32,
+        pub index: u32,
         pub mode: LCDMode,
     }
 
@@ -55,7 +62,7 @@ pub mod ffi {
         #[rust_name = "init_lcd"]
         fn initLcd(initPins: Pins) -> u32;
 
-        #[rust_name = "digitalWrite"]
+        #[rust_name = "digital_write"]
         fn lcdDigitalWrite(pin: u32, value: u32);
     }
 }
