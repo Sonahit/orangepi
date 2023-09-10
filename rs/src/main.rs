@@ -59,12 +59,13 @@ fn setup() {
 }
 
 fn logic() {
-    // https://www.sparkfun.com/datasheets/LCD/HD44780.pdf Table 12
+    // https://www.sparkfun.com/datasheets/LCD/HD44780.pdf Table 12 4bit 8digit 1 line
     #[rustfmt::skip]
     wp::lcd_commands(
         &[
-            0b00110000, 
-            0b00001110, 
+            0b0010, 
+            0b00100000, 
+            0b00001110,
             0b00000110
         ]
     );
