@@ -72,7 +72,7 @@ fn logic() {
     // wp::lcd_string("he");
 
     // 2 lines, 5x7 format
-    wp::lcd_command(0b00111000);
+    // wp::lcd_command(0b00111000);
 
     // display on
     wp::lcd_command(0b00001110);
