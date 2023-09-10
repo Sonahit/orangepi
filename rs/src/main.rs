@@ -70,7 +70,9 @@ fn logic() {
         ]
     );
 
-    wp::lcd_string("h");
+    loop {
+        wp::lcd_string("h");
+    }
 
     wp::lcd_command(0b10);
 
