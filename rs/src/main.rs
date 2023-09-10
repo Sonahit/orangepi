@@ -64,17 +64,13 @@ fn logic() {
     wp::lcd_commands(
         &[
             0b0010, 
-            0b00100000, 
-            0b00001110,
-            0b00000110
+            0b0010, 
+            0b1110,
+            0b110
         ]
     );
 
-    wp::lcd_string("Hitachi");
-
-    wp::lcd_command(0b00000111);
-
-    wp::lcd_string(" Mikrocom");
+    wp::lcd_string("h");
 
     wp::lcd_command(0b10);
 
