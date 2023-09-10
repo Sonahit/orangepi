@@ -17,7 +17,6 @@ mod ffi {
         pub mode: LCDMode,
     }
 
-    #[derive(Clonable)]
     #[allow(non_snake_case)]
     struct Pins {
         pub is4PinMode: bool,
@@ -83,5 +82,91 @@ pub fn lcd_string(str: &str) {
 pub fn lcd_commands(commands: &[u32]) {
     for cmd in commands {
         lcd_command(*cmd);
+    }
+}
+
+impl Clone for Pin {
+    fn clone(&self) -> Self {
+        Self {
+            index: self.index,
+            mode: self.mode,
+        }
+    }
+}
+
+impl Clone for Pins {
+    fn clone(&self) -> Self {
+        Self {
+            is4PinMode: self.is4PinMode,
+            RS: self.RS.clone(),
+            RW: self.RW.clone(),
+            E: self.E.clone(),
+            D0: self.D0.clone(),
+            D1: self.D1.clone(),
+            D2: self.D2.clone(),
+            D3: self.D3.clone(),
+            D4: self.D4.clone(),
+            D5: self.D5.clone(),
+            D6: self.D6.clone(),
+            D7: self.D7.clone(),
+            LCD_DISPLAY_MS: self.LCD_DISPLAY_MS,
+        }
+    }
+}
+
+impl Default for Pins {
+    fn default() -> Self {
+        Self {
+            D7: self::Pin {
+                mode: self::LCDMode::OUTPUT,
+                index: 0,
+            },
+            D6: self::Pin {
+                mode: self::LCDMode::OUTPUT,
+                index: 1,
+            },
+
+            D5: self::Pin {
+                mode: self::LCDMode::OUTPUT,
+                index: 2,
+            },
+            D4: self::Pin {
+                mode: self::LCDMode::OUTPUT,
+                index: 5,
+            },
+            D3: self::Pin {
+                mode: self::LCDMode::OUTPUT,
+                index: 3,
+            },
+            D2: self::Pin {
+                mode: self::LCDMode::OUTPUT,
+                index: 17,
+            },
+            D1: self::Pin {
+                mode: self::LCDMode::OUTPUT,
+                index: 19,
+            },
+            D0: self::Pin {
+                mode: self::LCDMode::OUTPUT,
+                index: 20,
+            },
+            E: self::Pin {
+                mode: self::LCDMode::OUTPUT,
+                index: 22,
+            },
+            RW: self::Pin {
+                mode: self::LCDMode::OUTPUT,
+                index: 23,
+            },
+            RS: self::Pin {
+                mode: self::LCDMode::OUTPUT,
+                index: 25,
+            },
+            is4PinMode: false,
+            LCD_DISPLAY_MS: std::option_env!("DELAY")
+                .unwrap_or("100")
+                .parse::<u32>()
+                .unwrap(),
+        }
     }
 }
