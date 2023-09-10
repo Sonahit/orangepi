@@ -47,7 +47,7 @@ const PINS: wp::Pins = wp::Pins {
         mode: wp::LCDMode::OUTPUT,
         index: 23,
     },
-    is4PinMode: true,
+    is4PinMode: false,
 };
 
 fn setup() {
@@ -60,37 +60,37 @@ fn setup() {
 fn logic() {
     // https://www.sparkfun.com/datasheets/LCD/HD44780.pdf Table 12
     #[rustfmt::skip]
-    wp::lcd_commands(
-        &[
-            0b00100000, 
-            0b00100000, 
-            0b00001110, 
-            0b00000110
-        ]
-    );
+    // wp::lcd_commands(
+    //     &[
+    //         0b00100000, 
+    //         0b00100000, 
+    //         0b00001110, 
+    //         0b00000110
+    //     ]
+    // );
 
-    wp::lcd_string("h");
+    // wp::lcd_string("he");
 
     // 2 lines, 5x7 format
-    // wp::lcd_command(0b00111000);
+    wp::lcd_command(0b00111000);
 
     // display on
-    // wp::lcd_command(0b00001110);
+    wp::lcd_command(0b00001110);
 
     // clear display (optional here)
-    // wp::lcd_command(0x01);
+    wp::lcd_command(0x01);
 
     // first line
     // entrymode
-    // wp::lcd_command(0b00000110);
+    wp::lcd_command(0b00000110);
 
-    // wp::lcd_string("Hitachi");
+    wp::lcd_string("Hitachi");
     //nextline
-    // wp::lcd_command(0b11000000);
-    // wp::lcd_string("MICROCOM");
+    wp::lcd_command(0b11000000);
+    wp::lcd_string("MICROCOM");
 
     // HOME
-    // wp::lcd_command(0b10);
+    wp::lcd_command(0b10);
 }
 
 fn main() {
