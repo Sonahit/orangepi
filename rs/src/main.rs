@@ -58,14 +58,12 @@ fn setup() {
 }
 
 fn logic() {
-    wp::switch_to_command();
     wp::lcd_command(0b00100000);
     wp::lcd_command(0b00100000);
     wp::lcd_command(0b00001110);
     wp::lcd_command(0b00000110);
 
-    wp::switch_to_char();
-    wp::lcd_command('h' as u32);
+    wp::lcd_string("h");
 
     // 2 lines, 5x7 format
     // wp::lcd_command(0b00111000);
