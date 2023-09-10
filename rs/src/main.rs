@@ -63,6 +63,7 @@ fn logic() {
     #[rustfmt::skip]
     wp::lcd_commands(
         &[
+            0b1,
             0b0010, 
             0b0010, 
             0b1110,
