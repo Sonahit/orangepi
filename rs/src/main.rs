@@ -53,10 +53,10 @@ fn setup() {
     wp::digital_write(PINS.E.index, wp::PinValue::LOW.repr);
     wp::write_mode_lcd();
     // 4-bit mode, 2 lines, 5x7 format
-    wp::lcd_command(0x38);
+    // wp::lcd_command(0x38);
 
     // lcd on cursor blink
-    wp::lcd_command(0x0e);
+    wp::lcd_command(0x0f);
     // clear display (optional here)
     wp::lcd_command(0x01);
     println!("Setup done");
