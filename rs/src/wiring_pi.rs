@@ -17,6 +17,7 @@ mod ffi {
         pub mode: LCDMode,
     }
 
+    #[derive(Clonable)]
     #[allow(non_snake_case)]
     struct Pins {
         pub is4PinMode: bool,

@@ -2,59 +2,9 @@ mod wiring_pi;
 
 use wiring_pi as wp;
 
-const PINS: wp::Pins = wp::Pins {
-    D7: wp::Pin {
-        mode: wp::LCDMode::OUTPUT,
-        index: 0,
-    },
-    D6: wp::Pin {
-        mode: wp::LCDMode::OUTPUT,
-        index: 1,
-    },
-
-    D5: wp::Pin {
-        mode: wp::LCDMode::OUTPUT,
-        index: 2,
-    },
-    D4: wp::Pin {
-        mode: wp::LCDMode::OUTPUT,
-        index: 5,
-    },
-    D3: wp::Pin {
-        mode: wp::LCDMode::OUTPUT,
-        index: 3,
-    },
-    D2: wp::Pin {
-        mode: wp::LCDMode::OUTPUT,
-        index: 17,
-    },
-    D1: wp::Pin {
-        mode: wp::LCDMode::OUTPUT,
-        index: 19,
-    },
-    D0: wp::Pin {
-        mode: wp::LCDMode::OUTPUT,
-        index: 20,
-    },
-    E: wp::Pin {
-        mode: wp::LCDMode::OUTPUT,
-        index: 22,
-    },
-    RW: wp::Pin {
-        mode: wp::LCDMode::OUTPUT,
-        index: 23,
-    },
-    RS: wp::Pin {
-        mode: wp::LCDMode::OUTPUT,
-        index: 25,
-    },
-    is4PinMode: false,
-    LCD_DISPLAY_MS: 1000,
-};
-
-fn setup() {
+fn setup(pins: &wp::Pins) {
     println!("Setup");
-    wp::digital_write(PINS.E.index, wp::PinValue::LOW.repr);
+    wp::digital_write(pins.E.index, wp::PinValue::LOW.repr);
     wp::write_mode_lcd();
     println!("Setup done");
 }
@@ -101,7 +51,56 @@ fn logic() {
 }
 
 fn main() {
-    let status = wp::init_lcd(PINS);
+    let pins = wp::Pins {
+        D7: wp::Pin {
+            mode: wp::LCDMode::OUTPUT,
+            index: 0,
+        },
+        D6: wp::Pin {
+            mode: wp::LCDMode::OUTPUT,
+            index: 1,
+        },
+
+        D5: wp::Pin {
+            mode: wp::LCDMode::OUTPUT,
+            index: 2,
+        },
+        D4: wp::Pin {
+            mode: wp::LCDMode::OUTPUT,
+            index: 5,
+        },
+        D3: wp::Pin {
+            mode: wp::LCDMode::OUTPUT,
+            index: 3,
+        },
+        D2: wp::Pin {
+            mode: wp::LCDMode::OUTPUT,
+            index: 17,
+        },
+        D1: wp::Pin {
+            mode: wp::LCDMode::OUTPUT,
+            index: 19,
+        },
+        D0: wp::Pin {
+            mode: wp::LCDMode::OUTPUT,
+            index: 20,
+        },
+        E: wp::Pin {
+            mode: wp::LCDMode::OUTPUT,
+            index: 22,
+        },
+        RW: wp::Pin {
+            mode: wp::LCDMode::OUTPUT,
+            index: 23,
+        },
+        RS: wp::Pin {
+            mode: wp::LCDMode::OUTPUT,
+            index: 25,
+        },
+        is4PinMode: false,
+        LCD_DISPLAY_MS: 100,
+    };
+    let status = wp::init_lcd(&pins);
 
     if status != 0 {
         panic!("WiringOP didnt start");
@@ -109,6 +108,6 @@ fn main() {
 
     println!("Hello, world! {}", status);
 
-    setup();
+    setup(&pins);
     logic();
 }
