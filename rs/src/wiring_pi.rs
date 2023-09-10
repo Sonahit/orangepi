@@ -85,35 +85,6 @@ pub fn lcd_commands(commands: &[u32]) {
     }
 }
 
-impl Clone for Pin {
-    fn clone(&self) -> Self {
-        Self {
-            index: self.index,
-            mode: self.mode,
-        }
-    }
-}
-
-impl Clone for Pins {
-    fn clone(&self) -> Self {
-        Self {
-            is4PinMode: self.is4PinMode,
-            RS: self.RS.clone(),
-            RW: self.RW.clone(),
-            E: self.E.clone(),
-            D0: self.D0.clone(),
-            D1: self.D1.clone(),
-            D2: self.D2.clone(),
-            D3: self.D3.clone(),
-            D4: self.D4.clone(),
-            D5: self.D5.clone(),
-            D6: self.D6.clone(),
-            D7: self.D7.clone(),
-            LCD_DISPLAY_MS: self.LCD_DISPLAY_MS,
-        }
-    }
-}
-
 impl Default for Pins {
     fn default() -> Self {
         Self {

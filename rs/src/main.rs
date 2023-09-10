@@ -2,9 +2,9 @@ mod wiring_pi;
 
 use wiring_pi as wp;
 
-fn setup(pins: &wp::Pins) {
+fn setup(e_pin: u32) {
     println!("Setup");
-    wp::digital_write(pins.E.index, wp::PinValue::LOW.repr);
+    wp::digital_write(e_pin, wp::PinValue::LOW.repr);
     wp::write_mode_lcd();
     println!("Setup done");
 }
@@ -52,7 +52,8 @@ fn logic() {
 
 fn main() {
     let pins = wp::Pins::default();
-    let status = wp::init_lcd(pins.clone());
+    let e_pin = pins.E.index;
+    let status = wp::init_lcd(pins);
 
     if status != 0 {
         panic!("WiringOP didnt start");
@@ -60,6 +61,6 @@ fn main() {
 
     println!("Hello, world! {}", status);
 
-    setup(&pins);
+    setup(e_pin);
     logic();
 }
