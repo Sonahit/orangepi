@@ -48,7 +48,7 @@ const PINS: wp::Pins = wp::Pins {
         mode: wp::LCDMode::OUTPUT,
         index: 25,
     },
-    is4PinMode: false,
+    is4PinMode: true,
 };
 
 fn setup() {
