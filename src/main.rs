@@ -40,7 +40,7 @@ impl I2CPort {
     }
 
     fn lcd_char(&self, char: char) {
-        self.lcd_bytes(char.to_digit(2).unwrap() as i32, LCD_CHAR)
+        self.lcd_bytes(char as i32, LCD_CHAR)
     }
 
     fn lcd_cmd(&self, bits: i32) {
@@ -48,6 +48,7 @@ impl I2CPort {
     }
 
     fn lcd_bytes(&self, bits: i32, mode: i32) {
+        println!("Writing {}", bits);
         // bits & 0b11110000
         let bits = mode | (bits & 0xF0) | LCD_BACKLIGHT;
         i2c::i2c_write(self.device_id(), bits);
