@@ -12,7 +12,7 @@ const LCD_BUS: u8 = 0;
 const LINE_1: i32 = 0x80;
 const LINE_2: i32 = 0xC0;
 const LCD_ENABLE: i32 = 0b100;
-const PULSE_SLEEP_MS: u64 = 50;
+const PULSE_SLEEP_S: f32 = 0.0005;
 const LCD_WIDTH: u32 = 16;
 
 fn setup() -> i2c::I2CPort {
@@ -54,7 +54,7 @@ impl I2CPort {
 
     fn lcd_enable(&self, bits: i32) {
         i2c::i2c_write_reg8(self.fd(), self.device_id(), bits | LCD_ENABLE);
-        thread::sleep(time::Duration::from_millis(PULSE_SLEEP_MS));
+        thread::sleep(time::Duration::from_secs_f32(PULSE_SLEEP_S));
         i2c::i2c_write_reg8(self.fd(), self.device_id(), bits & !LCD_ENABLE);
     }
 
