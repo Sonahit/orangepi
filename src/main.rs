@@ -61,6 +61,12 @@ impl I2CPort {
     fn lcd_clear(&self) {
         self.lcd_cmd(0x01);
     }
+
+    fn lcd_init_4_bytes_2_lines(&self) {
+        self.lcd_cmd(0x33);
+        self.lcd_cmd(0x32);
+        self.lcd_cmd(0x06);
+    }
 }
 
 fn logic(port: I2CPort) {
@@ -82,12 +88,13 @@ fn logic(port: I2CPort) {
 
 fn main() {
     println!("Setup");
+    // https://www.electronicsforu.com/technology-trends/learn-electronics/16x2-lcd-pinout-diagram
     let port = setup();
-    port.lcd_cmd(0x33);
-    port.lcd_cmd(0x32);
-    port.lcd_cmd(0x06);
-    port.lcd_cmd(0x0C);
-    port.lcd_cmd(0x28);
+    port.lcd_cmd(0x33); // init
+    port.lcd_cmd(0x32); // init
+    port.lcd_cmd(0x06); // cursor move direction right
+    port.lcd_cmd(0x0C); // display on cursor off
+    port.lcd_cmd(0x28); // 2 lines 4 bytes
     port.lcd_clear();
     println!("Setup done");
 
