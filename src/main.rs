@@ -44,20 +44,18 @@ impl I2CPort {
     fn lcd_bytes(&self, bits: i32, mode: i32) {
         // bits & 0b11110000
         let bits_high = mode | (bits & 0xF0) | LCD_BACKLIGHT;
-        i2c::i2c_write_reg8(self.fd(), self.device_id(), bits_high);
+        i2c::i2c_write(self.fd(), bits_high);
         self.lcd_enable(bits_high);
-        println!("{}", bits_high);
 
         let bits_low = mode | ((bits << 4) & 0xF0) | LCD_BACKLIGHT;
-        i2c::i2c_write_reg8(self.fd(), self.device_id(), bits_low);
+        i2c::i2c_write(self.fd(), bits_low);
         self.lcd_enable(bits_low);
-        println!("{}", bits_low);
     }
 
     fn lcd_enable(&self, bits: i32) {
-        i2c::i2c_write_reg8(self.fd(), self.device_id(), bits | LCD_ENABLE);
+        i2c::i2c_write(self.fd(), bits | LCD_ENABLE);
         thread::sleep(time::Duration::from_secs_f32(PULSE_SLEEP_S));
-        i2c::i2c_write_reg8(self.fd(), self.device_id(), bits & !LCD_ENABLE);
+        i2c::i2c_write(self.fd(), bits & !LCD_ENABLE);
     }
 
     fn lcd_clear(&self) {
