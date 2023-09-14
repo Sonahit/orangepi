@@ -12,7 +12,7 @@ const LCD_DEVICE: &str = "/dev/i2c-0";
 const LINE_1: i32 = 0x80;
 const LINE_2: i32 = 0xC0;
 const LCD_ENABLE: i32 = 0b100;
-const PULSE_SLEEP_MS: u64 = 50;
+const PULSE_SLEEP_MS: u64 = 5;
 const LCD_WIDTH: u32 = 16;
 
 fn setup() -> i2c::I2CPort {
@@ -74,6 +74,7 @@ fn logic(port: I2CPort) {
         port.lcd_string(">   World", LINE_2);
 
         thread::sleep(time::Duration::from_millis(1000));
+        println!("Loop done")
     }
 }
 
