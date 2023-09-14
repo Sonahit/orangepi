@@ -8,6 +8,7 @@ const LCD_CMD: i32 = 0;
 const LCD_CHAR: i32 = 1;
 const LCD_BACKLIGHT: i32 = 0x08;
 const LCD_PORT: i32 = 0x27;
+const LCD_DEVICE: &str = "/dev/i2c-0";
 const LINE_1: i32 = 0x80;
 const LINE_2: i32 = 0xC0;
 const LCD_ENABLE: i32 = 0b100;
@@ -15,7 +16,7 @@ const PULSE_SLEEP_MS: u64 = 50;
 const LCD_WIDTH: u32 = 16;
 
 fn setup() -> i2c::I2CPort {
-    match i2c::setup_i2c(LCD_PORT, LCD_WIDTH) {
+    match i2c::setup_i2c_device(LCD_DEVICE.as_ptr(), LCD_PORT, LCD_WIDTH) {
         Ok(port) => port,
         Err(err) => {
             panic!("Errored {}", err)
