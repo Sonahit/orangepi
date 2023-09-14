@@ -83,6 +83,11 @@ fn logic(port: I2CPort) {
 fn main() {
     println!("Setup");
     let port = setup();
+    port.lcd_cmd(0x33);
+    port.lcd_cmd(0x32);
+    port.lcd_cmd(0x06);
+    port.lcd_cmd(0x0C);
+    port.lcd_cmd(0x28);
     port.lcd_clear();
     println!("Setup done");
 
