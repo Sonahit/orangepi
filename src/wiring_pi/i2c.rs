@@ -40,16 +40,20 @@ pub use self::ffi::{
     i2c_write_reg16, i2c_write_reg8,
 };
 
-pub struct I2CPort(i32, u32);
+pub struct I2CPort(i32, i32, u32);
 
 #[allow(dead_code)]
 impl I2CPort {
-    pub fn device_id(&self) -> i32 {
+    pub fn fd(&self) -> i32 {
         self.0
     }
 
-    pub fn width(&self) -> u32 {
+    pub fn device_id(&self) -> i32 {
         self.1
+    }
+
+    pub fn width(&self) -> u32 {
+        self.2
     }
 }
 
@@ -59,7 +63,7 @@ pub fn setup_i2c(device_id: i32, width: u32) -> Result<I2CPort, i32> {
     if fd <= 0 {
         Err(ffi::i2c_get_error())
     } else {
-        Ok(I2CPort(fd, width))
+        Ok(I2CPort(fd, device_id, width))
     }
 }
 
@@ -72,7 +76,7 @@ pub fn setup_i2c_device(smbus: u8, device_id: i32, width: u32) -> Result<I2CPort
         if fd <= 0 {
             Err(ffi::i2c_get_error())
         } else {
-            Ok(I2CPort(fd, width))
+            Ok(I2CPort(fd, device_id, width))
         }
     }
 }
