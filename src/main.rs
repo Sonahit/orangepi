@@ -31,12 +31,6 @@ impl I2CPort {
         for char in str.chars() {
             self.lcd_char(char)
         }
-        if str.len() < self.width() as usize {
-            let spaces = self.width() as usize - str.len();
-            for _ in 0..spaces {
-                self.lcd_char(' ');
-            }
-        }
     }
 
     fn lcd_char(&self, char: char) {
@@ -48,7 +42,6 @@ impl I2CPort {
     }
 
     fn lcd_bytes(&self, bits: i32, mode: i32) {
-        println!("Writing {}", bits);
         // bits & 0b11110000
         let bits = mode | (bits & 0xF0) | LCD_BACKLIGHT;
         i2c::i2c_write(self.device_id(), bits);
