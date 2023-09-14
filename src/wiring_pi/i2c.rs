@@ -5,7 +5,7 @@ mod ffi {
         include!("rs/lib/i2c.h");
 
         #[rust_name = "i2c_setup_device"]
-        unsafe fn i2cSetupDevice(devicePath: *const c_char, deviceId: i32) -> i32;
+        unsafe fn i2cSetupDevice(devicePath: &CxxString, deviceId: i32) -> i32;
 
         #[rust_name = "i2c_setup"]
         fn i2cSetup(devId: i32) -> i32;
@@ -32,6 +32,8 @@ mod ffi {
         fn i2cWriteReg16(fd: i32, reg: i32, data: i32) -> i32;
     }
 }
+
+use cxx::let_cxx_string;
 
 pub use self::ffi::{
     i2c_get_error, i2c_read, i2c_read_reg16, i2c_read_reg8, i2c_setup, i2c_setup_device, i2c_write,
@@ -63,7 +65,9 @@ pub fn setup_i2c(device_id: i32, width: u32) -> Result<I2CPort, i32> {
 
 pub fn setup_i2c_device(device_path: &str, device_id: i32, width: u32) -> Result<I2CPort, i32> {
     unsafe {
-        let fd = ffi::i2c_setup_device(device_path.as_ptr() as *const std::ffi::c_char, device_id);
+        let_cxx_string!(c = device_path);
+
+        let fd = ffi::i2c_setup_device(&c, device_id);
 
         if fd <= 0 {
             Err(ffi::i2c_get_error())
