@@ -29,14 +29,18 @@ impl I2CPort {
         self.lcd_cmd(line);
 
         for char in str.chars() {
-            self.lcd_bytes(char as i32, LCD_CHAR)
+            self.lcd_char(char)
         }
         if str.len() < self.width() as usize {
             let spaces = self.width() as usize - str.len();
             for _ in 0..spaces {
-                self.lcd_bytes(' ' as i32, LCD_CHAR);
+                self.lcd_char(' ');
             }
         }
+    }
+
+    fn lcd_char(&self, char: char) {
+        self.lcd_bytes(char as i32, LCD_CHAR)
     }
 
     fn lcd_cmd(&self, bits: i32) {
@@ -65,13 +69,13 @@ fn logic(port: I2CPort) {
     // https://www.sparkfun.com/datasheets/LCD/HD44780.pdf Table 12 4bit 8digit 1 line
 
     loop {
-        port.lcd_string("Hello   <", LINE_1);
-        port.lcd_string("World   <", LINE_2);
+        port.lcd_string("Hello  <", LINE_1);
+        port.lcd_string("World  <", LINE_2);
 
         thread::sleep(time::Duration::from_millis(1000));
 
-        port.lcd_string(">   Hello", LINE_1);
-        port.lcd_string(">   World", LINE_2);
+        port.lcd_string(">  Hello", LINE_1);
+        port.lcd_string(">  World", LINE_2);
 
         thread::sleep(time::Duration::from_millis(1000));
         println!("Loop done")
