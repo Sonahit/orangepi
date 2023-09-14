@@ -16,7 +16,7 @@ const PULSE_SLEEP_MS: u64 = 50;
 const LCD_WIDTH: u32 = 16;
 
 fn setup() -> i2c::I2CPort {
-    match i2c::setup_i2c(LCD_PORT, LCD_WIDTH) {
+    match i2c::setup_i2c_device(LCD_BUS, LCD_PORT, LCD_WIDTH) {
         Ok(port) => port,
         Err(err) => {
             panic!("Errored {}", err)
