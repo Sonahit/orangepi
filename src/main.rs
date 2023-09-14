@@ -63,6 +63,10 @@ impl I2CPort {
         thread::sleep(time::Duration::from_millis(PULSE_SLEEP_MS));
         i2c::i2c_write(self.device_id(), bits & !LCD_ENABLE);
     }
+
+    fn lcd_clear(&self) {
+        self.lcd_cmd(0x01);
+    }
 }
 
 fn logic(port: I2CPort) {
@@ -85,6 +89,7 @@ fn logic(port: I2CPort) {
 fn main() {
     println!("Setup");
     let port = setup();
+    port.lcd_clear();
     println!("Setup done");
 
     thread::sleep(time::Duration::from_millis(1000));
