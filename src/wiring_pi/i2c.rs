@@ -63,7 +63,7 @@ pub fn setup_i2c(device_id: i32, width: u32) -> Result<I2CPort, i32> {
 
 pub fn setup_i2c_device(device_path: &str, device_id: i32, width: u32) -> Result<I2CPort, i32> {
     unsafe {
-        let fd = ffi::i2c_setup_device(device_path.as_ptr() as *const i8, device_id);
+        let fd = ffi::i2c_setup_device(device_path.as_ptr() as *const std::ffi::c_char, device_id);
 
         if fd <= 0 {
             Err(ffi::i2c_get_error())
