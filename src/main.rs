@@ -48,7 +48,7 @@ impl I2CPort {
         self.lcd_enable(bits_high);
         println!("{}", bits_high);
 
-        let bits_low = mode | ((bits_high << 4) & 0xF0) | LCD_BACKLIGHT;
+        let bits_low = mode | ((bits << 4) & 0xF0) | LCD_BACKLIGHT;
         i2c::i2c_write_reg8(self.fd(), self.device_id(), bits_low);
         self.lcd_enable(bits_low);
         println!("{}", bits_low);
