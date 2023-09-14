@@ -1,4 +1,4 @@
-#include <tuple>
+#include <iostream>
 
 #include "errno.h"
 #include "wiringPi.h"
@@ -11,6 +11,7 @@
  * @returns fd
  */
 int i2cSetupDevice(const char* devicePath, int deviceId) {
+  std::cout << devicePath;
   int fd = wiringPiI2CSetupInterface(devicePath, deviceId);
 
   return fd;
