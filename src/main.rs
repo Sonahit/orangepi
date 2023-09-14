@@ -61,12 +61,6 @@ impl I2CPort {
     fn lcd_clear(&self) {
         self.lcd_cmd(0x01);
     }
-
-    fn lcd_init_4_bytes_2_lines(&self) {
-        self.lcd_cmd(0x33);
-        self.lcd_cmd(0x32);
-        self.lcd_cmd(0x06);
-    }
 }
 
 fn logic(port: I2CPort) {
