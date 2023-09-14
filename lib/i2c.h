@@ -10,7 +10,7 @@
  * @param interface  /dev/i2c-0
  * @returns fd
  */
-int i2cSetupDevice(std::string devicePath, int deviceId) {
+int i2cSetupDevice(const std::string &devicePath, int deviceId) {
   int fd = wiringPiI2CSetupInterface(devicePath.c_str(), deviceId);
 
   return fd;
