@@ -1,11 +1,8 @@
 {
   "files.associations": {
     ".eslintrc": "jsonc",
-    "cstdint": "cpp",
-    "array": "cpp",
-    "string": "cpp",
-    "string_view": "cpp",
-    "span": "cpp",
+    "error_t.h": "c",
+    "tuple": "cpp",
     "cctype": "cpp",
     "clocale": "cpp",
     "cmath": "cpp",
@@ -19,6 +16,7 @@
     "cwchar": "cpp",
     "cwctype": "cpp",
     "any": "cpp",
+    "array": "cpp",
     "atomic": "cpp",
     "hash_map": "cpp",
     "bit": "cpp",
@@ -31,11 +29,13 @@
     "complex": "cpp",
     "concepts": "cpp",
     "condition_variable": "cpp",
+    "cstdint": "cpp",
     "deque": "cpp",
     "forward_list": "cpp",
     "list": "cpp",
     "map": "cpp",
     "set": "cpp",
+    "string": "cpp",
     "unordered_map": "cpp",
     "unordered_set": "cpp",
     "vector": "cpp",
@@ -50,8 +50,8 @@
     "random": "cpp",
     "ratio": "cpp",
     "source_location": "cpp",
+    "string_view": "cpp",
     "system_error": "cpp",
-    "tuple": "cpp",
     "type_traits": "cpp",
     "utility": "cpp",
     "format": "cpp",
@@ -68,6 +68,7 @@
     "numbers": "cpp",
     "ostream": "cpp",
     "semaphore": "cpp",
+    "span": "cpp",
     "sstream": "cpp",
     "stdexcept": "cpp",
     "stop_token": "cpp",
@@ -78,5 +79,8 @@
     "typeinfo": "cpp",
     "valarray": "cpp",
     "variant": "cpp"
-  }
+  },
+  "rust-analyzer.linkedProjects": [
+    "./Cargo.toml"
+  ]
 }
