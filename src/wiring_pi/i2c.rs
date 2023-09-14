@@ -63,9 +63,9 @@ pub fn setup_i2c(device_id: i32, width: u32) -> Result<I2CPort, i32> {
     }
 }
 
-pub fn setup_i2c_device(device_path: &str, device_id: i32, width: u32) -> Result<I2CPort, i32> {
+pub fn setup_i2c_device(smbus: u8, device_id: i32, width: u32) -> Result<I2CPort, i32> {
     unsafe {
-        let_cxx_string!(c = device_path);
+        let_cxx_string!(c = format!("/dev/i2c-{}", smbus));
 
         let fd = ffi::i2c_setup_device(&c, device_id);
 
