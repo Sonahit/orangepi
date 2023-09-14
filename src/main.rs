@@ -40,7 +40,7 @@ impl I2CPort {
     }
 
     fn lcd_char(&self, char: char) {
-        self.lcd_bytes(char as i32, LCD_CHAR)
+        self.lcd_bytes(char.to_digit(2).unwrap() as i32, LCD_CHAR)
     }
 
     fn lcd_cmd(&self, bits: i32) {
