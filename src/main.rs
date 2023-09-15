@@ -1,8 +1,11 @@
+mod utils;
 mod wiring_pi;
 
 use std::{thread, time};
 
 use wiring_pi::i2c::{self, I2CPort};
+
+use utils::Padding;
 
 const LCD_CMD: i32 = 0;
 const LCD_CHAR: i32 = 1;
@@ -33,7 +36,7 @@ enum ModLines {
 }
 
 impl I2CPort {
-    fn lcd_string(&self, str: &str, line: i32) {
+    fn lcd_str(&self, str: &str, line: i32) {
         self.lcd_cmd(line);
 
         for char in str.chars() {
@@ -41,21 +44,10 @@ impl I2CPort {
         }
     }
 
-    fn lcd_string_left_pad(&self, str: &str, line: i32, lft_pad: &str) {
+    fn lcd_string(&self, str: String, line: i32) {
         self.lcd_cmd(line);
-        let new_str = if str.len() < self.width() as usize {
-            let mut padded_str = String::with_capacity(self.width() as usize);
-            padded_str.push_str(str);
-            let pad_to = self.width() - padded_str.len() as u32;
-            for _ in 0..pad_to {
-                padded_str.push_str(lft_pad);
-            }
-            padded_str
-        } else {
-            String::from(str)
-        };
 
-        for char in new_str.chars() {
+        for char in str.chars() {
             self.lcd_char(char as u8)
         }
     }
@@ -115,12 +107,15 @@ impl I2CPort {
 fn logic(port: I2CPort) {
     // https://www.sparkfun.com/datasheets/LCD/HD44780.pdf
     // (ROM Code: A00)
-
+    let padding = Padding(port.width() as usize);
     loop {
-        port.lcd_string_u8(&[0b11110100], LINE_1);
-        port.lcd_string_left_pad("World", LINE_2, ">");
+        port.lcd_string(padding.right_pad_u8(&[0b11110100], "<"), LINE_1);
+        port.lcd_string(padding.left_pad("World", ">"), LINE_2);
 
         thread::sleep(time::Duration::from_millis(1000));
+
+        port.lcd_string(padding.right_pad("World", "<"), LINE_1);
+        port.lcd_string(padding.left_pad_u8(&[0b11110100], "<"), LINE_2);
         println!("Loop done")
     }
 }
