@@ -3,7 +3,8 @@ mod wiring_pi;
 
 use std::{
     sync::{mpsc, Arc},
-    thread, time,
+    thread::{self, JoinHandle},
+    time,
 };
 
 use wiring_pi::i2c::{self, I2CPort};
@@ -171,27 +172,10 @@ impl MovingText {
         }
     }
 
-    fn start_moving(self: Arc<Self>, port: Arc<I2CPort>) -> mpsc::Sender<bool> {
-        let (tx, rx) = mpsc::channel();
-        let port = port.clone();
-        let state = Arc::new(self);
-
-        thread::spawn(move || {
-            let state = state.clone();
-            let padding = Padding(port.width() as usize);
-            loop {
-                let text = padding.left_pad(&state.text, state.fill_with);
-                port.lcd_text_string(text, state.line);
-                port.lcd_sleep(1000);
-                port.lcd_text_string(" ".repeat(padding.width()), state.line);
-                port.lcd_sleep(1000);
-                if rx.recv().is_ok() {
-                    break;
-                }
-            }
-        });
-
-        tx
+    fn move_one(&self, port: &I2CPort) {
+        let padding = Padding(port.width() as usize);
+        let text = padding.left_pad(&self.text, self.fill_with);
+        port.lcd_text_string(text, self.line);
     }
 }
 
@@ -202,9 +186,6 @@ fn logic(port: I2CPort) {
     let padding = Padding(port.width() as usize);
 
     let moving_text = MovingText::new("help".to_string(), LinePlace::One);
-    let port = Arc::new(port.clone());
-    let tx = MovingText::start_moving(Arc::new(moving_text), port.clone());
-
     loop {
         // port.lcd_string_u8(
         //     padding.left_pad_u8(&[0b11110100], "<").as_slice(),
@@ -212,10 +193,11 @@ fn logic(port: I2CPort) {
         // );
 
         port.lcd_text_string(padding.right_pad("1", '0'), LinePlace::Two);
-        port.lcd_clear_line(LinePlace::Two);
+        moving_text.move_one(&port);
         port.lcd_sleep(1000);
 
         port.lcd_text_string(padding.left_pad("1", '2'), LinePlace::Two);
+        moving_text.move_one(&port);
         // port.lcd_string_u8(
         //     padding.right_pad_u8(&[0b11110100], "<").as_slice(),
         //     LinePlace::Two,
