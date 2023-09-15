@@ -123,6 +123,7 @@ impl I2CPort {
 fn logic(port: I2CPort) {
     // https://www.sparkfun.com/datasheets/LCD/HD44780.pdf
     // (ROM Code: A00)
+    port.lcd_cmd(0x83);
     let padding = Padding(port.width() as usize);
     loop {
         // port.lcd_string_u8(padding.right_pad_u8(&[0b11110100], "<").as_slice(), LINE_1);
@@ -144,7 +145,6 @@ fn main() {
     println!("Setup");
     // https://www.electronicsforu.com/technology-trends/learn-electronics/16x2-lcd-pinout-diagram
     let port = init_i2c();
-    port.lcd_set_mode_bytes(ModLines::One, ModBytes::Four);
     port.lcd_set_mode_bytes(ModLines::One, ModBytes::Four);
     port.lcd_display_on();
     port.lcd_first_line_setup();
