@@ -1,7 +1,10 @@
 mod utils;
 mod wiring_pi;
 
-use std::{thread, time};
+use std::{
+    sync::{mpsc, Arc},
+    thread, time,
+};
 
 use wiring_pi::i2c::{self, I2CPort};
 
@@ -33,6 +36,7 @@ enum ModLines {
     Two = 0b1000,
 }
 
+#[derive(Clone, Copy)]
 enum LinePlace {
     One = 0x80,
     Two = 0xC0,
@@ -149,23 +153,69 @@ impl I2CPort {
     }
 }
 
+#[derive(Clone)]
+struct MovingText {
+    text: String,
+    fill_with: char,
+    index: u8,
+    line: LinePlace,
+}
+
+impl MovingText {
+    fn new(text: String, line: LinePlace) -> Self {
+        Self {
+            text,
+            fill_with: ' ',
+            line,
+            index: 0,
+        }
+    }
+
+    fn start_moving(self: Arc<Self>, port: Arc<I2CPort>) -> mpsc::Sender<bool> {
+        let (tx, rx) = mpsc::channel();
+        let port = port.clone();
+        let state = Arc::new(self);
+
+        thread::spawn(move || {
+            let state = state.clone();
+            let padding = Padding(port.width() as usize);
+            loop {
+                let text = padding.left_pad(&state.text, state.fill_with);
+                port.lcd_text_string(text, state.line);
+                port.lcd_sleep(1000);
+                port.lcd_text_string(" ".repeat(padding.width()), state.line);
+                port.lcd_sleep(1000);
+                if rx.recv().is_ok() {
+                    break;
+                }
+            }
+        });
+
+        tx
+    }
+}
+
 fn logic(port: I2CPort) {
     println!("Logic start");
     // https://www.sparkfun.com/datasheets/LCD/HD44780.pdf
     // (ROM Code: A00)
     let padding = Padding(port.width() as usize);
 
+    let moving_text = MovingText::new("help".to_string(), LinePlace::One);
+    let port = Arc::new(port.clone());
+    let tx = MovingText::start_moving(Arc::new(moving_text), port.clone());
+
     loop {
         // port.lcd_string_u8(
         //     padding.left_pad_u8(&[0b11110100], "<").as_slice(),
         //     LinePlace::One,
         // );
-        port.lcd_text_string(padding.right_pad("1", '0'), LinePlace::One);
+
+        port.lcd_text_string(padding.right_pad("1", '0'), LinePlace::Two);
         port.lcd_clear_line(LinePlace::Two);
         port.lcd_sleep(1000);
 
         port.lcd_text_string(padding.left_pad("1", '2'), LinePlace::Two);
-        port.lcd_clear_line(LinePlace::One);
         // port.lcd_string_u8(
         //     padding.right_pad_u8(&[0b11110100], "<").as_slice(),
         //     LinePlace::Two,

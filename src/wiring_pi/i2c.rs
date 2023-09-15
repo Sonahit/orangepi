@@ -40,6 +40,7 @@ pub use self::ffi::{
     i2c_write_reg16, i2c_write_reg8,
 };
 
+#[derive(Clone)]
 pub struct I2CPort(i32, i32, u32);
 
 #[allow(dead_code)]
