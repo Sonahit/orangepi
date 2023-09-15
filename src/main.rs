@@ -196,17 +196,15 @@ impl MovingText {
 
         let overflow = port.width() as i8 - (self.index as usize + self.text.len()) as i8;
         if overflow < 0 {
-            port.lcd_text_string(
-                self.text
-                    .chars()
-                    .rev()
-                    .take(overflow.unsigned_abs() as usize)
-                    .collect::<String>()
-                    .chars()
-                    .rev()
-                    .collect::<String>(),
-                self.line,
-            );
+            let mut str_right = String::with_capacity(overflow.unsigned_abs() as usize);
+
+            for i in 0..overflow {
+                let idx = self.text.len() - i as usize;
+                if let Some(char) = self.text.get(idx..idx + 1) {
+                    str_right = format!("{}{}", char, str_right);
+                }
+            }
+            port.lcd_text_string(str_right, self.line);
         }
     }
 }
