@@ -142,40 +142,35 @@ impl I2CPort {
 }
 
 fn logic(port: I2CPort) {
+    println!("Logic start");
     // https://www.sparkfun.com/datasheets/LCD/HD44780.pdf
     // (ROM Code: A00)
     let padding = Padding(port.width() as usize);
     loop {
-        port.lcd_string(padding.left_pad("World", ">"), LinePlace::Two);
-        port.lcd_string_u8(
-            padding.right_pad_u8(&[0b11110100], "<").as_slice(),
-            LinePlace::One,
-        );
+        port.lcd_str("World", LinePlace::Two);
+        port.lcd_string_u8(&[0b11110100], LinePlace::One);
 
         thread::sleep(time::Duration::from_millis(1000));
-        port.lcd_string(padding.right_pad("World", "<"), LinePlace::One);
-        port.lcd_string_u8(
-            padding.left_pad_u8(&[0b11110100], "<").as_slice(),
-            LinePlace::Two,
-        );
+        port.lcd_str("World", LinePlace::One);
+        port.lcd_string_u8(&[0b11110100], LinePlace::Two);
         thread::sleep(time::Duration::from_millis(1000));
         println!("Loop done")
     }
 }
 
-fn main() {
+fn setup(port: &I2CPort) {
     println!("Setup");
-    // https://www.electronicsforu.com/technology-trends/learn-electronics/16x2-lcd-pinout-diagram
-    let port = init_i2c();
     port.lcd_set_mode_bytes(ModLines::Two, ModBytes::Four);
     port.lcd_display_on_with_cursor();
     port.lcd_first_line_setup();
     port.lcd_set_mode_bytes(ModLines::Two, ModBytes::Four);
     port.lcd_clear();
     println!("Setup done");
+}
 
-    thread::sleep(time::Duration::from_millis(1000));
-
-    println!("Logic start");
+fn main() {
+    // https://www.electronicsforu.com/technology-trends/learn-electronics/16x2-lcd-pinout-diagram
+    let port = init_i2c();
+    setup(&port);
     logic(port);
 }
