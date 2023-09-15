@@ -111,16 +111,29 @@ impl I2CPort {
         self.lcd_cmd(cmd);
     }
 
-    fn lcd_display(&self, d: i32, c: i32, b: i32) {
-        self.lcd_cmd(0b00001000 | d | c | b);
+    fn lcd_display(
+        &self,
+        d: wiring_pi::DigitalByte,
+        c: wiring_pi::DigitalByte,
+        b: wiring_pi::DigitalByte,
+    ) {
+        self.lcd_cmd(0b00001000 | ((d as i32) << 2) | ((c as i32) << 1) | b as i32);
     }
 
     fn lcd_display_on(&self) {
-        self.lcd_display(1, 0, 0);
+        self.lcd_display(
+            wiring_pi::DigitalByte::High,
+            wiring_pi::DigitalByte::Low,
+            wiring_pi::DigitalByte::Low,
+        );
     }
 
     fn lcd_display_on_with_cursor(&self) {
-        self.lcd_display(1, 1, 1);
+        self.lcd_display(
+            wiring_pi::DigitalByte::High,
+            wiring_pi::DigitalByte::High,
+            wiring_pi::DigitalByte::High,
+        );
     }
 
     fn lcd_first_line_setup(&self) {
