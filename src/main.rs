@@ -146,8 +146,8 @@ fn logic(port: I2CPort) {
     loop {
         port.lcd_string_u8(&[0b11110100], LinePlace::One);
         port.lcd_str("World <", LinePlace::Two);
-
         thread::sleep(time::Duration::from_millis(1000));
+
         port.lcd_str("World <", LinePlace::One);
         port.lcd_string_u8(&[0b11110100], LinePlace::Two);
         thread::sleep(time::Duration::from_millis(1000));
@@ -169,5 +169,6 @@ fn main() {
     // https://www.electronicsforu.com/technology-trends/learn-electronics/16x2-lcd-pinout-diagram
     let port = init_i2c();
     setup(&port);
+    thread::sleep(time::Duration::from_millis(1000));
     logic(port);
 }
