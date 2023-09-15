@@ -114,7 +114,7 @@ impl I2CPort {
     }
 
     fn lcd_clear_line(&self, line: LinePlace) {
-        self.lcd_text_string(" ".repeat(self.width() as usize), line);
+        self.lcd_text_string(" ".repeat(self.led_width() as usize), line);
     }
 
     fn lcd_display(
@@ -160,30 +160,30 @@ struct MovingText {
     fill_with: char,
     index: u8,
     line: LinePlace,
-    overflow: bool,
+    overflow_enabled: bool,
 }
 
 impl MovingText {
-    fn new(text: String, line: LinePlace, overflow: bool) -> Self {
+    fn new(text: String, line: LinePlace, overflow_enabled: bool) -> Self {
         Self {
             text,
             fill_with: ' ',
             line,
             index: 0,
-            overflow,
+            overflow_enabled,
         }
     }
 
     fn init(&self, port: &I2CPort) {
-        let padding = Padding(port.width() as usize);
+        let padding = Padding(port.led_width() as usize);
         let text = padding.left_pad(&self.text, self.fill_with);
         port.lcd_text_string(text, self.line);
     }
 
     fn move_one(&mut self, port: &I2CPort) {
-        let padding = Padding(port.width() as usize);
+        let padding = Padding(port.led_width() as usize);
 
-        if self.index + 1 < port.width() as u8 {
+        if self.index + 1 < port.led_width() as u8 {
             self.index += 1;
         } else {
             self.index = 0
@@ -196,8 +196,8 @@ impl MovingText {
         );
         port.lcd_text_string(text, self.line);
 
-        let overflow = port.width() as i8 - (self.index as usize + self.text.len()) as i8;
-        if self.overflow && overflow < 0 {
+        let overflow = port.led_width() as i8 - (self.index as usize + self.text.len()) as i8;
+        if self.overflow_enabled && overflow < 0 {
             let overflow = overflow.unsigned_abs() as usize;
             let mut str_right = String::with_capacity(overflow);
 
@@ -216,7 +216,7 @@ fn logic(port: I2CPort) {
     println!("Logic start");
     // https://www.sparkfun.com/datasheets/LCD/HD44780.pdf
     // (ROM Code: A00)
-    let padding = Padding(port.width() as usize);
+    let padding = Padding(port.led_width() as usize);
 
     let mut moving_text = MovingText::new("help".to_string(), LinePlace::One, true);
     moving_text.init(&port);

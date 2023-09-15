@@ -53,7 +53,7 @@ impl I2CPort {
         self.1
     }
 
-    pub fn width(&self) -> u32 {
+    pub fn led_width(&self) -> u32 {
         self.2
     }
 }
