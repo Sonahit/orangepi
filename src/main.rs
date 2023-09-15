@@ -68,7 +68,7 @@ impl I2CPort {
         let dl = 0b00000; // 4 bit mode
         let cmd = 0b00100000 | dl | num_lines | f;
         self.lcd_cmd(cmd);
-        self.lcd_cmd(cmd);
+        self.lcd_cmd(cmd & 1);
     }
 
     fn lcd_display_on(&self) {
