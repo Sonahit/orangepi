@@ -172,9 +172,15 @@ impl MovingText {
         }
     }
 
+    fn init(&self, port: &I2CPort) {
+        let padding = Padding(port.width() as usize);
+        let text = padding.left_pad(&self.text, self.fill_with);
+        port.lcd_text_string(text, self.line);
+    }
+
     fn move_one(&mut self, port: &I2CPort) {
         let padding = Padding(port.width() as usize);
-        let padding_index = Padding(self.index as usize);
+        let padding_index = Padding(self.index as usize + 1);
 
         let text = padding.left_pad(
             &padding_index.right_pad(&self.text, self.fill_with),
@@ -200,6 +206,8 @@ fn logic(port: I2CPort) {
     let padding = Padding(port.width() as usize);
 
     let mut moving_text = MovingText::new("help".to_string(), LinePlace::One);
+    moving_text.init(&port);
+
     loop {
         // port.lcd_string_u8(
         //     padding.left_pad_u8(&[0b11110100], "<").as_slice(),
