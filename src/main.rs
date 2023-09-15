@@ -160,15 +160,17 @@ struct MovingText {
     fill_with: char,
     index: u8,
     line: LinePlace,
+    overflow: bool,
 }
 
 impl MovingText {
-    fn new(text: String, line: LinePlace) -> Self {
+    fn new(text: String, line: LinePlace, overflow: bool) -> Self {
         Self {
             text,
             fill_with: ' ',
             line,
             index: 0,
+            overflow,
         }
     }
 
@@ -195,7 +197,7 @@ impl MovingText {
         port.lcd_text_string(text, self.line);
 
         let overflow = port.width() as i8 - (self.index as usize + self.text.len()) as i8;
-        if overflow < 0 {
+        if self.overflow && overflow < 0 {
             let overflow = overflow.unsigned_abs() as usize;
             let mut str_right = String::with_capacity(overflow);
 
@@ -216,7 +218,7 @@ fn logic(port: I2CPort) {
     // (ROM Code: A00)
     let padding = Padding(port.width() as usize);
 
-    let mut moving_text = MovingText::new("help".to_string(), LinePlace::One);
+    let mut moving_text = MovingText::new("help".to_string(), LinePlace::One, true);
     moving_text.init(&port);
 
     loop {
