@@ -12,9 +12,6 @@ const LCD_CHAR: i32 = 1;
 const LCD_BACKLIGHT: i32 = 0x08;
 const LCD_PORT: i32 = 0x27;
 const LCD_BUS: u8 = 0;
-const LINE_1: i32 = 0x80;
-const LINE_2: i32 = 0xC0;
-const LINE_ONLY: i32 = 0x00;
 const LCD_ENABLE: i32 = 0b100;
 const PULSE_SLEEP_S: f32 = 0.0005;
 const LCD_WIDTH: u32 = 16;
@@ -147,11 +144,11 @@ fn logic(port: I2CPort) {
     // (ROM Code: A00)
     let padding = Padding(port.width() as usize);
     loop {
-        port.lcd_str("World", LinePlace::Two);
         port.lcd_string_u8(&[0b11110100], LinePlace::One);
+        port.lcd_str("World <", LinePlace::Two);
 
         thread::sleep(time::Duration::from_millis(1000));
-        port.lcd_str("World", LinePlace::One);
+        port.lcd_str("World <", LinePlace::One);
         port.lcd_string_u8(&[0b11110100], LinePlace::Two);
         thread::sleep(time::Duration::from_millis(1000));
         println!("Loop done")
