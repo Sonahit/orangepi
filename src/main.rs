@@ -40,7 +40,7 @@ enum LinePlace {
 }
 
 impl I2CPort {
-    fn lcd_str(&self, str: &str, line: LinePlace) {
+    fn lcd_text_str(&self, str: &str, line: LinePlace) {
         match line {
             LinePlace::None => (),
             _ => self.lcd_cmd(line as i32),
@@ -51,7 +51,7 @@ impl I2CPort {
         }
     }
 
-    fn lcd_string(&self, str: String, line: LinePlace) {
+    fn lcd_text_string(&self, str: String, line: LinePlace) {
         match line {
             LinePlace::None => (),
             _ => self.lcd_cmd(line as i32),
@@ -62,7 +62,7 @@ impl I2CPort {
         }
     }
 
-    fn lcd_string_u8(&self, str: &[u8], line: LinePlace) {
+    fn lcd_text_u8(&self, str: &[u8], line: LinePlace) {
         match line {
             LinePlace::None => (),
             _ => self.lcd_cmd(line as i32),
@@ -150,17 +150,17 @@ fn logic(port: I2CPort) {
     println!("Logic start");
     // https://www.sparkfun.com/datasheets/LCD/HD44780.pdf
     // (ROM Code: A00)
-    let padding = Padding(port.width() as usize);
+    // let padding = Padding(port.width() as usize);
 
     loop {
         // port.lcd_string_u8(
         //     padding.left_pad_u8(&[0b11110100], "<").as_slice(),
         //     LinePlace::One,
         // );
-        port.lcd_str("World ", LinePlace::One);
+        port.lcd_text_string("1".repeat(port.width() as usize), LinePlace::One);
         port.lcd_sleep(1000);
 
-        port.lcd_str("World ", LinePlace::Two);
+        port.lcd_text_string("1".repeat(port.width() as usize), LinePlace::Two);
         // port.lcd_string_u8(
         //     padding.right_pad_u8(&[0b11110100], "<").as_slice(),
         //     LinePlace::Two,
