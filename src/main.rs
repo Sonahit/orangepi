@@ -199,7 +199,11 @@ impl MovingText {
             port.lcd_text_string(
                 self.text
                     .chars()
-                    .take(self.text.len() - overflow.unsigned_abs() as usize)
+                    .rev()
+                    .take(overflow.unsigned_abs() as usize)
+                    .collect::<String>()
+                    .chars()
+                    .rev()
                     .collect::<String>(),
                 self.line,
             );
