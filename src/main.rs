@@ -37,7 +37,6 @@ enum ModLines {
 
 impl I2CPort {
     fn lcd_str(&self, str: &str, line: i32) {
-        println!("{}", str.len());
         self.lcd_cmd(line);
 
         for char in str.chars() {
@@ -47,7 +46,6 @@ impl I2CPort {
 
     fn lcd_string(&self, str: String, line: i32) {
         self.lcd_cmd(line);
-        println!("{}", str.len());
 
         for char in str.chars() {
             self.lcd_char(char as u8)
@@ -56,7 +54,6 @@ impl I2CPort {
 
     fn lcd_string_u8(&self, str: &[u8], line: i32) {
         self.lcd_cmd(line);
-        println!("{}", str.len());
 
         for char in str {
             self.lcd_char(*char)
@@ -113,12 +110,12 @@ fn logic(port: I2CPort) {
     let padding = Padding(port.width() as usize);
     loop {
         port.lcd_string_u8(padding.right_pad_u8(&[0b11110100], "<").as_slice(), LINE_1);
-        port.lcd_string(padding.left_pad("World", ">"), LINE_2);
+        // port.lcd_string(padding.left_pad("World", ">"), LINE_2);
 
         thread::sleep(time::Duration::from_millis(1000));
 
         port.lcd_string(padding.right_pad("World", "<"), LINE_1);
-        port.lcd_string_u8(padding.left_pad_u8(&[0b11110100], "<").as_slice(), LINE_2);
+        // port.lcd_string_u8(padding.left_pad_u8(&[0b11110100], "<").as_slice(), LINE_2);
         thread::sleep(time::Duration::from_millis(1000));
         println!("Loop done")
     }
@@ -128,10 +125,10 @@ fn main() {
     println!("Setup");
     // https://www.electronicsforu.com/technology-trends/learn-electronics/16x2-lcd-pinout-diagram
     let port = init_i2c();
-    port.lcd_set_mode_bytes(ModLines::Two, ModBytes::Four);
+    port.lcd_set_mode_bytes(ModLines::One, ModBytes::Four);
     port.lcd_first_line_setup();
     port.lcd_display_on();
-    port.lcd_set_mode_bytes(ModLines::Two, ModBytes::Four);
+    port.lcd_set_mode_bytes(ModLines::One, ModBytes::Four);
     port.lcd_clear();
     println!("Setup done");
 
