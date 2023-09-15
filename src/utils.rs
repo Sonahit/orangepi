@@ -10,7 +10,7 @@ impl Padding {
         let mut pad_str = String::from_utf8(pad.into()).unwrap();
         for i in 0..size {
             if padded_str.len() + pad_str.len() > size {
-                pad_str.shrink_to(size - padded_str.len());
+                pad_str.shrink_to(size.saturating_sub(padded_str.len()));
                 padded_str.push_str(&pad_str)
             } else {
                 padded_str.push_str(&pad_str);

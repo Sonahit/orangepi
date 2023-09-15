@@ -55,9 +55,6 @@ impl I2CPort {
     pub fn width(&self) -> u32 {
         self.2
     }
-    pub fn widthu(&self) -> usize {
-        self.2 as usize
-    }
 }
 
 pub fn setup_i2c(device_id: i32, width: u32) -> Result<I2CPort, i32> {

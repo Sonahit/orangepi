@@ -152,12 +152,12 @@ fn logic(port: I2CPort) {
     let padding = Padding(port.width() as usize);
 
     loop {
-        port.lcd_string(padding.left_pad_u8(&[0b11110100], " <"), LinePlace::One);
+        port.lcd_string(padding.left_pad_u8(&[0b11110100], "<"), LinePlace::One);
         port.lcd_string(padding.left_pad("World", "<"), LinePlace::Two);
         port.lcd_sleep(1000);
 
         port.lcd_string(padding.left_pad("World", "<"), LinePlace::One);
-        port.lcd_string(padding.right_pad_u8(&[0b11110100], " <"), LinePlace::Two);
+        port.lcd_string(padding.right_pad_u8(&[0b11110100], "<"), LinePlace::Two);
         port.lcd_sleep(1000);
 
         port.lcd_clear();
