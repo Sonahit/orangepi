@@ -86,12 +86,10 @@ impl I2CPort {
         let bits_high = mode | (bits & 0xF0) | LCD_BACKLIGHT;
         i2c::i2c_write(self.fd(), bits_high);
         self.lcd_enable(bits_high);
-        println!("{}", bits_high);
 
         let bits_low = mode | ((bits << 4) & 0xF0) | LCD_BACKLIGHT;
         i2c::i2c_write(self.fd(), bits_low);
         self.lcd_enable(bits_low);
-        println!("{}", bits_low);
     }
 
     fn lcd_enable(&self, bits: i32) {
