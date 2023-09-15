@@ -100,7 +100,7 @@ fn main() {
     println!("Setup");
     // https://www.electronicsforu.com/technology-trends/learn-electronics/16x2-lcd-pinout-diagram
     let port = init_i2c();
-    port.lcd_set_4bytes(1);
+    port.lcd_set_4bytes(2);
     port.lcd_display_on();
     port.lcd_first_line_setup();
     port.lcd_clear();
