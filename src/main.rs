@@ -140,13 +140,17 @@ impl I2CPort {
     fn lcd_sleep(&self) {
         thread::sleep(time::Duration::from_millis(1000));
     }
+    fn lcd_sleep_init(&self) {
+        thread::sleep(time::Duration::from_millis(2000));
+    }
 }
 
 fn logic(port: I2CPort) {
     println!("Logic start");
     // https://www.sparkfun.com/datasheets/LCD/HD44780.pdf
     // (ROM Code: A00)
-    let padding = Padding(port.width() as usize);
+    // let padding = Padding(port.width() as usize);
+
     loop {
         port.lcd_string_u8(&[0b11110100], LinePlace::One);
         port.lcd_str("World <", LinePlace::Two);
@@ -159,12 +163,7 @@ fn logic(port: I2CPort) {
     }
 }
 
-fn setup(port: &I2CPort) {}
-
-fn main() {
-    // https://www.electronicsforu.com/technology-trends/learn-electronics/16x2-lcd-pinout-diagram
-    let port = init_i2c();
-    // setup(&port);
+fn setup(port: &I2CPort) {
     println!("Setup");
     port.lcd_set_mode_bytes(ModLines::Two, ModBytes::Four);
     port.lcd_display_on_with_cursor();
@@ -172,6 +171,12 @@ fn main() {
     port.lcd_set_mode_bytes(ModLines::Two, ModBytes::Four);
     port.lcd_clear();
     println!("Setup done");
-    port.lcd_sleep();
+}
+
+fn main() {
+    // https://www.electronicsforu.com/technology-trends/learn-electronics/16x2-lcd-pinout-diagram
+    let port = init_i2c();
+    setup(&port);
+    port.lcd_sleep_init();
     logic(port);
 }
