@@ -192,7 +192,7 @@ impl MovingText {
             &padding_index.right_pad(&self.text, self.fill_with),
             self.fill_with,
         );
-
+        println!("{} {}", self.index, text);
         port.lcd_text_string(text, self.line);
     }
 }
