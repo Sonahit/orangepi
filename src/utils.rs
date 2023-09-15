@@ -40,15 +40,15 @@ impl Padding {
         new_str
     }
 
-    pub fn left_pad_u8(&self, str: &[u8], pad: &str) -> String {
+    pub fn left_pad_u8(&self, str: &[u8], pad: &str) -> Vec<u8> {
         let pad_str = Self::get_pad_str(self.width() - str.len(), pad.as_bytes());
 
-        String::from_utf8([str, pad_str.as_bytes()].concat()).unwrap()
+        [str, pad_str.as_bytes()].concat()
     }
 
-    pub fn right_pad_u8(&self, str: &[u8], pad: &str) -> String {
+    pub fn right_pad_u8(&self, str: &[u8], pad: &str) -> Vec<u8> {
         let pad_str = Self::get_pad_str(self.width() - str.len(), pad.as_bytes());
 
-        String::from_utf8([pad_str.as_bytes(), str].concat()).unwrap()
+        [str, pad_str.as_bytes()].concat()
     }
 }
