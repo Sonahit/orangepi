@@ -44,7 +44,10 @@ enum Lines {
 
 impl I2CPort {
     fn lcd_str(&self, str: &str, line: Lines) {
-        self.lcd_cmd(line as i32);
+        match line {
+            Lines::None => (),
+            _ => self.lcd_cmd(line as i32),
+        };
 
         for char in str.chars() {
             self.lcd_char(char as u8)
@@ -52,7 +55,10 @@ impl I2CPort {
     }
 
     fn lcd_string(&self, str: String, line: Lines) {
-        self.lcd_cmd(line as i32);
+        match line {
+            Lines::None => (),
+            _ => self.lcd_cmd(line as i32),
+        };
 
         for char in str.chars() {
             self.lcd_char(char as u8)
@@ -60,7 +66,10 @@ impl I2CPort {
     }
 
     fn lcd_string_u8(&self, str: &[u8], line: Lines) {
-        self.lcd_cmd(line as i32);
+        match line {
+            Lines::None => (),
+            _ => self.lcd_cmd(line as i32),
+        };
 
         for char in str {
             self.lcd_char(*char)
