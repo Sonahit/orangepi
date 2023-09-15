@@ -27,6 +27,7 @@ impl Padding {
 
         new_str.push_str(str);
         new_str.push_str(&pad_str);
+        new_str.shrink_to(self.width());
         new_str
     }
 
@@ -37,6 +38,7 @@ impl Padding {
 
         new_str.push_str(&pad_str);
         new_str.push_str(str);
+        new_str.shrink_to(self.width());
         new_str
     }
 
@@ -48,6 +50,7 @@ impl Padding {
         for ch in str {
             new_str.push(*ch as char);
         }
+        new_str.shrink_to(self.width());
         new_str
     }
 
@@ -59,6 +62,7 @@ impl Padding {
             new_str.push(*ch as char);
         }
         new_str.push_str(&pad_str);
+        new_str.shrink_to(self.width());
         new_str
     }
 }

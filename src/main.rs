@@ -46,7 +46,6 @@ impl I2CPort {
     }
 
     fn lcd_string(&self, str: String, line: i32) {
-        println!("{}", str.len());
         self.lcd_cmd(line);
 
         for char in str.chars() {
