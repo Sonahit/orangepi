@@ -123,7 +123,6 @@ impl I2CPort {
 fn logic(port: I2CPort) {
     // https://www.sparkfun.com/datasheets/LCD/HD44780.pdf
     // (ROM Code: A00)
-    port.lcd_cmd(0x83);
     let padding = Padding(port.width() as usize);
     loop {
         // port.lcd_string_u8(padding.right_pad_u8(&[0b11110100], "<").as_slice(), LINE_1);
@@ -131,6 +130,8 @@ fn logic(port: I2CPort) {
 
         thread::sleep(time::Duration::from_millis(1000));
 
+        port.lcd_clear();
+        thread::sleep(time::Duration::from_millis(2000));
         // port.lcd_string(padding.right_pad("World", "<"), LINE_1);
         port.lcd_string_u8(
             padding.left_pad_u8(&[0b11110100], "<").as_slice(),
