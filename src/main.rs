@@ -166,6 +166,7 @@ fn logic(port: I2CPort) {
 fn setup(port: &I2CPort) {
     println!("Setup");
     port.lcd_set_mode_bytes(ModLines::Two, ModBytes::Four);
+    port.lcd_set_mode_bytes(ModLines::Two, ModBytes::Four);
     port.lcd_display_on_with_cursor();
     port.lcd_first_line_setup();
     port.lcd_set_mode_bytes(ModLines::Two, ModBytes::Four);
