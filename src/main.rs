@@ -159,7 +159,12 @@ fn logic(port: I2CPort) {
     }
 }
 
-fn setup(port: &I2CPort) {
+fn setup(port: &I2CPort) {}
+
+fn main() {
+    // https://www.electronicsforu.com/technology-trends/learn-electronics/16x2-lcd-pinout-diagram
+    let port = init_i2c();
+    // setup(&port);
     println!("Setup");
     port.lcd_set_mode_bytes(ModLines::Two, ModBytes::Four);
     port.lcd_display_on_with_cursor();
@@ -167,12 +172,6 @@ fn setup(port: &I2CPort) {
     port.lcd_set_mode_bytes(ModLines::Two, ModBytes::Four);
     port.lcd_clear();
     println!("Setup done");
-}
-
-fn main() {
-    // https://www.electronicsforu.com/technology-trends/learn-electronics/16x2-lcd-pinout-diagram
-    let port = init_i2c();
-    setup(&port);
     port.lcd_sleep();
     logic(port);
 }
