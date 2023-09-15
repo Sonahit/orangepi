@@ -157,19 +157,15 @@ fn logic(port: I2CPort) {
         //     padding.left_pad_u8(&[0b11110100], "<").as_slice(),
         //     LinePlace::One,
         // );
-        port.lcd_str("World ", LinePlace::Two);
+        port.lcd_str("World ", LinePlace::One);
         port.lcd_sleep(1000);
 
-        port.lcd_str("World ", LinePlace::One);
+        port.lcd_str("World ", LinePlace::Two);
         // port.lcd_string_u8(
         //     padding.right_pad_u8(&[0b11110100], "<").as_slice(),
         //     LinePlace::Two,
         // );
         port.lcd_sleep(1000);
-
-        port.lcd_clear();
-
-        port.lcd_sleep(2000);
         println!("Loop done")
     }
 }
