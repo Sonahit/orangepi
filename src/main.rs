@@ -106,15 +106,23 @@ impl I2CPort {
     }
 
     fn lcd_set_mode_bytes(&self, num_lines: ModLines, mod_bytes: ModBytes) {
-        let f = 0b000; // 5x8 dots
+        let f = 0 << 2; // 5x8 dots
         let cmd = 0b00100000 | mod_bytes as i32 | num_lines as i32 | f;
         self.lcd_cmd(cmd);
-        self.lcd_cmd(cmd & 1);
+    }
+
+    fn lcd_display(&self, d: i32, c: i32, b: i32) {
+        self.lcd_cmd(0b00001000 | d | c | b);
     }
 
     fn lcd_display_on(&self) {
-        self.lcd_cmd(0b00001110);
+        self.lcd_display(1, 0, 0);
     }
+
+    fn lcd_display_on_with_cursor(&self) {
+        self.lcd_display(1, 1, 1);
+    }
+
     fn lcd_first_line_setup(&self) {
         self.lcd_cmd(0b00000110);
     }
@@ -145,10 +153,10 @@ fn main() {
     println!("Setup");
     // https://www.electronicsforu.com/technology-trends/learn-electronics/16x2-lcd-pinout-diagram
     let port = init_i2c();
-    port.lcd_set_mode_bytes(ModLines::One, ModBytes::Four);
-    port.lcd_display_on();
+    port.lcd_set_mode_bytes(ModLines::Two, ModBytes::Four);
+    port.lcd_display_on_with_cursor();
     port.lcd_first_line_setup();
-    port.lcd_set_mode_bytes(ModLines::One, ModBytes::Four);
+    port.lcd_set_mode_bytes(ModLines::Two, ModBytes::Four);
     port.lcd_clear();
     println!("Setup done");
 
