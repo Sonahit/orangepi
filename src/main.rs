@@ -153,18 +153,18 @@ fn logic(port: I2CPort) {
     println!("Logic start");
     // https://www.sparkfun.com/datasheets/LCD/HD44780.pdf
     // (ROM Code: A00)
-    // let padding = Padding(port.width() as usize);
+    let padding = Padding(port.width() as usize);
 
     loop {
         // port.lcd_string_u8(
         //     padding.left_pad_u8(&[0b11110100], "<").as_slice(),
         //     LinePlace::One,
         // );
-        port.lcd_text_string("1".repeat(port.width() as usize), LinePlace::One);
+        port.lcd_text_string(padding.right_pad("1", '0'), LinePlace::One);
         port.lcd_clear_line(LinePlace::Two);
         port.lcd_sleep(1000);
 
-        port.lcd_text_string("1".repeat(port.width() as usize), LinePlace::Two);
+        port.lcd_text_string(padding.left_pad("1", '2'), LinePlace::Two);
         port.lcd_clear_line(LinePlace::One);
         // port.lcd_string_u8(
         //     padding.right_pad_u8(&[0b11110100], "<").as_slice(),
