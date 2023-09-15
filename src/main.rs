@@ -153,8 +153,6 @@ fn logic(port: I2CPort) {
         );
 
         thread::sleep(time::Duration::from_millis(1000));
-        port.lcd_cmd(0x05);
-        thread::sleep(time::Duration::from_millis(1000));
         port.lcd_string(padding.right_pad("World", "<"), LinePlace::One);
         port.lcd_string_u8(
             padding.left_pad_u8(&[0b11110100], "<").as_slice(),
