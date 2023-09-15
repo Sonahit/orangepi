@@ -41,6 +41,23 @@ impl I2CPort {
         }
     }
 
+    fn lcd_string_left_pad(&self, str: &str, line: i32, lft_pad: &str) {
+        self.lcd_cmd(line);
+        let new_str = if str.len() < self.width() as usize {
+            let mut padded_str = String::with_capacity(self.width() as usize);
+            padded_str.push_str(str);
+            padded_str.push_str(lft_pad);
+            padded_str.truncate(self.width() as usize);
+            padded_str
+        } else {
+            String::from(str)
+        };
+
+        for char in new_str.chars() {
+            self.lcd_char(char as u8)
+        }
+    }
+
     fn lcd_string_u8(&self, str: &[u8], line: i32) {
         self.lcd_cmd(line);
 
@@ -99,7 +116,7 @@ fn logic(port: I2CPort) {
 
     loop {
         port.lcd_string_u8(&[0b11110100], LINE_1);
-        port.lcd_string("World  <", LINE_2);
+        port.lcd_string_left_pad("World", LINE_2, ">");
 
         thread::sleep(time::Duration::from_millis(1000));
         println!("Loop done")
