@@ -137,8 +137,8 @@ impl I2CPort {
         self.lcd_cmd(0b00000110);
     }
 
-    fn lcd_sleep(&self) {
-        thread::sleep(time::Duration::from_millis(1000));
+    fn lcd_sleep(&self, ms: u64) {
+        thread::sleep(time::Duration::from_millis(ms));
     }
     fn lcd_sleep_init(&self) {
         thread::sleep(time::Duration::from_millis(2000));
@@ -154,11 +154,15 @@ fn logic(port: I2CPort) {
     loop {
         port.lcd_string_u8(&[0b11110100], LinePlace::One);
         port.lcd_str("World <", LinePlace::Two);
-        port.lcd_sleep();
+        port.lcd_sleep(1000);
 
         port.lcd_str("World <", LinePlace::One);
         port.lcd_string_u8(&[0b11110100], LinePlace::Two);
-        port.lcd_sleep();
+        port.lcd_sleep(1000);
+
+        port.lcd_clear();
+
+        port.lcd_sleep(2000);
         println!("Loop done")
     }
 }
