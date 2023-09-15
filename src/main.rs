@@ -94,10 +94,11 @@ impl I2CPort {
 }
 
 fn logic(port: I2CPort) {
-    // https://www.sparkfun.com/datasheets/LCD/HD44780.pdf Table 12 4bit 8digit 1 line
+    // https://www.sparkfun.com/datasheets/LCD/HD44780.pdf
+    // (ROM Code: A00)
 
     loop {
-        port.lcd_string_u8(&[0b00110000], LINE_1);
+        port.lcd_string_u8(&[0b11110000], LINE_1);
         port.lcd_string("World  <", LINE_2);
 
         thread::sleep(time::Duration::from_millis(1000));
