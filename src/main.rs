@@ -199,7 +199,7 @@ impl MovingText {
             let overflow = overflow.unsigned_abs() as usize;
             let mut str_right = String::with_capacity(overflow);
 
-            for i in 0..overflow {
+            for i in 0..=overflow {
                 let idx = self.text.len() - i;
                 if let Some(char) = self.text.get(idx..idx + 1) {
                     str_right = format!("{}{}", char, str_right);
