@@ -110,6 +110,10 @@ impl I2CPort {
         self.lcd_cmd(cmd);
     }
 
+    fn lcd_clear_line(&self, line: LinePlace) {
+        self.lcd_text_string(" ".repeat(self.width() as usize), line);
+    }
+
     fn lcd_display(
         &self,
         d: wiring_pi::DigitalByte,
@@ -159,9 +163,11 @@ fn logic(port: I2CPort) {
         //     LinePlace::One,
         // );
         port.lcd_text_string("1".repeat(port.width() as usize), LinePlace::One);
+        port.lcd_clear_line(LinePlace::Two);
         port.lcd_sleep(1000);
 
         port.lcd_text_string("1".repeat(port.width() as usize), LinePlace::Two);
+        port.lcd_clear_line(LinePlace::One);
         // port.lcd_string_u8(
         //     padding.right_pad_u8(&[0b11110100], "<").as_slice(),
         //     LinePlace::Two,
