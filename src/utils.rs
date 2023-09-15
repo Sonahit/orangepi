@@ -16,7 +16,6 @@ impl Padding {
     }
 
     pub fn left_pad(&self, str: &str, pad: char) -> String {
-        println!("{} {}", self.width(), str.len());
         let pad_str = Self::get_pad_str(self.width() - str.len(), pad);
 
         let mut new_str = String::with_capacity(self.width());
