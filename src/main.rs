@@ -187,7 +187,7 @@ impl MovingText {
             self.index = 0
         }
 
-        let padding_index = Padding(self.index as usize);
+        let padding_index = Padding(self.index as usize + self.text.len());
 
         let text = padding.left_pad(
             &padding_index.right_pad(&self.text, self.fill_with),
