@@ -15,7 +15,7 @@ const LCD_ENABLE: i32 = 0b100;
 const PULSE_SLEEP_S: f32 = 0.0005;
 const LCD_WIDTH: u32 = 16;
 
-fn setup() -> i2c::I2CPort {
+fn init_i2c() -> i2c::I2CPort {
     match i2c::setup_i2c_device(LCD_BUS, LCD_PORT, LCD_WIDTH) {
         Ok(port) => port,
         Err(err) => {
@@ -61,6 +61,22 @@ impl I2CPort {
     fn lcd_clear(&self) {
         self.lcd_cmd(0x01);
     }
+
+    fn lcd_set_4bytes(&self, num_lines: u8) {
+        let f = 0b000; // 5x8 dots
+        let num_lines = if num_lines == 1u8 { 0b0000 } else { 0b1000 };
+        let dl = 0b00000; // 4 bit mode
+        let cmd = 0b00100000 | dl | num_lines | f;
+        self.lcd_cmd(cmd);
+        self.lcd_cmd(cmd);
+    }
+
+    fn lcd_display_on(&self) {
+        self.lcd_cmd(0b00001110);
+    }
+    fn lcd_first_line_setup(&self) {
+        self.lcd_cmd(0b00000110);
+    }
 }
 
 fn logic(port: I2CPort) {
@@ -83,12 +99,10 @@ fn logic(port: I2CPort) {
 fn main() {
     println!("Setup");
     // https://www.electronicsforu.com/technology-trends/learn-electronics/16x2-lcd-pinout-diagram
-    let port = setup();
-    port.lcd_cmd(0x33); // init
-    port.lcd_cmd(0x32); // init
-    port.lcd_cmd(0x06); // cursor move direction right
-    port.lcd_cmd(0x0C); // display on cursor off
-    port.lcd_cmd(0x28); // 2 lines 4 bytes
+    let port = init_i2c();
+    port.lcd_set_4bytes(1);
+    port.lcd_display_on();
+    port.lcd_first_line_setup();
     port.lcd_clear();
     println!("Setup done");
 
