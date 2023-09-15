@@ -106,7 +106,6 @@ impl I2CPort {
         let f = 0 << 2; // 5x8 dots
         let cmd = 0b00100000 | mod_bytes as i32 | num_lines as i32 | f;
         self.lcd_cmd(cmd);
-        self.lcd_cmd(cmd & 1);
     }
 
     fn lcd_display(
@@ -172,6 +171,7 @@ fn logic(port: I2CPort) {
 
 fn setup(port: &I2CPort) {
     println!("Setup");
+    port.lcd_clear();
     port.lcd_set_mode_bytes(ModLines::Two, ModBytes::Four);
     port.lcd_set_mode_bytes(ModLines::Two, ModBytes::Four);
     port.lcd_display_on();
