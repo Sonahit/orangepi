@@ -180,7 +180,14 @@ impl MovingText {
 
     fn move_one(&mut self, port: &I2CPort) {
         let padding = Padding(port.width() as usize);
-        let padding_index = Padding(self.index as usize + 1);
+
+        self.index += if self.index + 1 > port.width() as u8 {
+            0
+        } else {
+            self.index + 1
+        };
+
+        let padding_index = Padding(self.index as usize);
 
         let text = padding.left_pad(
             &padding_index.right_pad(&self.text, self.fill_with),
@@ -188,12 +195,6 @@ impl MovingText {
         );
 
         println!("{}", &text);
-
-        self.index += if self.index + 1 > port.width() as u8 {
-            0
-        } else {
-            self.index + 1
-        };
 
         port.lcd_text_string(text, self.line);
     }
