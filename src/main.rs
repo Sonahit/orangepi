@@ -36,16 +36,16 @@ enum ModLines {
     Two = 0b1000,
 }
 
-enum Lines {
+enum LinePlace {
     One = 0x80,
     Two = 0xC0,
     None = 0x00,
 }
 
 impl I2CPort {
-    fn lcd_str(&self, str: &str, line: Lines) {
+    fn lcd_str(&self, str: &str, line: LinePlace) {
         match line {
-            Lines::None => (),
+            LinePlace::None => (),
             _ => self.lcd_cmd(line as i32),
         };
 
@@ -54,9 +54,9 @@ impl I2CPort {
         }
     }
 
-    fn lcd_string(&self, str: String, line: Lines) {
+    fn lcd_string(&self, str: String, line: LinePlace) {
         match line {
-            Lines::None => (),
+            LinePlace::None => (),
             _ => self.lcd_cmd(line as i32),
         };
 
@@ -65,9 +65,9 @@ impl I2CPort {
         }
     }
 
-    fn lcd_string_u8(&self, str: &[u8], line: Lines) {
+    fn lcd_string_u8(&self, str: &[u8], line: LinePlace) {
         match line {
-            Lines::None => (),
+            LinePlace::None => (),
             _ => self.lcd_cmd(line as i32),
         };
 
@@ -146,16 +146,19 @@ fn logic(port: I2CPort) {
     // (ROM Code: A00)
     let padding = Padding(port.width() as usize);
     loop {
-        // port.lcd_string_u8(padding.right_pad_u8(&[0b11110100], "<").as_slice(), LINE_1);
-        port.lcd_string(padding.left_pad("World", ">"), Lines::One);
+        port.lcd_string(padding.left_pad("World", ">"), LinePlace::Two);
+        port.lcd_string_u8(
+            padding.right_pad_u8(&[0b11110100], "<").as_slice(),
+            LinePlace::One,
+        );
 
         thread::sleep(time::Duration::from_millis(1000));
         port.lcd_cmd(0x05);
         thread::sleep(time::Duration::from_millis(1000));
-        // port.lcd_string(padding.right_pad("World", "<"), LINE_1);
+        port.lcd_string(padding.right_pad("World", "<"), LinePlace::One);
         port.lcd_string_u8(
             padding.left_pad_u8(&[0b11110100], "<").as_slice(),
-            Lines::One,
+            LinePlace::Two,
         );
         thread::sleep(time::Duration::from_millis(1000));
         println!("Loop done")
