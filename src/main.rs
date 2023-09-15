@@ -181,11 +181,11 @@ impl MovingText {
     fn move_one(&mut self, port: &I2CPort) {
         let padding = Padding(port.width() as usize);
 
-        self.index += if self.index + 1 > port.width() as u8 {
-            0
+        if self.index + 1 < port.width() as u8 {
+            self.index += 1;
         } else {
-            self.index + 1
-        };
+            self.index = 0
+        }
 
         let padding_index = Padding(self.index as usize);
 
