@@ -46,8 +46,10 @@ impl I2CPort {
         let new_str = if str.len() < self.width() as usize {
             let mut padded_str = String::with_capacity(self.width() as usize);
             padded_str.push_str(str);
-            padded_str.push_str(lft_pad);
-            padded_str.truncate(self.width() as usize);
+            let pad_to = self.width() - padded_str.len() as u32;
+            for _ in 0..pad_to {
+                padded_str.push_str(lft_pad);
+            }
             padded_str
         } else {
             String::from(str)
