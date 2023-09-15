@@ -111,13 +111,13 @@ fn logic(port: I2CPort) {
     // (ROM Code: A00)
     let padding = Padding(port.width() as usize);
     loop {
-        port.lcd_string(padding.right_pad_u8(&[0b11110100], "<"), LINE_1);
+        port.lcd_string_u8(padding.right_pad_u8(&[0b11110100], "<").as_slice(), LINE_1);
         port.lcd_string(padding.left_pad("World", ">"), LINE_2);
 
         thread::sleep(time::Duration::from_millis(1000));
 
         port.lcd_string(padding.right_pad("World", "<"), LINE_1);
-        port.lcd_string(padding.left_pad_u8(&[0b11110100], "<"), LINE_2);
+        port.lcd_string_u8(padding.left_pad_u8(&[0b11110100], "<").as_slice(), LINE_2);
         thread::sleep(time::Duration::from_millis(1000));
         println!("Loop done")
     }
