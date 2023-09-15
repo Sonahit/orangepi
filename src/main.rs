@@ -194,8 +194,6 @@ impl MovingText {
             self.fill_with,
         );
 
-        println!("{}", &text);
-
         port.lcd_text_string(text, self.line);
     }
 }
