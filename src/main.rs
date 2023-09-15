@@ -98,7 +98,7 @@ fn logic(port: I2CPort) {
     // (ROM Code: A00)
 
     loop {
-        port.lcd_string_u8(&[0b11110000], LINE_1);
+        port.lcd_string_u8(&[0b11110100], LINE_1);
         port.lcd_string("World  <", LINE_2);
 
         thread::sleep(time::Duration::from_millis(1000));
