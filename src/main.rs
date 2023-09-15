@@ -192,8 +192,18 @@ impl MovingText {
             &padding_index.right_pad(&self.text, self.fill_with),
             self.fill_with,
         );
-        println!("{} {}", self.index, text);
         port.lcd_text_string(text, self.line);
+
+        let overflow = port.width() as i8 - (self.index as usize + self.text.len()) as i8;
+        if overflow < 0 {
+            port.lcd_text_string(
+                self.text
+                    .chars()
+                    .take(overflow.unsigned_abs() as usize)
+                    .collect::<String>(),
+                self.line,
+            );
+        }
     }
 }
 
