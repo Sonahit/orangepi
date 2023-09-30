@@ -49,20 +49,20 @@ func setup(lcd I2CLed) {
 func logic(lcd I2CLed) {
 	lineOne := LeftPad("1", ' ', lcd.Width)
 	lineTwo := RightPad("1", ' ', lcd.Width)
-	lcd.CreateCustomChar(0, smileChar)
+	lcd.CreateCustomChar(1, smileChar)
 	for {
 		log.Println("Logic start")
 		lcd.TextString(lineOne, LCD_LINE_ONE)
 		lcd.TextString(lineTwo, LCD_LINE_TWO)
 		lcd.SetCursor(3, 0)
-		lcd.WriteCustomChar(0)
+		lcd.WriteCustomChar(1)
 
 		sleep(1000)
 
 		lcd.TextString(lineTwo, LCD_LINE_ONE)
 		lcd.TextString(lineOne, LCD_LINE_TWO)
 		lcd.SetCursor(7, 1)
-		lcd.WriteCustomChar(0)
+		lcd.WriteCustomChar(1)
 
 		sleep(1000)
 		log.Println("Logic End")
