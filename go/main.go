@@ -19,12 +19,13 @@ func main() {
 
 	lcd := NewI2CLed(fd)
 	setup(lcd)
+	sleep(2000)
 	logic(lcd)
 }
 
 func setup(lcd I2CLed) {
-	println("Setup")
-	defer println("SetupDone")
+	log.Println("Setup")
+	defer log.Println("SetupDone")
 
 	lcd.SetMode(LCD_MODE_TWO_LINES, LCD_MODE_FOUR_BYTES)
 	lcd.SetMode(LCD_MODE_TWO_LINES, LCD_MODE_FOUR_BYTES)

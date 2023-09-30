@@ -5,7 +5,6 @@ package main
 import "C"
 import (
 	"fmt"
-	"log"
 )
 
 type I2CFd struct {
@@ -27,7 +26,6 @@ func I2cError() int {
 }
 
 func I2cWrite(fd I2CFd, data int) {
-	log.Printf("Writing %d\n", data)
 	C.i2cWrite(fd.fd, C.int(data))
 }
 
