@@ -3,7 +3,10 @@ package main
 // #cgo LDFLAGS: -lwiringPi
 // #include "lib/i2c.hpp"
 import "C"
-import "fmt"
+import (
+	"fmt"
+	"log"
+)
 
 type I2CFd struct {
 	fd C.int
@@ -24,6 +27,7 @@ func I2cError() int {
 }
 
 func I2cWrite(fd I2CFd, data int) {
+	log.Printf("Writing %d\n", data)
 	C.i2cWrite(fd.fd, C.int(data))
 }
 
