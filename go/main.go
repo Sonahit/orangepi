@@ -37,9 +37,9 @@ func setup(lcd I2CLed) {
 func logic(lcd I2CLed) {
 	lineOne := LeftPad("1", ' ', lcd.Width)
 	lineTwo := RightPad("1", ' ', lcd.Width)
-
+	log.Printf("%s\n%s\n", lineOne, lineTwo)
 	for {
-
+		log.Println("Logic start")
 		lcd.TextString(lineOne, LCD_LINE_ONE)
 		lcd.TextString(lineTwo, LCD_LINE_TWO)
 
@@ -49,6 +49,7 @@ func logic(lcd I2CLed) {
 		lcd.TextString(lineOne, LCD_LINE_TWO)
 
 		sleep(1000)
+		log.Println("Logic End")
 	}
 }
 
