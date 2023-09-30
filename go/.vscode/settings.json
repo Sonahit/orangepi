@@ -1,0 +1,6 @@
+{
+  "files.associations": {
+    ".eslintrc": "jsonc",
+    "iostream": "cpp"
+  }
+}
