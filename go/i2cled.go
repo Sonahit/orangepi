@@ -3,16 +3,22 @@ package main
 import "time"
 
 type I2CLed struct {
-	fd    I2CFd
-	Width int
+	fd          I2CFd
+	Width       int
+	row_offsets []int
 }
 
 const (
 	LCD_CMD        = 0
 	LCD_CHAR       = 1
-	LCD_ENABLE     = 0b100
-	LCD_BACKLIGHT  = 0x08
 	PULSE_SLEEP_NS = 500
+)
+
+const (
+	LCD_ENABLE       = 0b100
+	LCD_BACKLIGHT    = 0x08
+	LCD_SETCGRAMADDR = 0x40
+	LCD_SETDDRAMADDR = 0x80
 )
 
 const (
@@ -35,9 +41,11 @@ const (
 )
 
 func NewI2CLed(fd I2CFd) I2CLed {
+	width := 16
 	return I2CLed{
-		fd:    fd,
-		Width: 16,
+		fd:          fd,
+		Width:       width,
+		row_offsets: []int{0x00, 0x40, 0x00 + width, 0x40 + width},
 	}
 }
 
@@ -106,6 +114,22 @@ func (led I2CLed) Clear() {
 
 func (led I2CLed) FirstLineSetup() {
 	led.Command(0b00000110)
+}
+
+func (led I2CLed) CreateCustomChar(location int, char CustomChar) {
+	location = location & 7 // only 7 spots
+	led.Command(LCD_SETCGRAMADDR | (location << 3))
+	for _, ch := range char.Rows {
+		led.Char(ch)
+	}
+}
+
+func (led I2CLed) SetCursor(x, y int) {
+	led.Command(LCD_SETDDRAMADDR | (x + led.row_offsets[y]))
+}
+
+func (led I2CLed) WriteCustomChar(location int) {
+	led.Char(location)
 }
 
 func lcdText[T string | int](led I2CLed, text T, line int) {
