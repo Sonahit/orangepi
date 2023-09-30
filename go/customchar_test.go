@@ -106,7 +106,6 @@ func TestSymbol(t *testing.T) {
 }
 
 func TestSymbol100000Times(t *testing.T) {
-	t.Skip()
 	ch := NewCustomChar([]int{
 		0b000111111110000,
 		0b001000010001000,

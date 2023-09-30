@@ -56,10 +56,14 @@ func rowsZero(rows []int) bool {
 func (ch CustomChar) SplitBySections() (int, [][]int) {
 	copyMatrix := make([][]int, 0, len(ch.Rows))
 	sections := make([][]int, 0, len(ch.Rows))
+
+	copiedRows := make([]int, len(ch.Rows))
+	copy(copiedRows, ch.Rows)
+
 	if len(ch.Rows) > CHAR_HEIGHT {
-		copyMatrix = append(copyMatrix, ch.Rows[:CHAR_HEIGHT], ch.Rows[CHAR_HEIGHT:len(ch.Rows)])
+		copyMatrix = append(copyMatrix, copiedRows[:CHAR_HEIGHT], copiedRows[CHAR_HEIGHT:])
 	} else {
-		copyMatrix = append(copyMatrix, ch.Rows[:len(ch.Rows)])
+		copyMatrix = append(copyMatrix, copiedRows)
 	}
 
 	for _, rows := range copyMatrix {
@@ -67,7 +71,7 @@ func (ch CustomChar) SplitBySections() (int, [][]int) {
 			if rowsZero(rows) {
 				break
 			}
-			newRows := make([]int, len(rows))
+			newRows := make([]int, 0, len(rows))
 			// firstChar from left
 			// LE
 			for height := 0; height < len(rows); height += 1 {
@@ -79,12 +83,11 @@ func (ch CustomChar) SplitBySections() (int, [][]int) {
 					}
 					rows[height] >>= CHAR_LENGTH
 				}
-				newRows[height] = int(row)
+				newRows = append(newRows, row)
 			}
 			sections = append(sections, newRows)
 		}
 	}
 	sectionsNumber := len(sections)
-	printRows(sections[0])
 	return sectionsNumber, sections
 }
