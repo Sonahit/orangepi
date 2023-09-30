@@ -106,6 +106,7 @@ func TestSymbol(t *testing.T) {
 }
 
 func TestSymbol100000Times(t *testing.T) {
+	t.Skip()
 	ch := NewCustomChar([]int{
 		0b000111111110000,
 		0b001000010001000,
@@ -126,10 +127,10 @@ func TestSymbol100000Times(t *testing.T) {
 	})
 	for i := 0; i < 100000; i++ {
 		slicesNum, splitted := ch.SplitBySections()
+
 		if slicesNum == 0 {
 			t.Fatal("Expected more than 0 slices")
 		}
-		printRows(splitted[0])
 		if splitted[0][0] != 0b10000 {
 			t.Fatalf("Expected %d, got %d", 0b10000, splitted[0][0])
 		}

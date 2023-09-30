@@ -53,8 +53,9 @@ func rowsZero(rows []int) bool {
 	return slices.Max[[]int](rows) == 0
 }
 
-func (ch CustomChar) SplitBySections() (sectionsNumber int, locations [][]int) {
+func (ch CustomChar) SplitBySections() (int, [][]int) {
 	copyMatrix := make([][]int, 0, len(ch.Rows))
+	sections := make([][]int, 0, len(ch.Rows))
 	if len(ch.Rows) > CHAR_HEIGHT {
 		copyMatrix = append(copyMatrix, ch.Rows[:CHAR_HEIGHT], ch.Rows[CHAR_HEIGHT:len(ch.Rows)])
 	} else {
@@ -80,9 +81,10 @@ func (ch CustomChar) SplitBySections() (sectionsNumber int, locations [][]int) {
 				}
 				newRows[height] = int(row)
 			}
-			locations = append(locations, newRows)
+			sections = append(sections, newRows)
 		}
 	}
-	sectionsNumber = len(locations)
-	return sectionsNumber, locations
+	sectionsNumber := len(sections)
+	printRows(sections[0])
+	return sectionsNumber, sections
 }
