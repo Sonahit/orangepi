@@ -60,7 +60,7 @@ func (led I2CLed) Write(bytes int) {
 func (led I2CLed) Enable(bytes int) {
 	I2cWrite(led.fd, bytes|LCD_ENABLE)
 	waitPulse()
-	I2cWrite(led.fd, bytes&^LCD_ENABLE)
+	I2cWrite(led.fd, bytes&(^LCD_ENABLE))
 }
 
 func (led I2CLed) Command(bytes int) {
