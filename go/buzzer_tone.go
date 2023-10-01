@@ -2,23 +2,21 @@ package main
 
 type BuzzerPwm struct {
 	pin       int
-	RangeHz   int
 	CurrentHz int
 }
 
-func NewBuzzerPwm(pin, rangeHz int) *BuzzerPwm {
-	PwmCreate(pin, 0, rangeHz)
+func NewBuzzerPwm(pin int) *BuzzerPwm {
+	ToneCreate(pin)
 	return &BuzzerPwm{
-		pin:     pin,
-		RangeHz: rangeHz,
+		pin: pin,
 	}
 }
 
 func (buz *BuzzerPwm) ChangeHz(hz int) {
 	buz.CurrentHz = hz
-	PwmWrite(buz.pin, buz.CurrentHz)
+	ToneWrite(buz.pin, buz.CurrentHz)
 }
 
 func (buz *BuzzerPwm) Stop() {
-	PwmStop(buz.pin)
+	ToneStop(buz.pin)
 }
