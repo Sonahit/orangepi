@@ -14,8 +14,8 @@ func mainPwm() {
 
 	PinMode(PIN_WPI, 5)
 
-	buzzer := NewBuzzerPwm(PIN_WPI, RANGE_HZ)
-	buzzer.ChangeHz(1000)
+	// buzzer := NewBuzzerPwm(PIN_WPI, RANGE_HZ)
+	// buzzer.ChangeHz(1000)
 
 	for {
 	}
