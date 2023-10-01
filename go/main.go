@@ -44,22 +44,14 @@ var chIaco = NewCustomChar([]int{
 })
 
 var chProdol = NewCustomChar([]int{
-	0b0000000000,
-	0b0000000000,
-	0b0000000000,
-	0b1111111111,
-	0b0000000000,
-	0b0000000000,
-	0b0000000000,
-	0b0000000000,
-	0b0000000000,
-	0b0000000000,
-	0b0000000000,
-	0b0000000000,
-	0b1111111111,
-	0b0000000000,
-	0b0000000000,
-	0b0000000000,
+	0b00000,
+	0b00000,
+	0b00000,
+	0b11111,
+	0b11111,
+	0b00000,
+	0b00000,
+	0b00000,
 })
 
 var chGolova = NewCustomChar([]int{
@@ -113,7 +105,6 @@ func logic(lcd I2CLed) {
 	lineOne := LeftPad("1", ' ', lcd.Width)
 	lineTwo := RightPad("1", ' ', lcd.Width)
 	sectionIacoNum, iacoSections := chIaco.SplitBySections()
-	sectionProdolNum, prodolSections := chProdol.SplitBySections()
 	_, golovaSections := chGolova.SplitBySections()
 
 	for {
@@ -128,9 +119,9 @@ func logic(lcd I2CLed) {
 			lcd.WriteCustomChar(charLoc)
 		}
 
-		for i, section := range prodolSections {
-			charLoc := i + sectionIacoNum
-			lcd.CreateCustomChar(charLoc, section)
+		lcd.CreateCustomChar(sectionIacoNum, chProdol)
+		charLoc := sectionIacoNum
+		for i := 0; i < 2; i++ {
 			lcd.SetCursor(3, i)
 			lcd.WriteCustomChar(charLoc)
 			lcd.SetCursor(4, i)
@@ -142,7 +133,7 @@ func logic(lcd I2CLed) {
 		}
 
 		for i, section := range golovaSections {
-			charLoc := i + sectionIacoNum + sectionProdolNum
+			charLoc := i + sectionIacoNum + 1
 			lcd.CreateCustomChar(charLoc, section)
 			lcd.SetCursor(7, i)
 			lcd.WriteCustomChar(charLoc)
