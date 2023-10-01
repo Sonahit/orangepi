@@ -27,12 +27,12 @@ var smileChar = NewCustomChar([]int{
 var chIaco = NewCustomChar([]int{
 	0b00000,
 	0b01110,
-	0b01001,
+	0b10001,
 	0b10001,
 	0b10001,
 	0b10000,
 	0b01000,
-	0b01000,
+	0b00100,
 	0b00100,
 	0b01000,
 	0b01000,
@@ -55,22 +55,22 @@ var chProdol = NewCustomChar([]int{
 })
 
 var chGolova = NewCustomChar([]int{
-	0b00000,
-	0b01111,
-	0b10011,
-	0b10011,
-	0b10011,
-	0b00011,
-	0b00011,
-	0b11111,
-	0b11111,
-	0b00011,
-	0b00011,
-	0b10011,
-	0b10011,
-	0b10011,
-	0b01111,
-	0b00000,
+	0b0000000000,
+	0b0111100000,
+	0b1000010000,
+	0b1000001000,
+	0b0000000100,
+	0b0000000100,
+	0b0000000100,
+	0b0000111100,
+	0b0000000100,
+	0b0000000100,
+	0b0000000100,
+	0b0000000100,
+	0b1000001000,
+	0b1000010000,
+	0b0111100000,
+	0b0000000000,
 })
 
 func main() {
@@ -133,6 +133,7 @@ func logic(lcd I2CLed) {
 			lcd.SetCursor(2, i)
 			lcd.WriteCustomChar(charLoc)
 		}
+
 		for i := 0; i < 2; i++ {
 			lcd.SetCursor(3, i)
 			lcd.WriteCustomChar(charLoc)
@@ -144,11 +145,14 @@ func logic(lcd I2CLed) {
 			lcd.WriteCustomChar(charLoc)
 		}
 
-		for i := range golovaSections {
-			charLoc := i + sectionIacoNum + 1
-			lcd.SetCursor(7, i)
-			lcd.WriteCustomChar(charLoc)
-		}
+		lcd.SetCursor(7, 0)
+		lcd.WriteCustomChar(0 + sectionIacoNum + 1)
+		lcd.SetCursor(8, 0)
+		lcd.WriteCustomChar(1 + sectionIacoNum + 1)
+		lcd.SetCursor(8, 1)
+		lcd.WriteCustomChar(2 + sectionIacoNum + 1)
+		lcd.SetCursor(7, 1)
+		lcd.WriteCustomChar(3 + sectionIacoNum + 1)
 
 		// sleep(1000)
 
