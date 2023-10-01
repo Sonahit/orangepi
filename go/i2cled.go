@@ -112,12 +112,14 @@ func (led I2CLed) FirstLineSetup() {
 	led.Command(0b00000110)
 }
 
-func (led I2CLed) CreateCustomChar(location int, char CustomChar) {
+func (led I2CLed) CreateCustomChar(location int, char CustomChar) LocatedChar {
 	location = location & 7 // only 7 spots
 	led.Command(LCD_SETCGRAMADDR | (location << 3))
 	for _, ch := range char.Rows {
 		led.Char(ch)
 	}
+
+	return NewLocatedChar(location)
 }
 
 func (led I2CLed) SetCursor(x, y int) {

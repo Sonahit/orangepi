@@ -26,6 +26,16 @@ type CustomChar struct {
 	Rows []int
 }
 
+type LocatedChar struct {
+	Location int
+}
+
+func NewLocatedChar(location int) LocatedChar {
+	return LocatedChar{
+		Location: location,
+	}
+}
+
 const (
 	CHAR_HEIGHT = 8
 	CHAR_LENGTH = 5
