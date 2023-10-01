@@ -122,27 +122,30 @@ func logic(lcd I2CLed) {
 		lcd.TextString(lineTwo, LCD_LINE_TWO)
 
 		for i := 0; i < sectionIacoNum; i++ {
-			lcd.CreateCustomChar(i, iacoSections[i])
-			lcd.SetCursor(2, i)
-			lcd.WriteCustomChar(i)
+			charLoc := i
+			lcd.CreateCustomChar(charLoc, iacoSections[i])
+			lcd.SetCursor(2, charLoc)
+			lcd.WriteCustomChar(charLoc)
 		}
 
 		for i := 0; i < sectionProdolNum; i++ {
-			lcd.CreateCustomChar(i, prodolSections[i])
-			lcd.SetCursor(3, i)
-			lcd.WriteCustomChar(i)
-			lcd.SetCursor(4, i)
-			lcd.WriteCustomChar(i)
-			lcd.SetCursor(5, i)
-			lcd.WriteCustomChar(i)
-			lcd.SetCursor(6, i)
-			lcd.WriteCustomChar(i)
+			charLoc := i + sectionIacoNum
+			lcd.CreateCustomChar(charLoc, prodolSections[i])
+			lcd.SetCursor(3, charLoc)
+			lcd.WriteCustomChar(charLoc)
+			lcd.SetCursor(4, charLoc)
+			lcd.WriteCustomChar(charLoc)
+			lcd.SetCursor(5, charLoc)
+			lcd.WriteCustomChar(charLoc)
+			lcd.SetCursor(6, charLoc)
+			lcd.WriteCustomChar(charLoc)
 		}
 
 		for i := 0; i < sectionGolovaNum; i++ {
-			lcd.CreateCustomChar(i, golovaSections[i])
-			lcd.SetCursor(7, i)
-			lcd.WriteCustomChar(i)
+			charLoc := i + sectionIacoNum + sectionProdolNum
+			lcd.CreateCustomChar(charLoc, golovaSections[i])
+			lcd.SetCursor(7, charLoc)
+			lcd.WriteCustomChar(charLoc)
 		}
 
 		// sleep(1000)
