@@ -2,6 +2,9 @@ package main
 
 import (
 	"log"
+	"os"
+	"os/signal"
+	"syscall"
 	"time"
 )
 
@@ -84,8 +87,13 @@ func main() {
 	setup(lcd)
 	sleep(2000)
 	logic(lcd)
-	defer func() {
+
+	c := make(chan os.Signal)
+	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
+	go func() {
+		<-c
 		lcd.Clear()
+		os.Exit(1)
 	}()
 }
 
