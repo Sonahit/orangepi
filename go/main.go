@@ -63,7 +63,7 @@ var chGolova = NewCustomChar([]int{
 	0b0000000100,
 	0b0000000100,
 	0b0000111100,
-	0b0000000100,
+	0b0000111100,
 	0b0000000100,
 	0b0000000100,
 	0b0000000100,
@@ -145,9 +145,9 @@ func logic(lcd I2CLed) {
 			lcd.WriteCustomChar(charLoc)
 		}
 
-		lcd.SetCursor(7, 0)
-		lcd.WriteCustomChar(0 + sectionIacoNum + 1)
 		lcd.SetCursor(8, 0)
+		lcd.WriteCustomChar(0 + sectionIacoNum + 1)
+		lcd.SetCursor(7, 0)
 		lcd.WriteCustomChar(1 + sectionIacoNum + 1)
 		lcd.SetCursor(8, 1)
 		lcd.WriteCustomChar(2 + sectionIacoNum + 1)
