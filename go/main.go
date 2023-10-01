@@ -87,6 +87,11 @@ func main() {
 	setup(lcd)
 	sleep(2000)
 	logic(lcd)
+}
+
+func setup(lcd I2CLed) {
+	log.Println("Setup")
+	defer log.Println("SetupDone")
 
 	c := make(chan os.Signal)
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
@@ -95,11 +100,6 @@ func main() {
 		lcd.Clear()
 		os.Exit(1)
 	}()
-}
-
-func setup(lcd I2CLed) {
-	log.Println("Setup")
-	defer log.Println("SetupDone")
 
 	lcd.SetMode(LCD_MODE_TWO_LINES, LCD_MODE_FOUR_BYTES)
 	lcd.SetMode(LCD_MODE_TWO_LINES, LCD_MODE_FOUR_BYTES)
