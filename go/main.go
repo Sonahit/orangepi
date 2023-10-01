@@ -127,17 +127,17 @@ func logic(lcd I2CLed) {
 		locatedChars = append(locatedChars, lcd.CreateCustomChar(i+sectionProdolNum+sectionIacoNum, golovaSections[i]))
 	}
 
-	iaceVerh,
-		iaceNiz,
-		prodolVerh,
-		prodolNiz,
-		golovaVerh,
-		golovaNiz := locatedChars[0],
-		locatedChars[1],
-		locatedChars[2],
-		locatedChars[3],
-		locatedChars[4],
-		locatedChars[5]
+	// iaceVerh,
+	// 	iaceNiz,
+	// 	prodolVerh,
+	// 	prodolNiz,
+	// 	golovaVerh,
+	// 	golovaNiz := locatedChars[0],
+	// 	locatedChars[1],
+	// 	locatedChars[2],
+	// 	locatedChars[3],
+	// 	locatedChars[4],
+	// 	locatedChars[5]
 
 	for {
 		log.Println("Logic start")
