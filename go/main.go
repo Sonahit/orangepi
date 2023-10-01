@@ -5,6 +5,9 @@ import (
 	"time"
 )
 
+// https://www.sparkfun.com/datasheets/LCD/HD44780.pdf
+// (ROM Code: A00)
+
 const (
 	LCD_BUS  = 0
 	LCD_PORT = 0x27
@@ -113,60 +116,34 @@ func logic(lcd I2CLed) {
 	sectionProdolNum, prodolSections := chProdol.SplitBySections()
 	sectionGolovaNum, golovaSections := chGolova.SplitBySections()
 
-	locatedChars := make([]LocatedChar, 0, sectionGolovaNum+sectionIacoNum+sectionProdolNum)
-
-	for i := 0; i < sectionIacoNum; i++ {
-		locatedChars = append(locatedChars, lcd.CreateCustomChar(i, iacoSections[i]))
-	}
-
-	for i := 0; i < sectionProdolNum; i++ {
-		locatedChars = append(locatedChars, lcd.CreateCustomChar(i+sectionProdolNum, prodolSections[i]))
-	}
-
-	for i := 0; i < sectionGolovaNum; i++ {
-		locatedChars = append(locatedChars, lcd.CreateCustomChar(i+sectionProdolNum+sectionIacoNum, golovaSections[i]))
-	}
-
-	// iaceVerh,
-	// 	iaceNiz,
-	// 	prodolVerh,
-	// 	prodolNiz,
-	// 	golovaVerh,
-	// 	golovaNiz := locatedChars[0],
-	// 	locatedChars[1],
-	// 	locatedChars[2],
-	// 	locatedChars[3],
-	// 	locatedChars[4],
-	// 	locatedChars[5]
-
 	for {
 		log.Println("Logic start")
 		lcd.TextString(lineOne, LCD_LINE_ONE)
 		lcd.TextString(lineTwo, LCD_LINE_TWO)
 
-		lcd.SetCursor(2, 0)
-		lcd.WriteCustomChar(0)
+		for i := 0; i < sectionIacoNum; i++ {
+			lcd.CreateCustomChar(i, iacoSections[i])
+			lcd.SetCursor(2, i)
+			lcd.WriteCustomChar(i)
+		}
 
-		lcd.SetCursor(3, 0)
-		lcd.WriteCustomChar(1)
+		for i := 0; i < sectionProdolNum; i++ {
+			lcd.CreateCustomChar(i, prodolSections[i])
+			lcd.SetCursor(3, i)
+			lcd.WriteCustomChar(i)
+			lcd.SetCursor(4, i)
+			lcd.WriteCustomChar(i)
+			lcd.SetCursor(5, i)
+			lcd.WriteCustomChar(i)
+			lcd.SetCursor(6, i)
+			lcd.WriteCustomChar(i)
+		}
 
-		lcd.SetCursor(4, 0)
-		lcd.WriteCustomChar(2)
-
-		lcd.SetCursor(5, 0)
-		lcd.WriteCustomChar(3)
-
-		lcd.SetCursor(6, 0)
-		lcd.WriteCustomChar(4)
-
-		lcd.SetCursor(7, 0)
-		lcd.WriteCustomChar(5)
-
-		lcd.SetCursor(8, 0)
-		lcd.WriteCustomChar(6)
-
-		lcd.SetCursor(9, 0)
-		lcd.WriteCustomChar(7)
+		for i := 0; i < sectionGolovaNum; i++ {
+			lcd.CreateCustomChar(i, golovaSections[i])
+			lcd.SetCursor(7, i)
+			lcd.WriteCustomChar(i)
+		}
 
 		// sleep(1000)
 
