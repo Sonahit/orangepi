@@ -153,19 +153,7 @@ func logic(lcd I2CLed) {
 		lcd.SetCursor(5, 0)
 		lcd.WriteCustomChar(2)
 
-		lcd.SetCursor(5, 1)
-		lcd.WriteCustomChar(3)
-
-		lcd.SetCursor(6, 0)
-		lcd.WriteCustomChar(2)
-
-		lcd.SetCursor(6, 1)
-		lcd.WriteCustomChar(3)
-
-		lcd.SetCursor(7, 0)
-		lcd.WriteCustomChar(2)
-
-		lcd.SetCursor(7, 1)
+		lcd.SetCursor(5, 0)
 		lcd.WriteCustomChar(3)
 
 		lcd.SetCursor(8, 0)
@@ -173,6 +161,12 @@ func logic(lcd I2CLed) {
 
 		lcd.SetCursor(8, 1)
 		lcd.WriteCustomChar(5)
+
+		lcd.SetCursor(8, 1)
+		lcd.WriteCustomChar(6)
+
+		lcd.SetCursor(8, 1)
+		lcd.WriteCustomChar(7)
 
 		// sleep(1000)
 
