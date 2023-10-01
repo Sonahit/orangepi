@@ -117,6 +117,7 @@ func logic(lcd I2CLed) {
 			lcd.CreateCustomChar(charLoc, section)
 			lcd.SetCursor(2, i)
 			lcd.WriteCustomChar(charLoc)
+			sleep(100)
 		}
 
 		lcd.CreateCustomChar(sectionIacoNum, chProdol)
@@ -130,6 +131,8 @@ func logic(lcd I2CLed) {
 			lcd.WriteCustomChar(charLoc)
 			lcd.SetCursor(6, i)
 			lcd.WriteCustomChar(charLoc)
+
+			sleep(100)
 		}
 
 		for i, section := range golovaSections {
@@ -137,6 +140,7 @@ func logic(lcd I2CLed) {
 			lcd.CreateCustomChar(charLoc, section)
 			lcd.SetCursor(7, i)
 			lcd.WriteCustomChar(charLoc)
+			sleep(100)
 		}
 
 		// sleep(1000)
