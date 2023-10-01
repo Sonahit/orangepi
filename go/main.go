@@ -124,27 +124,27 @@ func logic(lcd I2CLed) {
 		for i := 0; i < sectionIacoNum; i++ {
 			charLoc := i
 			lcd.CreateCustomChar(charLoc, iacoSections[i])
-			lcd.SetCursor(2, charLoc)
+			lcd.SetCursor(2, i)
 			lcd.WriteCustomChar(charLoc)
 		}
 
 		for i := 0; i < sectionProdolNum; i++ {
 			charLoc := i + sectionIacoNum
 			lcd.CreateCustomChar(charLoc, prodolSections[i])
-			lcd.SetCursor(3, charLoc)
+			lcd.SetCursor(3, i)
 			lcd.WriteCustomChar(charLoc)
-			lcd.SetCursor(4, charLoc)
+			lcd.SetCursor(4, i)
 			lcd.WriteCustomChar(charLoc)
-			lcd.SetCursor(5, charLoc)
+			lcd.SetCursor(5, i)
 			lcd.WriteCustomChar(charLoc)
-			lcd.SetCursor(6, charLoc)
+			lcd.SetCursor(6, i)
 			lcd.WriteCustomChar(charLoc)
 		}
 
 		for i := 0; i < sectionGolovaNum; i++ {
 			charLoc := i + sectionIacoNum + sectionProdolNum
 			lcd.CreateCustomChar(charLoc, golovaSections[i])
-			lcd.SetCursor(7, charLoc)
+			lcd.SetCursor(7, i)
 			lcd.WriteCustomChar(charLoc)
 		}
 
