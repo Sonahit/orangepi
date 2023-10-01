@@ -4,7 +4,7 @@ import "log"
 
 const (
 	PIN_WPI  = 2
-	RANGE_HZ = 20000
+	RANGE_HZ = 200000
 )
 
 func mainPwm() {
@@ -12,10 +12,12 @@ func mainPwm() {
 		log.Fatalf("Setup error %d", err)
 	}
 
-	buzzer := NewBuzzerPwm(PIN_WPI, RANGE_HZ)
-
-	buzzer.ChangeHz(20)
+	PinMode(PIN_WPI, PIN_OUTPUT)
 
 	for {
+		DigitalWrite(PIN_WPI, DIGITAL_LOW)
+		sleep(2)
+		DigitalWrite(PIN_WPI, DIGITAL_HIGH)
+		sleep(2)
 	}
 }

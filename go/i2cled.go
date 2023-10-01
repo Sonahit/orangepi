@@ -35,11 +35,6 @@ const (
 	NONE         = 0x00
 )
 
-const (
-	DIGITAL_HIGH = 1
-	DIGITAL_LOW  = 0
-)
-
 func NewI2CLed(fd I2CFd) I2CLed {
 	width := 16
 	return I2CLed{
