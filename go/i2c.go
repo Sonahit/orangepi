@@ -25,14 +25,14 @@ func I2cError() int {
 	return int(C.i2cGetError())
 }
 
-func I2cWrite(fd I2CFd, data int) {
+func (fd I2CFd) I2cWrite(data int) {
 	C.i2cWrite(fd.fd, C.int(data))
 }
 
-func I2cWriteReg8(fd I2CFd, reg uint, data int) {
+func (fd I2CFd) I2cWriteReg8(reg uint, data int) {
 	C.i2cWriteReg8(fd.fd, C.int(reg), C.int(data))
 }
 
-func I2cWriteReg16(fd *I2CFd, reg uint, data int) {
+func (fd I2CFd) I2cWriteReg16(reg uint, data int) {
 	C.i2cWriteReg16(fd.fd, C.int(reg), C.int(data))
 }

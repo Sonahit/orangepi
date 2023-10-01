@@ -15,8 +15,8 @@ func TestWithin8Chars(t *testing.T) {
 
 	_, splitted := ch.SplitBySections()
 
-	if splitted[0][4] != 0b11111 {
-		t.Fatalf("Expected %d, got %d", 0b11111, splitted[0][4])
+	if splitted[0].At(4) != 0b11111 {
+		t.Fatalf("Expected %d, got %d", 0b11111, splitted[0].At(4))
 	}
 }
 
@@ -30,11 +30,11 @@ func TestWithin10Chars(t *testing.T) {
 	})
 	_, splitted := ch.SplitBySections()
 
-	if splitted[0][4] != 0b11111 {
-		t.Fatalf("Expected %d, got %d", 0b11111, splitted[0][4])
+	if splitted[0].At(4) != 0b11111 {
+		t.Fatalf("Expected %d, got %d", 0b11111, splitted[0].At(4))
 	}
-	if splitted[1][0] != 0b10011 {
-		t.Fatalf("Expected %d, got %d", 0b10011, splitted[1][0])
+	if splitted[1].At(0) != 0b10011 {
+		t.Fatalf("Expected %d, got %d", 0b10011, splitted[1].At(0))
 	}
 }
 
@@ -48,8 +48,8 @@ func TestWithin11Chars(t *testing.T) {
 	})
 
 	_, splitted := ch.SplitBySections()
-	if splitted[2][0] != 0b1 {
-		t.Fatalf("Expected %d, got %d", 0b1, splitted[2][0])
+	if splitted[2].At(0) != 0b1 {
+		t.Fatalf("Expected %d, got %d", 0b1, splitted[2].At(0))
 	}
 }
 
@@ -67,8 +67,8 @@ func TestWithin11Chars2Height(t *testing.T) {
 	})
 
 	_, splitted := ch.SplitBySections()
-	if splitted[1][0] != 0b11111 {
-		t.Fatalf("Expected %d, got %d", 0b11111, splitted[0][7])
+	if splitted[1].At(0) != 0b11111 {
+		t.Fatalf("Expected %d, got %d", 0b11111, splitted[1].At(0))
 	}
 }
 
@@ -94,14 +94,14 @@ func TestSymbol(t *testing.T) {
 
 	_, splitted := ch.SplitBySections()
 
-	if splitted[0][0] != 0b10000 {
-		t.Fatalf("Expected %d, got %d", 0b10000, splitted[0][0])
+	if splitted[0].At(0) != 0b10000 {
+		t.Fatalf("Expected %d, got %d", 0b10000, splitted[0].At(0))
 	}
-	if splitted[2][0] != 0b11 {
-		t.Fatalf("Expected %d, got %d", 0b11, splitted[2][0])
+	if splitted[2].At(0) != 0b11 {
+		t.Fatalf("Expected %d, got %d", 0b11, splitted[2].At(0))
 	}
-	if splitted[3][7] != 0b10000 {
-		t.Fatalf("Expected %d, got %d", 0b10000, splitted[3][7])
+	if splitted[3].At(7) != 0b10000 {
+		t.Fatalf("Expected %d, got %d", 0b10000, splitted[3].At(7))
 	}
 }
 
@@ -130,14 +130,14 @@ func TestSymbol100000Times(t *testing.T) {
 		if slicesNum == 0 {
 			t.Fatal("Expected more than 0 slices")
 		}
-		if splitted[0][0] != 0b10000 {
-			t.Fatalf("Expected %d, got %d", 0b10000, splitted[0][0])
+		if splitted[0].At(0) != 0b10000 {
+			t.Fatalf("Expected %d, got %d", 0b10000, splitted[0].At(0))
 		}
-		if splitted[2][0] != 0b11 {
-			t.Fatalf("Expected %d, got %d", 0b11, splitted[2][0])
+		if splitted[2].At(0) != 0b11 {
+			t.Fatalf("Expected %d, got %d", 0b11, splitted[2].At(0))
 		}
-		if splitted[3][7] != 0b10000 {
-			t.Fatalf("Expected %d, got %d", 0b10000, splitted[3][7])
+		if splitted[3].At(7) != 0b10000 {
+			t.Fatalf("Expected %d, got %d", 0b10000, splitted[3].At(7))
 		}
 	}
 }

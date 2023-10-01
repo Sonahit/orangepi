@@ -53,23 +53,19 @@ func (led I2CLed) lcdBytes(bits, mode int) {
 	bits_high := mode | (bits & 0xf0) | LCD_BACKLIGHT
 	bits_low := mode | ((bits << 4) & 0xf0) | LCD_BACKLIGHT
 
-	led.Write(bits_high)
+	led.fd.I2cWrite(bits_high)
 	led.Enable(bits_high)
 
-	led.Write(bits_low)
+	led.fd.I2cWrite(bits_low)
 	led.Enable(bits_low)
 
 }
 
-func (led I2CLed) Write(bytes int) {
-	I2cWrite(led.fd, bytes)
-}
-
 func (led I2CLed) Enable(bytes int) {
 	waitPulse()
-	I2cWrite(led.fd, bytes|LCD_ENABLE)
+	led.fd.I2cWrite(bytes | LCD_ENABLE)
 	waitPulse()
-	I2cWrite(led.fd, bytes&(^LCD_ENABLE))
+	led.fd.I2cWrite(bytes & (^LCD_ENABLE))
 	waitPulse()
 }
 
@@ -109,7 +105,7 @@ func (led I2CLed) SetMode(modLines, modBytes int) {
 }
 
 func (led I2CLed) Clear() {
-	led.Write(0x01)
+	led.fd.I2cWrite(0x01)
 }
 
 func (led I2CLed) FirstLineSetup() {

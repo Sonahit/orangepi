@@ -21,72 +21,6 @@ var smileChar = NewCustomChar([]int{
 	0b00000,
 })
 
-var ch1 = NewCustomChar([]int{
-	0b11111,
-	0b00100,
-	0b00100,
-	0b00100,
-	0b00100,
-	0b00100,
-	0b10100,
-	0b01100,
-})
-
-var ch2 = NewCustomChar([]int{
-	0b00000,
-	0b00001,
-	0b00110,
-	0b01001,
-	0b01000,
-	0b01111,
-	0b01000,
-	0b01000,
-})
-
-var ch3 = NewCustomChar([]int{
-	0b01000,
-	0b01000,
-	0b01000,
-	0b01000,
-	0b01001,
-	0b00110,
-	0b00010,
-	0b00000,
-})
-
-var ch4 = NewCustomChar([]int{
-	0b00101,
-	0b01001,
-	0b10001,
-	0b00001,
-	0b00001,
-	0b00001,
-	0b00001,
-	0b11111,
-})
-
-var ch5 = NewCustomChar([]int{
-	0b11110,
-	0b00010,
-	0b00010,
-	0b00010,
-	0b10010,
-	0b01100,
-	0b10000,
-	0b00000,
-})
-
-var ch6 = NewCustomChar([]int{
-	0b11110,
-	0b00010,
-	0b00010,
-	0b00010,
-	0b10010,
-	0b01100,
-	0b10000,
-	0b00000,
-})
-
 var chAll = NewCustomChar([]int{
 	0b000111111110000,
 	0b001000010001000,
@@ -134,23 +68,42 @@ func setup(lcd I2CLed) {
 func logic(lcd I2CLed) {
 	lineOne := LeftPad("1", ' ', lcd.Width)
 	lineTwo := RightPad("1", ' ', lcd.Width)
-	lcd.CreateCustomChar(1, smileChar)
+	sectionsNum, sections := chAll.SplitBySections()
+	for i := 0; i < sectionsNum; i++ {
+		lcd.CreateCustomChar(i, sections[i])
+	}
 	for {
 		log.Println("Logic start")
 		lcd.TextString(lineOne, LCD_LINE_ONE)
 		lcd.TextString(lineTwo, LCD_LINE_TWO)
+
+		lcd.SetCursor(4, 0)
+		lcd.WriteCustomChar(0)
+
 		lcd.SetCursor(3, 0)
 		lcd.WriteCustomChar(1)
 
-		sleep(1000)
+		lcd.SetCursor(2, 0)
+		lcd.WriteCustomChar(2)
 
-		lcd.TextString(lineTwo, LCD_LINE_ONE)
-		lcd.TextString(lineOne, LCD_LINE_TWO)
-		lcd.SetCursor(7, 1)
-		lcd.WriteCustomChar(1)
+		lcd.SetCursor(4, 1)
+		lcd.WriteCustomChar(3)
 
-		sleep(1000)
+		lcd.SetCursor(3, 1)
+		lcd.WriteCustomChar(4)
+
+		lcd.SetCursor(2, 1)
+		lcd.WriteCustomChar(5)
+
+		// sleep(1000)
+
+		// lcd.TextString(lineTwo, LCD_LINE_ONE)
+		// lcd.TextString(lineOne, LCD_LINE_TWO)
+		// lcd.SetCursor(7, 1)
+		// lcd.WriteCustomChar(1)
+
 		log.Println("Logic End")
+		sleep(1000)
 	}
 }
 
