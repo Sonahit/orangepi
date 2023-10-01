@@ -59,7 +59,7 @@ func setup(lcd I2CLed) {
 
 	lcd.SetMode(LCD_MODE_TWO_LINES, LCD_MODE_FOUR_BYTES)
 	lcd.SetMode(LCD_MODE_TWO_LINES, LCD_MODE_FOUR_BYTES)
-	lcd.DisplayCursorOn()
+	lcd.DisplayOn()
 	lcd.FirstLineSetup()
 	lcd.SetMode(LCD_MODE_TWO_LINES, LCD_MODE_FOUR_BYTES)
 	lcd.Clear()
