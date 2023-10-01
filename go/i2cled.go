@@ -105,7 +105,7 @@ func (led I2CLed) SetMode(modLines, modBytes int) {
 }
 
 func (led I2CLed) Clear() {
-	led.fd.I2cWrite(0x01)
+	led.Command(0x01)
 }
 
 func (led I2CLed) FirstLineSetup() {
