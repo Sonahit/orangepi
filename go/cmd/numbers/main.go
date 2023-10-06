@@ -69,6 +69,7 @@ func setupNumber() {
 }
 
 func logicNumber() {
+	lib.DigitalWrite(RED_PIN, lib.DIGITAL_HIGH)
 	for {
 		for _, pin := range DATA_PINS {
 			toggle(pin)
