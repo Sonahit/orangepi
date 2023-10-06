@@ -35,7 +35,6 @@ const (
 var DATA_PINS = [8]int{
 	B_PIN,
 	A_PIN,
-	DP_PIN,
 	F_PIN,
 	G_PIN,
 	C_PIN,
@@ -63,6 +62,8 @@ func setupNumber() {
 
 func logicNumber() {
 	lib.DigitalWrite(RED_PIN, lib.DIGITAL_HIGH)
+	lib.DigitalWrite(GREEN_PIN, lib.DIGITAL_HIGH)
+	lib.DigitalWrite(DP_PIN, lib.DIGITAL_HIGH)
 	for {
 		for _, pin := range DATA_PINS {
 			toggle(pin)
