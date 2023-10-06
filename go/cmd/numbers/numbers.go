@@ -42,11 +42,11 @@ func (n NumberSegments) Render(pins DataPins) {
 	n.writePin(n.pins.g, pins.g)
 }
 
-func (n NumberSegments) writePin(pin, value int) {
-	if value != 0 {
-		lib.DigitalWrite(pin, lib.DIGITAL_HIGH)
-	} else {
+func (n NumberSegments) writePin(value, pin int) {
+	if value == 0 {
 		lib.DigitalWrite(pin, lib.DIGITAL_LOW)
+	} else {
+		lib.DigitalWrite(pin, lib.DIGITAL_HIGH)
 	}
 }
 
