@@ -56,9 +56,9 @@ func setupNumber() {
 	if err := lib.WiringSetup(); err != 0 {
 		log.Fatalf("Setup error %d", err)
 	}
-	lib.PinModeDefault(VCC_1, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
-	lib.PinModeDefault(VCC_2, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
-	lib.PinModeDefault(DP_PIN, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
+	lib.PinModeDefault(VCC_1, lib.PIN_OUTPUT, lib.DIGITAL_HIGH)
+	lib.PinModeDefault(VCC_2, lib.PIN_OUTPUT, lib.DIGITAL_HIGH)
+	lib.PinModeDefault(DP_PIN, lib.PIN_OUTPUT, lib.DIGITAL_HIGH)
 
 	lib.PinModeDefault(B_PIN, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
 	lib.PinModeDefault(A_PIN, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
@@ -70,14 +70,10 @@ func setupNumber() {
 }
 
 func logicNumber() {
-	lib.DigitalWrite(VCC_1, lib.DIGITAL_HIGH)
-	lib.DigitalWrite(VCC_2, lib.DIGITAL_HIGH)
-	lib.DigitalWrite(DP_PIN, lib.DIGITAL_HIGH)
-
 	for {
 		for _, pin := range DATA_PINS {
 			toggle(pin)
-			pkg.Sleep(1000)
+			pkg.Sleep(100)
 		}
 	}
 }
