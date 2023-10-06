@@ -3,6 +3,7 @@ package main
 import (
 	"display/lib"
 	"display/pkg"
+	"fmt"
 	"log"
 )
 
@@ -32,7 +33,7 @@ const (
 	RED_PIN   = PIN_9
 )
 
-var DATA_PINS = []int{
+var DATA_PINS = [8]int{
 	B_PIN,
 	A_PIN,
 	DP_PIN,
@@ -48,7 +49,7 @@ func setupNumber() {
 	if err := lib.WiringSetup(); err != 0 {
 		log.Fatalf("Setup error %d", err)
 	}
-
+	fmt.Println(DATA_PINS)
 	lib.PinMode(B_PIN, lib.PIN_OUTPUT)
 	lib.PinMode(A_PIN, lib.PIN_OUTPUT)
 	lib.PinMode(DP_PIN, lib.PIN_OUTPUT)
