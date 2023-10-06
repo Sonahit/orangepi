@@ -41,7 +41,7 @@ const (
 	VCC_2  = PIN_9
 )
 
-var DATA_PINS = [8]int{
+var DATA_PINS_SLICE = [8]int{
 	B_PIN,
 	A_PIN,
 	F_PIN,
@@ -49,6 +49,16 @@ var DATA_PINS = [8]int{
 	C_PIN,
 	D_PIN,
 	E_PIN,
+}
+
+var DATA_PINS = DataPins{
+	a: A_PIN,
+	b: B_PIN,
+	c: C_PIN,
+	d: D_PIN,
+	e: E_PIN,
+	f: F_PIN,
+	g: G_PIN,
 }
 
 func setupNumber() {
@@ -60,18 +70,18 @@ func setupNumber() {
 	lib.PinModeDefault(VCC_2, lib.PIN_OUTPUT, lib.DIGITAL_HIGH)
 	lib.PinModeDefault(DP_PIN, lib.PIN_OUTPUT, lib.DIGITAL_HIGH)
 
-	lib.PinModeDefault(B_PIN, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
-	lib.PinModeDefault(A_PIN, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
-	lib.PinModeDefault(F_PIN, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
-	lib.PinModeDefault(G_PIN, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
-	lib.PinModeDefault(C_PIN, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
-	lib.PinModeDefault(D_PIN, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
-	lib.PinModeDefault(E_PIN, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
+	lib.PinModeDefault(DATA_PINS.b, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
+	lib.PinModeDefault(DATA_PINS.a, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
+	lib.PinModeDefault(DATA_PINS.f, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
+	lib.PinModeDefault(DATA_PINS.g, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
+	lib.PinModeDefault(DATA_PINS.c, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
+	lib.PinModeDefault(DATA_PINS.d, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
+	lib.PinModeDefault(DATA_PINS.e, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
 }
 
 func logicNumber() {
 	for {
-		for _, pin := range DATA_PINS {
+		for _, pin := range DATA_PINS_SLICE {
 			toggle(pin)
 			pkg.Sleep(100)
 		}
