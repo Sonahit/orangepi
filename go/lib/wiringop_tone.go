@@ -1,7 +1,7 @@
-package main
+package lib
 
 // #cgo LDFLAGS: -lwiringPi -lpthread
-// #include "lib/tone.hpp"
+// #include "tone.hpp"
 import "C"
 
 func ToneCreate(pin int) {

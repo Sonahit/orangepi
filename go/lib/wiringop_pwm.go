@@ -1,7 +1,7 @@
-package main
+package lib
 
 // #cgo LDFLAGS: -lwiringPi -lpthread
-// #include "lib/pwm.hpp"
+// #include "pwm.hpp"
 import "C"
 
 func PwmCreate(pin, value, rang int) {

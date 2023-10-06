@@ -1,9 +1,12 @@
-package main
+package pkg
 
-import "time"
+import (
+	"display/lib"
+	"time"
+)
 
 type I2CLed struct {
-	fd          I2CFd
+	fd          lib.I2CFd
 	Width       int
 	row_offsets []int
 }
@@ -35,7 +38,7 @@ const (
 	NONE         = 0x00
 )
 
-func NewI2CLed(fd I2CFd) I2CLed {
+func NewI2CLed(fd lib.I2CFd) I2CLed {
 	width := 16
 	return I2CLed{
 		fd:          fd,
@@ -86,11 +89,11 @@ func (led I2CLed) Display(d, c, b int) {
 }
 
 func (led I2CLed) DisplayCursorOn() {
-	led.Display(DIGITAL_HIGH, DIGITAL_HIGH, DIGITAL_HIGH)
+	led.Display(lib.DIGITAL_HIGH, lib.DIGITAL_HIGH, lib.DIGITAL_HIGH)
 }
 
 func (led I2CLed) DisplayOn() {
-	led.Display(DIGITAL_HIGH, DIGITAL_LOW, DIGITAL_LOW)
+	led.Display(lib.DIGITAL_HIGH, lib.DIGITAL_LOW, lib.DIGITAL_LOW)
 }
 
 func (led I2CLed) SetMode(modLines, modBytes int) {

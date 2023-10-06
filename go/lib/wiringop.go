@@ -1,7 +1,7 @@
-package main
+package lib
 
 // #cgo LDFLAGS: -lwiringPi -lpthread
-// #include "lib/wiringop.hpp"
+// #include "wiringop.hpp"
 import "C"
 
 const (
@@ -17,6 +17,10 @@ func WiringSetup() int {
 
 func DigitalWrite(pin, value int) {
 	C._digitalWrite(C.int(pin), C.int(value))
+}
+
+func DigitalRead(pin int) int {
+	return int(C._digitalRead(C.int(pin)))
 }
 
 func PinMode(pin, mode int) {

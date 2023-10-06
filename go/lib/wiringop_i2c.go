@@ -1,7 +1,7 @@
-package main
+package lib
 
 // #cgo LDFLAGS: -lwiringPi
-// #include "lib/i2c.hpp"
+// #include "i2c.hpp"
 import "C"
 import (
 	"fmt"
