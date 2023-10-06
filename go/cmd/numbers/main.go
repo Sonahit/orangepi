@@ -81,10 +81,10 @@ func setupNumber() {
 
 func logicNumber() {
 	for {
-		for _, pin := range DATA_PINS_SLICE {
-			toggle(pin)
-			pkg.Sleep(100)
-		}
+		One.Render(DATA_PINS)
+		pkg.Sleep(500)
+		Two.Render(DATA_PINS)
+		pkg.Sleep(500)
 	}
 }
 
