@@ -50,7 +50,7 @@ func (n NumberSegments) writePin(pin, value int) {
 	}
 }
 
-var One = NewNumber(0, 1, 1)
+var One = NewNumber(0, 1, 1, 0, 0, 0, 0)
 var Two = NewNumber(1, 1, 0, 1, 1, 0, 1)
 
 // var Three = NewNumber(0, 1, 1)
