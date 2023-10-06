@@ -29,16 +29,16 @@ const (
 )
 
 const (
-	B_PIN     = PIN_0
-	A_PIN     = PIN_1
-	DP_PIN    = PIN_2
-	F_PIN     = PIN_3
-	G_PIN     = PIN_4
-	GREEN_PIN = PIN_5
-	C_PIN     = PIN_6
-	D_PIN     = PIN_7
-	E_PIN     = PIN_8
-	RED_PIN   = PIN_9
+	B_PIN  = PIN_0
+	A_PIN  = PIN_1
+	DP_PIN = PIN_2
+	F_PIN  = PIN_3
+	G_PIN  = PIN_4
+	VCC_1  = PIN_5
+	C_PIN  = PIN_6
+	D_PIN  = PIN_7
+	E_PIN  = PIN_8
+	VCC_2  = PIN_9
 )
 
 var DATA_PINS = [8]int{
@@ -62,44 +62,24 @@ func setupNumber() {
 	lib.PinMode(DP_PIN, lib.PIN_OUTPUT)
 	lib.PinMode(F_PIN, lib.PIN_OUTPUT)
 	lib.PinMode(G_PIN, lib.PIN_OUTPUT)
-	lib.PinMode(GREEN_PIN, lib.PIN_OUTPUT)
+	lib.PinMode(VCC_1, lib.PIN_OUTPUT)
 	lib.PinMode(C_PIN, lib.PIN_OUTPUT)
 	lib.PinMode(D_PIN, lib.PIN_OUTPUT)
 	lib.PinMode(E_PIN, lib.PIN_OUTPUT)
-	lib.PinMode(RED_PIN, lib.PIN_OUTPUT)
+	lib.PinMode(VCC_2, lib.PIN_OUTPUT)
 }
 
 func logicNumber() {
-	lib.DigitalWrite(RED_PIN, lib.DIGITAL_HIGH)
-	lib.DigitalWrite(GREEN_PIN, lib.DIGITAL_HIGH)
+	lib.DigitalWrite(VCC_1, lib.DIGITAL_HIGH)
+	lib.DigitalWrite(VCC_2, lib.DIGITAL_HIGH)
 	lib.DigitalWrite(DP_PIN, lib.DIGITAL_HIGH)
 
-	lib.DigitalWrite(F_PIN, lib.DIGITAL_HIGH)
-
-	pin(RED_PIN, "RED")
-	pin(GREEN_PIN, "GREEN")
-	pin(DP_PIN, "DP")
-
-	lib.DigitalWrite(RED_PIN, lib.DIGITAL_HIGH)
-	lib.DigitalWrite(GREEN_PIN, lib.DIGITAL_HIGH)
-	lib.DigitalWrite(DP_PIN, lib.DIGITAL_HIGH)
-
-	pin(B_PIN, "B_PIN")
-	pin(A_PIN, "A_PIN")
-	pin(F_PIN, "F_PIN")
-	pin(G_PIN, "G_PIN")
-	pin(C_PIN, "C_PIN")
-	pin(D_PIN, "D_PIN")
-	pin(E_PIN, "E_PIN")
-}
-
-func pin(pin int, msg string) {
-	log.Printf("%s", msg)
-	lib.DigitalWrite(pin, lib.DIGITAL_HIGH)
-
-	pkg.Sleep(2000)
-
-	lib.DigitalWrite(pin, lib.DIGITAL_LOW)
+	for {
+		for _, pin := range DATA_PINS {
+			toggle(pin)
+			pkg.Sleep(1000)
+		}
+	}
 }
 
 var toggled map[int]bool = make(map[int]bool)
