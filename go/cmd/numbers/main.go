@@ -19,25 +19,18 @@ const (
 	PIN_9 = 18
 )
 
-var B_PIN,
-	A_PIN,
-	DP_PIN,
-	F_PIN,
-	G_PIN,
-	GREEN_PIN,
-	C_PIN,
-	D_PIN,
-	E_PIN,
-	RED_PIN = PIN_0,
-	PIN_1,
-	PIN_2,
-	PIN_3,
-	PIN_4,
-	PIN_5,
-	PIN_6,
-	PIN_7,
-	PIN_8,
-	PIN_9
+const (
+	B_PIN     = PIN_0
+	A_PIN     = PIN_1
+	DP_PIN    = PIN_2
+	F_PIN     = PIN_3
+	G_PIN     = PIN_4
+	GREEN_PIN = PIN_5
+	C_PIN     = PIN_6
+	D_PIN     = PIN_7
+	E_PIN     = PIN_8
+	RED_PIN   = PIN_9
+)
 
 var DATA_PINS = []int{
 	B_PIN,
