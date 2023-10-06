@@ -56,17 +56,17 @@ func setupNumber() {
 	if err := lib.WiringSetup(); err != 0 {
 		log.Fatalf("Setup error %d", err)
 	}
+	lib.PinModeDefault(VCC_1, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
+	lib.PinModeDefault(VCC_2, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
+	lib.PinModeDefault(DP_PIN, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
 
-	lib.PinMode(B_PIN, lib.PIN_OUTPUT)
-	lib.PinMode(A_PIN, lib.PIN_OUTPUT)
-	lib.PinMode(DP_PIN, lib.PIN_OUTPUT)
-	lib.PinMode(F_PIN, lib.PIN_OUTPUT)
-	lib.PinMode(G_PIN, lib.PIN_OUTPUT)
-	lib.PinMode(VCC_1, lib.PIN_OUTPUT)
-	lib.PinMode(C_PIN, lib.PIN_OUTPUT)
-	lib.PinMode(D_PIN, lib.PIN_OUTPUT)
-	lib.PinMode(E_PIN, lib.PIN_OUTPUT)
-	lib.PinMode(VCC_2, lib.PIN_OUTPUT)
+	lib.PinModeDefault(B_PIN, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
+	lib.PinModeDefault(A_PIN, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
+	lib.PinModeDefault(F_PIN, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
+	lib.PinModeDefault(G_PIN, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
+	lib.PinModeDefault(C_PIN, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
+	lib.PinModeDefault(D_PIN, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
+	lib.PinModeDefault(E_PIN, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
 }
 
 func logicNumber() {

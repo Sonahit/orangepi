@@ -26,3 +26,9 @@ func DigitalRead(pin int) int {
 func PinMode(pin, mode int) {
 	C._pinMode(C.int(pin), C.int(mode))
 }
+
+func PinModeDefault(pin, mode, value int) {
+	C._pinMode(C.int(pin), C.int(mode))
+
+	DigitalWrite(pin, value)
+}
