@@ -2,6 +2,7 @@ package main
 
 import (
 	"display/lib"
+	"display/pkg"
 	"log"
 )
 
@@ -74,6 +75,31 @@ func logicNumber() {
 	lib.DigitalWrite(DP_PIN, lib.DIGITAL_HIGH)
 
 	lib.DigitalWrite(F_PIN, lib.DIGITAL_HIGH)
+
+	pin(RED_PIN, "RED")
+	pin(GREEN_PIN, "GREEN")
+	pin(DP_PIN, "DP")
+
+	lib.DigitalWrite(RED_PIN, lib.DIGITAL_HIGH)
+	lib.DigitalWrite(GREEN_PIN, lib.DIGITAL_HIGH)
+	lib.DigitalWrite(DP_PIN, lib.DIGITAL_HIGH)
+
+	pin(B_PIN, "B_PIN")
+	pin(A_PIN, "A_PIN")
+	pin(F_PIN, "F_PIN")
+	pin(G_PIN, "G_PIN")
+	pin(C_PIN, "C_PIN")
+	pin(D_PIN, "D_PIN")
+	pin(E_PIN, "E_PIN")
+}
+
+func pin(pin int, msg string) {
+	log.Printf("%s", msg)
+	lib.DigitalWrite(pin, lib.DIGITAL_HIGH)
+
+	pkg.Sleep(2000)
+
+	lib.DigitalWrite(pin, lib.DIGITAL_LOW)
 }
 
 var toggled map[int]bool = make(map[int]bool)
