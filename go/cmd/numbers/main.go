@@ -3,6 +3,7 @@ package main
 import (
 	"display/lib"
 	"display/pkg"
+	"flag"
 	"log"
 )
 
@@ -70,8 +71,15 @@ func setupNumber() {
 }
 
 func logicNumber() {
+	var sleepMs int
 
-	sleepMs := 100
+	flag.IntVar(&sleepMs, "sleep", 500, "")
+	flag.Parse()
+
+	if sleepMs <= 0 {
+		sleepMs = 500
+	}
+
 	for {
 		println("LOGIC START")
 		lib.DigitalWrite(DP_PIN, lib.DIGITAL_HIGH)
