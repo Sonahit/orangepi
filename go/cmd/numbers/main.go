@@ -41,16 +41,6 @@ const (
 	VCC_2  = PIN_9
 )
 
-var DATA_PINS_SLICE = [8]int{
-	B_PIN,
-	A_PIN,
-	F_PIN,
-	G_PIN,
-	C_PIN,
-	D_PIN,
-	E_PIN,
-}
-
 var DATA_PINS = DataPins{
 	a: A_PIN,
 	b: B_PIN,
@@ -70,8 +60,8 @@ func setupNumber() {
 	lib.PinModeDefault(VCC_2, lib.PIN_OUTPUT, lib.DIGITAL_HIGH)
 	lib.PinModeDefault(DP_PIN, lib.PIN_OUTPUT, lib.DIGITAL_HIGH)
 
-	lib.PinModeDefault(DATA_PINS.b, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
 	lib.PinModeDefault(DATA_PINS.a, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
+	lib.PinModeDefault(DATA_PINS.b, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
 	lib.PinModeDefault(DATA_PINS.f, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
 	lib.PinModeDefault(DATA_PINS.g, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
 	lib.PinModeDefault(DATA_PINS.c, lib.PIN_OUTPUT, lib.DIGITAL_LOW)
@@ -81,10 +71,50 @@ func setupNumber() {
 
 func logicNumber() {
 	for {
-		One.Render(DATA_PINS)
-		pkg.Sleep(500)
-		Two.Render(DATA_PINS)
-		pkg.Sleep(500)
+		// One.Render(DATA_PINS)
+		// pkg.Sleep(500)
+		// Two.Render(DATA_PINS)
+		// pkg.Sleep(500)
+		println("LOGIC START")
+		lib.DigitalWrite(DATA_PINS.a, lib.DIGITAL_HIGH)
+		println("A")
+		pkg.Sleep(1000)
+
+		lib.DigitalWrite(DATA_PINS.b, lib.DIGITAL_HIGH)
+		println("B")
+		pkg.Sleep(1000)
+
+		lib.DigitalWrite(DATA_PINS.f, lib.DIGITAL_HIGH)
+		println("F")
+		pkg.Sleep(1000)
+
+		lib.DigitalWrite(DATA_PINS.g, lib.DIGITAL_HIGH)
+		println("G")
+		pkg.Sleep(1000)
+
+		lib.DigitalWrite(DATA_PINS.c, lib.DIGITAL_HIGH)
+		println("C")
+		pkg.Sleep(1000)
+
+		lib.DigitalWrite(DATA_PINS.d, lib.DIGITAL_HIGH)
+		println("D")
+		pkg.Sleep(1000)
+
+		lib.DigitalWrite(DATA_PINS.e, lib.DIGITAL_HIGH)
+		println("E")
+		pkg.Sleep(1000)
+
+		println("RESET")
+		lib.DigitalWrite(DATA_PINS.a, lib.DIGITAL_LOW)
+		lib.DigitalWrite(DATA_PINS.b, lib.DIGITAL_LOW)
+		lib.DigitalWrite(DATA_PINS.f, lib.DIGITAL_LOW)
+		lib.DigitalWrite(DATA_PINS.g, lib.DIGITAL_LOW)
+		lib.DigitalWrite(DATA_PINS.c, lib.DIGITAL_LOW)
+		lib.DigitalWrite(DATA_PINS.d, lib.DIGITAL_LOW)
+		lib.DigitalWrite(DATA_PINS.e, lib.DIGITAL_LOW)
+
+		println("LOGIC END")
+
 	}
 }
 
