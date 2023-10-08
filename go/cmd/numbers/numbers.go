@@ -18,17 +18,9 @@ e c
 _d_
 */
 
-func NewNumber(segments DataPins) NumberSegments {
+func NewNumber(pins DataPins) NumberSegments {
 	return NumberSegments{
-		pins: DataPins{
-			a: segments.a,
-			b: segments.b,
-			c: segments.c,
-			d: segments.d,
-			e: segments.e,
-			f: segments.f,
-			g: segments.g,
-		},
+		pins: pins,
 	}
 }
 
