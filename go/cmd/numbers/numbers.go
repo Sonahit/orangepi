@@ -18,16 +18,16 @@ e c
 _d_
 */
 
-func NewNumber(segments ...int) NumberSegments {
+func NewNumber(segments DataPins) NumberSegments {
 	return NumberSegments{
 		pins: DataPins{
-			a: segments[0],
-			b: segments[1],
-			c: segments[2],
-			d: segments[3],
-			e: segments[4],
-			f: segments[5],
-			g: segments[6],
+			a: segments.a,
+			b: segments.b,
+			c: segments.c,
+			d: segments.d,
+			e: segments.e,
+			f: segments.f,
+			g: segments.g,
 		},
 	}
 }
@@ -50,8 +50,8 @@ func (n NumberSegments) writePin(value, pin int) {
 	}
 }
 
-var One = NewNumber(0, 1, 1, 0, 0, 0, 0)
-var Two = NewNumber(1, 1, 0, 1, 1, 0, 1)
+var One = NewNumber(DataPins{b: 1, c: 1})
+var Two = NewNumber(DataPins{a: 1, b: 1, d: 1, e: 1, g: 1})
 
 // var Three = NewNumber(0, 1, 1)
 // var Four = NewNumber(0, 1, 1)
