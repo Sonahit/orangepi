@@ -33,13 +33,13 @@ func NewNumber(segments DataPins) NumberSegments {
 }
 
 func (n NumberSegments) Render(pins DataPins) {
-	n.writePin(n.pins.a, pins.a)
-	n.writePin(n.pins.b, pins.b)
-	n.writePin(n.pins.c, pins.c)
-	n.writePin(n.pins.d, pins.d)
-	n.writePin(n.pins.e, pins.e)
-	n.writePin(n.pins.f, pins.f)
-	n.writePin(n.pins.g, pins.g)
+	n.writePin(^n.pins.a, pins.a)
+	n.writePin(^n.pins.b, pins.b)
+	n.writePin(^n.pins.c, pins.c)
+	n.writePin(^n.pins.d, pins.d)
+	n.writePin(^n.pins.e, pins.e)
+	n.writePin(^n.pins.f, pins.f)
+	n.writePin(^n.pins.g, pins.g)
 }
 
 func (n NumberSegments) writePin(value, pin int) {
