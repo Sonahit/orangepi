@@ -33,16 +33,16 @@ func NewNumber(segments DataPins) NumberSegments {
 }
 
 func (n NumberSegments) Render(pins DataPins) {
-	n.writePin(^n.pins.a, pins.a)
-	n.writePin(^n.pins.b, pins.b)
-	n.writePin(^n.pins.c, pins.c)
-	n.writePin(^n.pins.d, pins.d)
-	n.writePin(^n.pins.e, pins.e)
-	n.writePin(^n.pins.f, pins.f)
-	n.writePin(^n.pins.g, pins.g)
+	n.writePin(pins.a, n.pins.a)
+	n.writePin(pins.b, n.pins.b)
+	n.writePin(pins.c, n.pins.c)
+	n.writePin(pins.d, n.pins.d)
+	n.writePin(pins.e, n.pins.e)
+	n.writePin(pins.f, n.pins.f)
+	n.writePin(pins.g, n.pins.g)
 }
 
-func (n NumberSegments) writePin(value, pin int) {
+func (n NumberSegments) writePin(pin, value int) {
 	if value == 0 {
 		lib.DigitalWrite(pin, lib.DIGITAL_LOW)
 	} else {
