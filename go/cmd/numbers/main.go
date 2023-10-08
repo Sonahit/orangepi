@@ -72,7 +72,7 @@ func setupNumber() {
 func logicNumber() {
 	for {
 		println("LOGIC START")
-		lib.DigitalWrite(DP_PIN, lib.DIGITAL_LOW)
+		lib.DigitalWrite(DP_PIN, lib.DIGITAL_HIGH)
 
 		One.Render(DATA_PINS)
 		pkg.Sleep(500)
@@ -104,7 +104,7 @@ func logicNumber() {
 		Zero.Render(DATA_PINS)
 		pkg.Sleep(500)
 
-		lib.DigitalWrite(DP_PIN, lib.DIGITAL_HIGH)
+		lib.DigitalWrite(DP_PIN, lib.DIGITAL_LOW)
 		pkg.Sleep(500)
 
 		println("LOGIC END")
