@@ -71,49 +71,43 @@ func setupNumber() {
 
 func logicNumber() {
 	for {
+		println("LOGIC START")
+		lib.DigitalWrite(DP_PIN, lib.DIGITAL_LOW)
+
 		One.Render(DATA_PINS)
 		pkg.Sleep(500)
+
 		Two.Render(DATA_PINS)
 		pkg.Sleep(500)
-		// println("LOGIC START")
-		// lib.DigitalWrite(DATA_PINS.a, lib.DIGITAL_HIGH)
-		// println("A")
-		// pkg.Sleep(1000)
 
-		// lib.DigitalWrite(DATA_PINS.b, lib.DIGITAL_HIGH)
-		// println("B")
-		// pkg.Sleep(1000)
+		Three.Render(DATA_PINS)
+		pkg.Sleep(500)
 
-		// lib.DigitalWrite(DATA_PINS.f, lib.DIGITAL_HIGH)
-		// println("F")
-		// pkg.Sleep(1000)
+		Four.Render(DATA_PINS)
+		pkg.Sleep(500)
 
-		// lib.DigitalWrite(DATA_PINS.g, lib.DIGITAL_HIGH)
-		// println("G")
-		// pkg.Sleep(1000)
+		Five.Render(DATA_PINS)
+		pkg.Sleep(500)
 
-		// lib.DigitalWrite(DATA_PINS.c, lib.DIGITAL_HIGH)
-		// println("C")
-		// pkg.Sleep(1000)
+		Six.Render(DATA_PINS)
+		pkg.Sleep(500)
 
-		// lib.DigitalWrite(DATA_PINS.d, lib.DIGITAL_HIGH)
-		// println("D")
-		// pkg.Sleep(1000)
+		Seven.Render(DATA_PINS)
+		pkg.Sleep(500)
 
-		// lib.DigitalWrite(DATA_PINS.e, lib.DIGITAL_HIGH)
-		// println("E")
-		// pkg.Sleep(1000)
+		Eight.Render(DATA_PINS)
+		pkg.Sleep(500)
 
-		// println("RESET")
-		// lib.DigitalWrite(DATA_PINS.a, lib.DIGITAL_LOW)
-		// lib.DigitalWrite(DATA_PINS.b, lib.DIGITAL_LOW)
-		// lib.DigitalWrite(DATA_PINS.f, lib.DIGITAL_LOW)
-		// lib.DigitalWrite(DATA_PINS.g, lib.DIGITAL_LOW)
-		// lib.DigitalWrite(DATA_PINS.c, lib.DIGITAL_LOW)
-		// lib.DigitalWrite(DATA_PINS.d, lib.DIGITAL_LOW)
-		// lib.DigitalWrite(DATA_PINS.e, lib.DIGITAL_LOW)
+		Nine.Render(DATA_PINS)
+		pkg.Sleep(500)
 
-		// println("LOGIC END")
+		Zero.Render(DATA_PINS)
+		pkg.Sleep(500)
+
+		lib.DigitalWrite(DP_PIN, lib.DIGITAL_HIGH)
+		pkg.Sleep(500)
+
+		println("LOGIC END")
 
 	}
 }
