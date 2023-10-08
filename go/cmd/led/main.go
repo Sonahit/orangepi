@@ -17,7 +17,7 @@ const (
 	LCD_PORT = 0x27
 )
 
-var smileChar = pkg.NewCustomChar([]int{
+var smileChar = NewCustomChar([]int{
 	0b00000,
 	0b00000,
 	0b01010,
@@ -28,7 +28,7 @@ var smileChar = pkg.NewCustomChar([]int{
 	0b00000,
 })
 
-var chIaco = pkg.NewCustomChar([]int{
+var chIaco = NewCustomChar([]int{
 	0b00000,
 	0b01110,
 	0b10001,
@@ -47,7 +47,7 @@ var chIaco = pkg.NewCustomChar([]int{
 	0b00000,
 })
 
-var chProdol = pkg.NewCustomChar([]int{
+var chProdol = NewCustomChar([]int{
 	0b00000,
 	0b00000,
 	0b00000,
@@ -58,7 +58,7 @@ var chProdol = pkg.NewCustomChar([]int{
 	0b00000,
 })
 
-var chGolova = pkg.NewCustomChar([]int{
+var chGolova = NewCustomChar([]int{
 	0b0000000000,
 	0b0111100000,
 	0b1000010000,
@@ -77,24 +77,11 @@ var chGolova = pkg.NewCustomChar([]int{
 	0b0000000000,
 })
 
-func mainLed() {
-	fd, err := lib.I2cSetup(LCD_BUS, LCD_PORT)
-
-	if err != 0 {
-		log.Fatalf("Error on I2CInit %d", err)
-	}
-
-	lcd := pkg.NewI2CLed(fd)
-	setupLeds(lcd)
-	pkg.Sleep(2000)
-	logicLed(lcd)
-}
-
-func setupLeds(lcd pkg.I2CLed) {
+func setupLeds(lcd I2CLed) {
 	log.Println("Setup")
 	defer log.Println("SetupDone")
 
-	c := make(chan os.Signal)
+	c := make(chan os.Signal, 2)
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
 	go func() {
 		<-c
@@ -102,15 +89,15 @@ func setupLeds(lcd pkg.I2CLed) {
 		os.Exit(1)
 	}()
 
-	lcd.SetMode(pkg.LCD_MODE_TWO_LINES, pkg.LCD_MODE_FOUR_BYTES)
-	lcd.SetMode(pkg.LCD_MODE_TWO_LINES, pkg.LCD_MODE_FOUR_BYTES)
+	lcd.SetMode(LCD_MODE_TWO_LINES, LCD_MODE_FOUR_BYTES)
+	lcd.SetMode(LCD_MODE_TWO_LINES, LCD_MODE_FOUR_BYTES)
 	lcd.DisplayOn()
 	lcd.FirstLineSetup()
-	lcd.SetMode(pkg.LCD_MODE_TWO_LINES, pkg.LCD_MODE_FOUR_BYTES)
+	lcd.SetMode(LCD_MODE_TWO_LINES, LCD_MODE_FOUR_BYTES)
 	lcd.Clear()
 }
 
-func logicLed(lcd pkg.I2CLed) {
+func logicLed(lcd I2CLed) {
 	lineOne := pkg.LeftPad("1", ' ', lcd.Width)
 	lineTwo := pkg.RightPad("1", ' ', lcd.Width)
 	sectionIacoNum, iacoSections := chIaco.SplitBySections()
@@ -134,8 +121,8 @@ func logicLed(lcd pkg.I2CLed) {
 
 	for {
 		log.Println("Logic start")
-		lcd.TextString(lineOne, pkg.LCD_LINE_ONE)
-		lcd.TextString(lineTwo, pkg.LCD_LINE_TWO)
+		lcd.TextString(lineOne, LCD_LINE_ONE)
+		lcd.TextString(lineTwo, LCD_LINE_TWO)
 
 		for i := range iacoSections {
 			charLoc := i
@@ -163,7 +150,7 @@ func logicLed(lcd pkg.I2CLed) {
 		lcd.SetCursor(7, 1)
 		lcd.WriteCustomChar(3 + sectionIacoNum + 1)
 
-		// sleep(1000)
+		// pkg.sleep(1000)
 
 		// lcd.TextString(lineTwo, LCD_LINE_ONE)
 		// lcd.TextString(lineOne, LCD_LINE_TWO)
@@ -176,10 +163,14 @@ func logicLed(lcd pkg.I2CLed) {
 }
 
 func main() {
-	fd, _ := lib.I2cSetup(LCD_BUS, LCD_PORT)
+	fd, err := lib.I2cSetup(LCD_BUS, LCD_PORT)
 
-	led := pkg.NewI2CLed(fd)
-	setupLeds(led)
+	if err != 0 {
+		log.Fatalf("Error on I2CInit %d", err)
+	}
 
-	logicLed(led)
+	lcd := NewI2CLed(fd)
+	setupLeds(lcd)
+	pkg.Sleep(2000)
+	logicLed(lcd)
 }

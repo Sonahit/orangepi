@@ -15,7 +15,7 @@ func main() {
 		log.Fatalf("Setup error %d", err)
 	}
 
-	buzzer := pkg.NewBuzzer(PIN_WPI)
+	buzzer := NewBuzzer(PIN_WPI)
 	buzzer.ChangeHz(1000)
 	scale := [8]int{262, 294, 330, 349, 392, 440, 494, 525}
 	for {

@@ -122,17 +122,6 @@ func logicNumber() {
 	}
 }
 
-var toggled map[int]bool = make(map[int]bool)
-
-func toggle(pin int) {
-	if toggled[pin] {
-		lib.DigitalWrite(pin, lib.DIGITAL_LOW)
-	} else {
-		lib.DigitalWrite(pin, lib.DIGITAL_HIGH)
-	}
-	toggled[pin] = !toggled[pin]
-}
-
 func main() {
 	setupNumber()
 	logicNumber()

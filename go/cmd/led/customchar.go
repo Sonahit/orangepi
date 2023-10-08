@@ -1,10 +1,6 @@
-package pkg
+package main
 
 import (
-	"log"
-	"strconv"
-	"strings"
-
 	"golang.org/x/exp/slices"
 )
 
@@ -45,18 +41,6 @@ func NewCustomChar(rows []int) CustomChar {
 	return CustomChar{
 		Rows: rows,
 	}
-}
-
-func printRows(rows []int) {
-	for height := 0; height < len(rows); height += 1 {
-		log.Println(strconv.FormatInt(int64(rows[height]), 2))
-	}
-}
-
-func maxRowsLength(rows []int) int {
-	return slices.MaxFunc[[]int](rows, func(a, b int) int {
-		return strings.Compare(strconv.FormatInt(int64(a), 2), strconv.FormatInt(int64(b), 2))
-	})
 }
 
 func rowsZero(rows []int) bool {
