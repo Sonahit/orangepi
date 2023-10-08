@@ -70,39 +70,41 @@ func setupNumber() {
 }
 
 func logicNumber() {
+
+	sleepMs := 100
 	for {
 		println("LOGIC START")
 		lib.DigitalWrite(DP_PIN, lib.DIGITAL_HIGH)
 
 		One.Render(DATA_PINS)
-		pkg.Sleep(500)
+		pkg.Sleep(sleepMs)
 
 		Two.Render(DATA_PINS)
-		pkg.Sleep(500)
+		pkg.Sleep(sleepMs)
 
 		Three.Render(DATA_PINS)
-		pkg.Sleep(500)
+		pkg.Sleep(sleepMs)
 
 		Four.Render(DATA_PINS)
-		pkg.Sleep(500)
+		pkg.Sleep(sleepMs)
 
 		Five.Render(DATA_PINS)
-		pkg.Sleep(500)
+		pkg.Sleep(sleepMs)
 
 		Six.Render(DATA_PINS)
-		pkg.Sleep(500)
+		pkg.Sleep(sleepMs)
 
 		Seven.Render(DATA_PINS)
-		pkg.Sleep(500)
+		pkg.Sleep(sleepMs)
 
 		Eight.Render(DATA_PINS)
-		pkg.Sleep(500)
+		pkg.Sleep(sleepMs)
 
 		Nine.Render(DATA_PINS)
-		pkg.Sleep(500)
+		pkg.Sleep(sleepMs)
 
 		Zero.Render(DATA_PINS)
-		pkg.Sleep(500)
+		pkg.Sleep(sleepMs)
 
 		lib.DigitalWrite(DP_PIN, lib.DIGITAL_LOW)
 		pkg.Sleep(500)
