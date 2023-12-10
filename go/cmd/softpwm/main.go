@@ -13,7 +13,7 @@ func main() {
 	flag.Parse()
 
 	speed := 0
-	rng := 10
+	rng := 50
 
 	if err := lib.WiringSetup(); err != 0 {
 		log.Fatalf("Setup error %d", err)
@@ -23,10 +23,10 @@ func main() {
 	lib.PwmCreate(pin, speed, rng)
 
 	for {
-		if speed == rng {
+		if speed >= rng {
 			speed = 0
 		} else {
-			speed += 1
+			speed += 10
 		}
 
 		lib.PwmWrite(pin, speed)
