@@ -12,8 +12,8 @@ func main() {
 	flag.IntVar(&pin, "pin", 2, "pin pwm")
 	flag.Parse()
 
-	speed := 0
 	rng := 50
+	speed := rng
 
 	if err := lib.WiringSetup(); err != 0 {
 		log.Fatalf("Setup error %d", err)
@@ -23,13 +23,14 @@ func main() {
 	lib.PwmCreate(pin, speed, rng)
 
 	for {
-		if speed >= rng {
+
+		if speed < 0 {
 			speed = 0
 		} else {
-			speed += 10
+			speed -= 10
 		}
 
 		lib.PwmWrite(pin, speed)
-		pkg.Sleep(5000)
+		pkg.Sleep(2000)
 	}
 }
