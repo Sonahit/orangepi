@@ -23,14 +23,13 @@ func main() {
 	lib.PwmCreate(pin, speed, rng)
 
 	for {
+		lib.PwmWrite(pin, speed)
+		pkg.Sleep(2000)
 
 		if speed < 0 {
 			speed = 0
 		} else {
 			speed -= 10
 		}
-
-		lib.PwmWrite(pin, speed)
-		pkg.Sleep(2000)
 	}
 }
